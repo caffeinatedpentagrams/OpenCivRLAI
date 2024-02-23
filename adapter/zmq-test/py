@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+
+import zmq
+
+context = zmq.Context()
+client = context.socket(zmq.REQ)
+client.connect("tcp://localhost:5555")
+
+while True:
+    request = input('request: ')
+    client.send(request.encode())
+
+    response = client.recv()
+    print(f'response: {response.decode()}')
+
+    if response.decode() == 'exit':
+        break
+
+client.close()
+context.term()

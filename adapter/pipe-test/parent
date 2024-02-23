@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+
+import subprocess
+
+import subprocess
+
+proc = subprocess.Popen("./child",
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    text=True)
+
+proc.stdin.write('abc')
+message = proc.stdout.read(3)
+print("return message ->" + message + " written by python \n")
+proc.stdin.write('q')
+proc.wait()
+
+def pipe(request):
+
+    proc.stdin.write(request)
+    # proc.stdin.write('\n')
+
+    return proc.stdout.read()
+
+exit
+
+
+if __name__ == '__main__':
+    proc = subprocess.Popen("./child",
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE,
+                            bufsize=1,
+                            text=True)
+
+    while True:
+        print(pipe(input('request: ')))
+
+    proc.wait()
