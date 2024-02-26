@@ -246,13 +246,14 @@ static void at_exit(void)
 **************************************************************************/
 static void client_game_init(void)
 {
+  printf("Entered client_game_init\n"):
   client.conn.playing = NULL;
   client.conn.observer = FALSE;
 
   game_init(FALSE);
-  std::cout << "Ran game_init\n";
+  printf("Ran game_init\n");
   attribute_init();
-  std::cout << "Ran attribute_init\n";
+  printf("Ran attribute_init\n");
   agents_init();
   control_init();
   link_marks_init();
@@ -271,6 +272,7 @@ static void client_game_init(void)
 **************************************************************************/
 static void client_game_free(void)
 {
+  printf("Entered client_game_free");
   editgui_popdown_all();
 
   animations_free();
@@ -301,6 +303,7 @@ static void client_game_free(void)
 **************************************************************************/
 static void client_game_reset(void)
 {
+  printf("Entered client_game_reset");
   editgui_popdown_all();
 
   packhand_free();
@@ -323,6 +326,7 @@ static void client_game_reset(void)
 **************************************************************************/
 int default_tileset_select(void)
 {
+  printf("Entered default_tileset_select");
   fill_topo_ts_default();
 
   if (forced_tileset_name[0] != '\0') {
@@ -345,6 +349,7 @@ int default_tileset_select(void)
 **************************************************************************/
 int client_main(int argc, char *argv[], bool postpone_tileset)
 {
+  printf("Entered client_main");
   int i;
   enum log_level loglevel = LOG_NORMAL;
   int ui_options = 0;
