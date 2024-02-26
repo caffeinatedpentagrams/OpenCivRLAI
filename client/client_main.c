@@ -246,7 +246,7 @@ static void at_exit(void)
 **************************************************************************/
 static void client_game_init(void)
 {
-  printf("Entered client_game_init\n"):
+  printf("Entered client_game_init\n");
   client.conn.playing = NULL;
   client.conn.observer = FALSE;
 
