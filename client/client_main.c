@@ -250,7 +250,9 @@ static void client_game_init(void)
   client.conn.observer = FALSE;
 
   game_init(FALSE);
+  std::cout << "Ran game_init\n";
   attribute_init();
+  std::cout << "Ran attribute_init\n";
   agents_init();
   control_init();
   link_marks_init();
