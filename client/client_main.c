@@ -246,7 +246,7 @@ static void at_exit(void)
 **************************************************************************/
 static void client_game_init(void)
 {
-  printf("Entered client_game_init\n");
+  printf("Entered client_game_init \n\n");
   client.conn.playing = NULL;
   client.conn.observer = FALSE;
 
@@ -272,7 +272,7 @@ static void client_game_init(void)
 **************************************************************************/
 static void client_game_free(void)
 {
-  printf("Entered client_game_free");
+  printf("Entered client_game_free\n");
   editgui_popdown_all();
 
   animations_free();
@@ -303,7 +303,7 @@ static void client_game_free(void)
 **************************************************************************/
 static void client_game_reset(void)
 {
-  printf("Entered client_game_reset");
+  printf("Entered client_game_reset\n");
   editgui_popdown_all();
 
   packhand_free();
@@ -326,7 +326,7 @@ static void client_game_reset(void)
 **************************************************************************/
 int default_tileset_select(void)
 {
-  printf("Entered default_tileset_select");
+  printf("Entered default_tileset_select\n");
   fill_topo_ts_default();
 
   if (forced_tileset_name[0] != '\0') {
@@ -340,7 +340,7 @@ int default_tileset_select(void)
   }
 
   editor_init();
-
+  printf("About to return success (default_tileset_select)");
   return EXIT_SUCCESS;
 }
 

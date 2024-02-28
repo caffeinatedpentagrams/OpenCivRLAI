@@ -16,6 +16,7 @@
 #endif
 
 #include "fc_prehdrs.h"
+#include "hello_world.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -410,13 +411,20 @@ void input_from_server(int fd)
   fc_assert_ret(fd == client.conn.sock);
 
   nb = read_from_connection(&client.conn, FALSE);
+  hello();
+  printf("START RAW BYTES");
+  char visited[1<<10]={0};
+  int count = 0;
+  //printf("%.*s",nb,(char *) &client.conn.buffer);
   if (0 <= nb) {
     agents_freeze_hint();
     while (client.conn.used) {
       enum packet_type type;
       void *packet = get_packet_from_connection(&client.conn, &type);
-
       if (NULL != packet) {
+	intercept_packet(type, packet, &visited[0], &count);
+	//#printf("%p\n", packet);
+	//#printf("END RAW BYTES");
 	client_packet_input(packet, type);
 	free(packet);
       } else {
