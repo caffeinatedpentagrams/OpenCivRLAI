@@ -17,6 +17,7 @@
 
 #include "fc_prehdrs.h"
 #include "hello_world.h"
+#include "state_sender.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -404,17 +405,22 @@ static int read_from_connection(struct connection *pc, bool block)
  This function is called when the client received a new input from the
  server.
 **************************************************************************/
+char visited[1<<20]={0};
 void input_from_server(int fd)
 {
   int nb;
 
   fc_assert_ret(fd == client.conn.sock);
-
   nb = read_from_connection(&client.conn, FALSE);
   hello();
-  printf("START RAW BYTES");
-  char visited[1<<10]={0};
+  printf("\ninput_from_server called, new turn\n");
+  
   int count = 0;
+  if (count>25) {
+      count = 0;
+      
+      //WRONG send_packet_data(&client.conn,get_bytes(),D,PACKET_UNIT_DO_ACTION);
+  }
   //printf("%.*s",nb,(char *) &client.conn.buffer);
   if (0 <= nb) {
     agents_freeze_hint();
