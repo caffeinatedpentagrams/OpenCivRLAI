@@ -47,8 +47,8 @@ void single_unit_update(struct unit_basic* old, struct unit* new) {
 }
 
 void update_units(struct unit* punit) {
-  if (index>=MAX_UNITS) return;
   static int index=0;
+  if (index>=MAX_UNITS) return;
   bool found = false;
   for (int i=0;i<index;i++) {
     if (units[i].id==punit->id) {
