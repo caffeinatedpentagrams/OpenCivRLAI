@@ -1,6 +1,8 @@
 #include "state_aggregator.h"
 #include <stdio.h>
 #include <stdint.h>
+#include "unittype.h"
+#include "unit.h"
 
 // char map_state[64][64][D]={0}; defined in header
 
@@ -26,19 +28,21 @@ void update_map(int x,int y,struct map_index* ptr) {
 }
 
 void single_unit_update(struct unit_basic* old, struct unit* new) {
-  old->type=new->unit_type->item_number;
-  old->build_cost=new->unit_type->build_cost;
-  old->pop_cost = new->unit_type->pop_cost;
-  old->att_str = new->unit_type->attack_strength;
-  old->def_str = new->unit_type->defense_strength;
-  old->move_rate = new->unit_type->move_rate;
-  old->unknown_move_cost = new->unit_type->unknown_move_cost;
-  old->vision_radius=new->unit_type->vision_radius_sq;
+  struct unit_type* type;
+  type = new;
+  old->type=type->item_number;
+  old->build_cost=type->build_cost;
+  old->pop_cost = type->pop_cost;
+  old->att_str = type->attack_strength;
+  old->def_str = type->defense_strength;
+  old->move_rate = type->move_rate;
+  old->unknown_move_cost = type->unknown_move_cost;
+  old->vision_radius=type->vision_radius_sq;
   old->hp=new->hp;
-  old->firepower = new->unit_type->firepower;
-  old->city_size = new->unit_type->city_size;
-  old->city_slots = new->unit_type->city_slots;
-  memcpy(&(old->upkeep[0]),&(new->unit_type->upkeep[0]),sizeof(int)*O_LAST);
+  old->firepower = type->firepower;
+  old->city_size = type->city_size;
+  old->city_slots = type->city_slots;
+  memcpy(&(old->upkeep[0]),&(type->upkeep[0]),sizeof(int)*O_LAST);
   old->has_orders=new->has_orders;
 }
 

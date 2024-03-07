@@ -36,7 +36,7 @@ struct unit_basic {
   int vision_radius;
   int hp;
   int firepower;
-  int cty_size;
+  int city_size;
   int city_slots;
   int pos; //index from (x,y)
   int id;
@@ -46,7 +46,7 @@ struct unit_basic {
   bool has_orders; // Use this field to only order units without current orders
 };
 
-struct unit units[MAX_UNITS];
+struct unit_basic units[MAX_UNITS];
 
 #define D sizeof(struct map_index)
 
