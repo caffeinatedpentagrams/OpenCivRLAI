@@ -5,6 +5,9 @@
 #include "unit.h"
 
 // char map_state[64][64][D]={0}; defined in header
+char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
+struct unit_basic units[MAX_UNITS];
+
 
 void* tile_to_vec(struct tile* tile) {
   struct map_index* pos = malloc(D);

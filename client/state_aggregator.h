@@ -46,11 +46,13 @@ struct unit_basic {
   bool has_orders; // Use this field to only order units without current orders
 };
 
-struct unit_basic units[MAX_UNITS];
-
 #define D sizeof(struct map_index)
 
-char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
+//struct unit_basic units[MAX_UNITS];
+extern struct unit_basic units[MAX_UNITS];
+extern char map_state_internal[MAXIMUM][MAXIMUM][D];
+
+//char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
 
 void* tile_to_vec(struct tile* tile);
 
