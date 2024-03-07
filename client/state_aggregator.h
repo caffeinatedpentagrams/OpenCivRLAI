@@ -11,9 +11,9 @@
 #include "unit.h"
 #include "unittype.h"
 
-#include "state_aggregator.h"
+#include "state_sender.h"
 
-#define MAX_UNITS[40];
+#define MAX_UNITS 40
 
 struct map_index {
     bool owned;
@@ -44,7 +44,7 @@ struct unit_basic {
   int moves_left;
   int upkeep[O_LAST];
   bool has_orders; // Use this field to only order units without current orders
-}
+};
 
 struct unit units[MAX_UNITS];
 
