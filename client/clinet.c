@@ -418,7 +418,7 @@ void input_from_server(int fd)
   int count = 0;
   if (count>25) {
       count = 0;
-      
+      send_state();
       //WRONG send_packet_data(&client.conn,get_bytes(),D,PACKET_UNIT_DO_ACTION);
   }
   //printf("%.*s",nb,(char *) &client.conn.buffer);
