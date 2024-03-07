@@ -106,7 +106,7 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
    memcpy(&unit, packet, sizeof(unit));
    struct unit_type* type;
    type = &unit; // First elem of struct is an int
-   printf("\n\nUnit type: %d\nBuild cost: %d\nPop Cost: %d\nAttack Strength: %d\nDefense strength: %d\nMove Rate: %d\nunknown move cost: %d\nVision radius: %d\nTransport capacity: %d\nHP: %d\nFirepower: %d\nCity size: %d\nCity Slots: %d",type->item_number,type->build_cost,type->pop_cost,type->attack_strength,type->defense_strength,type->move_rate,type->unknown_move_cost,type->vision_radius_sq,type->transport_capacity,type->hp,type->firepower,type->city_size,type->city_slots);
+   printf("\n\nUnit type: %d\nBuild cost: %d\nPop Cost: %d\nAttack Strength: %d\nDefense strength: %d\nMove Rate: %d\nunknown move cost: %d\nVision radius: %d\nTransport capacity: %d\nHP (unit type): %d\nHP (unit): %d\nFirepower: %d\nCity size: %d\nCity Slots: %d",type->item_number,type->build_cost,type->pop_cost,type->attack_strength,type->defense_strength,type->move_rate,type->unknown_move_cost,type->vision_radius_sq,type->transport_capacity,type->hp,unit.hp,type->firepower,type->city_size,type->city_slots);
    printf("\nO_LAST: %d\n",O_LAST);
    printf("\nUnit ID: %d\nHome city: %d\n",unit.id,unit.homecity);
    struct tile* tile = unit.tile;

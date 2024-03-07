@@ -152,7 +152,14 @@ freeciv_client_src = $(AUDIO_SDL_FILES) \
 	audio.c         \
 	audio.h         \
 	audio_none.c    \
-	audio_none.h
+	audio_none.h    \
+	hello_world.h   \
+	state_aggregator.h \
+	state_aggregator.c \
+	state_sender.h	\
+	state_sender.c	\
+	state_reciever.h \
+	state_reciever.c
 
 gui_interface_src = \
 	gui_interface.c \
