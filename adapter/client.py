@@ -72,7 +72,6 @@ class Client:
         UINT32 major_version, minor_version, patch_version;
         end
         '''
-        
 
 
 if __name__ == '__main__':

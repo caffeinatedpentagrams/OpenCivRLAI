@@ -2,6 +2,7 @@ import socket
 import argparse
 from socket_listener import SocketClient
 
+
 def get_args():
     parser = argparse.ArgumentParser(description='A simple program with argparse')
 
@@ -14,8 +15,8 @@ def get_args():
     port = args.serverport
 
     return ip, port
+
+
 if __name__ == '__main__':
     ip, port = get_args()
     listener = SocketClient(ip, port)
-
-
