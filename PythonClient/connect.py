@@ -11,7 +11,6 @@ void disconnect_from_server(bool leaving_sound);
 
 double try_to_autoconnect(void);
 void start_autoconnecting_to_server(void);'''
-# b'\x00w\x04colin\x00+Freeciv-3.0-network year32 plrculture32 pingfix researchclr cityculture32 rsdesc32 obsinv\x00-msys2\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\n'
 import socket
 
 
