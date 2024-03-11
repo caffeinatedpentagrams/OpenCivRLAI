@@ -55,30 +55,58 @@ class Packet:
 # TODO subclass packet for every packet type we need!
 # TODO make PacketFactory??
 
-class HelloPacket(Packet):
+class HelloPacket(Packet):  # 0
     def __init__(self):
-        super.__init__(0)
+        super().__init__(0)
         self._add_field("greeting", 10, 'str')
 
-class HelloReplyPacket(Packet):
+class HelloReplyPacket(Packet):  # 1
     def __init__(self):
-        super.__init__(1)
+        super().__init__(1)
         self._add_field("greeting", 10, 'str')
 
-class MapPacket(Packet):
+class MapPacket(Packet):  # 2
     def __init__(self):
-        super.__init__(2)
+        super().__init__(2)
         self._add_field('map', 25600, 'array')
 
-class UnitInfoPacket(Packet):
+class UnitInfoPacket(Packet):  # 3
     def __init__(self):
-        super.__init__(3)
-        self._add_field('unit_id', 100, int)
+        super().__init__(3)
+        self._add_field('unit_id', 100, 'int')
         # TODO more fields? what are they?
 
-class CivInfoPacket(Packet):
+class CivInfoPacket(Packet):  # 4
     def __init__(self):
-        super.__init__(4)
-        self._add_field('nation_tag', 20, int)
+        super().__init__(4)
+        self._add_field('nation_tag', 20, 'int')
         self._add_field('')
 
+class CityInfoPacket(Packet):  # 5
+    def __init__(self):
+        super().__init__(5)
+        self._add_field('city_name', 100, 'str')
+        self._add_field('pop', 100, 'int')
+        self._add_field('owned_by', 100, 'str')
+        # TODO more
+
+class ActionPacket(Packet):  # 6
+    def __init__(self):
+        super().__init__(6)
+        self._add_field('action', 100, 'str')
+        self._add_field('action_specifiers', 25000, 'str')
+
+class ActionReplyPacket(Packet):  # 7
+    def __init__(self):
+        super().__init__(7)
+        self._add_field('action', 100, 'str')
+
+class TurnBeginPacket(Packet):  # 8
+    def __init__(self):
+        super().__init__(8)
+        self._add_field('turn_begin', 100, 'str')
+
+class TurnEndPacket(Packet):
+    def __init__(self):
+        super().__init__(9)
+        self._add_field('turn_end', 100, 'str')
