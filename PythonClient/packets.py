@@ -27,10 +27,10 @@ class Packet:
     def set_content(self, field_name, content):
         if field_name not in self.content:
             raise ValueError(f"{field_name} not found in packet type {self.packid}!")
-        if type(content) == str:
+        if self.types[field_name] == 'str':
             if len(content) > self.maxlens[field_name]:
                 raise ValueError(f"{field_name} exceeds maximum length!")
-        elif type(content) == int:
+        elif self.types[field_name] == 'int':
             if content.bit_length() > self.maxlens[field_name]*8:
                 raise ValueError(f"{field_name} exceeds maximum length!")
         # TODO arrays
@@ -41,9 +41,9 @@ class Packet:
         for field in self.field_names:
             arg = self.content[field]
 
-            if type(arg) == str:
+            if self.types[field_name] == 'str':
                 data += arg.encode() + b'\0'
-            elif type(arg) == int:
+            elif self.types[field_name] == 'int':
                 data += struct.pack('>I', arg)
 
         data = struct.pack('>H', len(data) + 2) + data
@@ -73,12 +73,12 @@ class MapPacket(Packet):
 class UnitInfoPacket(Packet):
     def __init__(self):
         super.__init__(3)
-        self._add_field('unit_id', 100, int)
+        self._add_field('unit_id', 100, 'int')
         # TODO more fields? what are they?
 
 class CivInfoPacket(Packet):
     def __init__(self):
         super.__init__(4)
-        self._add_field('nation_tag', 20, int)
+        self._add_field('nation_tag', 20, 'int')
         self._add_field('')
 
