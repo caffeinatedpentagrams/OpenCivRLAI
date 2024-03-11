@@ -4,10 +4,6 @@ import struct
 import packets
 # b'\x00w\x04holyv\x00+Freeciv-3.0-network year32 plrculture32 pingfix researchclr cityculture32 rsdesc32 obsinv\x00-msys2\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\n'
 
-# todo
-def buildPacket(pid, payload):
-    return {}
-
 class SocketClient:
     def __init__(self, server_ip, server_port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,4 +29,4 @@ class SocketClient:
         packet_type = int.from_bytes(data[:2], byteorder='big')
         packet_payload = data[2:]
 
-        return buildPacket(packet_type, packet_payload)
+        return packets.PacketFactory().make_packet(packet_type, packet_payload)
