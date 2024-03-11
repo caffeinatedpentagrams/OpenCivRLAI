@@ -20,11 +20,14 @@ class SocketClient:
             self.client_socket.close()
             print("Closed")
 
-    def receive_packet():
-        data = client.recv(2)
+    def receive_packet(self):
+        data = self.client_socket.recv(2)
         packet_len = int.from_bytes(data, byteorder='big')
 
-        data = client.recv(packet_len - 2)
+        data = self.client_socket.recv(packet_len - 2)
         packet_payload = data
 
         return packets.PacketFactory(data).make_packet()
+
+    def send_packet(self, packet):
+        self.client_socket.send(packet.encode())

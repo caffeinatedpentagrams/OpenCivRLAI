@@ -159,7 +159,7 @@ class PacketFactory:
 
     def make_packet(self):
         if self.packet_type == PacketEnum.Hello.value: packet = HelloPacket()
-        elif self.packet_type == PacketEnum.HelloReply.value: packet = HelloPacket()
+        elif self.packet_type == PacketEnum.HelloReply.value: packet = HelloReplyPacket()
         elif self.packet_type == PacketEnum.Map.value: packet = MapPacket()
         elif self.packet_type == PacketEnum.UnitInfo.value: packet = UnitInfoPacket() # TODO finish all fields
         elif self.packet_type == PacketEnum.CivInfo.value: packet = CivInfoPacket() # TODO finish all fields
