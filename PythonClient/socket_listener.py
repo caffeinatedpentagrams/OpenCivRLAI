@@ -6,7 +6,7 @@ import packets
 
 # todo
 def buildPacket(pid, payload):
-  return {}
+    return {}
 
 class SocketClient:
     def __init__(self, server_ip, server_port):
@@ -17,47 +17,13 @@ class SocketClient:
         self._partial_packet_length = 0
         print("Created socket")
 
-        # todo: delete this as this should be handled by the modified client...
         try:
             self.client_socket.connect((server_ip, server_port))
             print("Connected!")
-            print("Sending login...")
-            login = packets.LoginPacket()
-            login.initialize_fields((
-                'holyv',
-                '+Freeciv-3.0-network year32 plrculture32 pingfix researchclr cityculture32 rsdesc32 obsinv',
-                '-msys2',
-                3,
-                0,
-                10
-            ))
-            print(login.encode())
-            self.client_socket.sendall(login.encode())
-            print("Starting decoding...")
-            while True:
-                response = self.client_socket.recv(1024)
-                packid = response[3]
-                print(packid)
+
         finally:
             self.client_socket.close()
             print("Closed")
-
-    def read_packet(self):
-        response = self.client_socket.recv(65536)
-        size = response[:2]
-        response = response[2:]
-        data = self._partial_packet
-        while len(response) >= size:
-            packid = response[:2]  # TODO this is sometimes just one during the initialize protocol!
-            data += response[:size]
-            # TODO initialize the appropriate packet
-            response = response[size:]
-        if len(response) > 0:
-            self._partial_packet_length = response[:2]
-            self._partial_packet = response[2:]
-        else:
-            self._partial_packet = b''
-            self._partial_packet_length = 0
 
     def receive_packet():
         data = client.recv(2)
