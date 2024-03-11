@@ -33,6 +33,7 @@ class Packet:
         elif type(content) == int:
             if content.bit_length() > self.maxlens[field_name]*8:
                 raise ValueError(f"{field_name} exceeds maximum length!")
+        # TODO arrays
         self.content[field_name] = content
 
     def encode(self):
@@ -49,24 +50,35 @@ class Packet:
         return data
 
     def decode(self, message):
-        pass
+        pass  # TODO str, int, array
 
 # TODO subclass packet for every packet type we need!
 # TODO make PacketFactory??
-class LoginPacket(Packet):
-    '''
-    PACKET_SERVER_JOIN_REQ = 4; cs, dsend, no-delta, no-handle
-    STRING username[48];
-    STRING capability[512];
-    STRING version_label[48];
-    UINT32 major_version, minor_version, patch_version;
-    end
-    '''
+
+class HelloPacket(Packet):
     def __init__(self):
-        super().__init__(4)
-        self._add_field('username', 48)
-        self._add_field('capability', 512)
-        self._add_field('version_label', 48)
-        self._add_field('major_version', 4)
-        self._add_field('minor_version', 4)
-        self._add_field('patch_version', 4)
+        super.__init__(0)
+        self._add_field("greeting", 10, 'str')
+
+class HelloReplyPacket(Packet):
+    def __init__(self):
+        super.__init__(1)
+        self._add_field("greeting", 10, 'str')
+
+class MapPacket(Packet):
+    def __init__(self):
+        super.__init__(2)
+        self._add_field('map', 25600, 'array')
+
+class UnitInfoPacket(Packet):
+    def __init__(self):
+        super.__init__(3)
+        self._add_field('unit_id', 100, int)
+        # TODO more fields? what are they?
+
+class CivInfoPacket(Packet):
+    def __init__(self):
+        super.__init__(4)
+        self._add_field('nation_tag', 20, int)
+        self._add_field('')
+
