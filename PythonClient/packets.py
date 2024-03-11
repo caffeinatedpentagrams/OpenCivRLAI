@@ -39,7 +39,7 @@ class Packet:
         self.content[field_name] = content
 
     def encode(self):
-        data = struct.pack('>B', self.packid)
+        data = struct.pack('>H', self.packid)
         for field in self.field_names:
             arg = self.content[field]
 
@@ -48,7 +48,8 @@ class Packet:
             elif self.types[field] == 'int':
                 data += struct.pack('>I', arg)
             elif self.types[field] == 'array':
-                pass # TODO
+                data += struct.pack('>I', len(arg))
+                data += arg.astype('>u4').tobytes()
 
         data = struct.pack('>H', len(data) + 2) + data
         return data
@@ -131,51 +132,159 @@ class PacketEnum(enum.Enum):
     TurnEnd = 9
     CompletedStateTransfer = 10
 
-class PacketFactory(Packet):
-    def make_packet(self, packet_type, bytestream):
+class PacketFactory:
+    def __init__(self, bytestream):
+        self.bytestream = bytestream
+        self.packet_type = int.from_bytes(self.bytestream[2 : 4], byteorder='big')
+        self.idx = 4
+
+    def get_str(self):
+        cut_idx = self.bytestream.find(b'\0', self.idx)
+        value = self.bytestream[self.idx : cut_idx].decode()
+        self.idx = cut_idx + 1
+        return value
+
+    def get_int(self):
+        value = int.from_bytes(self.bytestream[self.idx : self.idx + 4], byteorder='big')
+        self.idx += 4
+        return value
+
+    def get_array(self):
+        length = self.get_int()
+        value = np.frombuffer(self.bytestream[self.idx : self.idx + 4 * length], dtype='>u4')
+        self.idx += 4 * length
+        return value
+
+    def make_packet(self):
+        if self.packet_type == PacketEnum.Hello.value: packet = HelloPacket()
+        elif self.packet_type == PacketEnum.HelloReply.value: packet = HelloPacket()
+        elif self.packet_type == PacketEnum.Map.value: packet = MapPacket()
+        elif self.packet_type == PacketEnum.UnitInfo.value: packet = UnitInfoPacket() # TODO finish all fields
+        elif self.packet_type == PacketEnum.CivInfo.value: packet = CivInfoPacket() # TODO finish all fields
+        elif self.packet_type == PacketEnum.CityInfo.value: packet = CityInfoPacket() # TODO finish all fields
+        elif self.packet_type == PacketEnum.Action.value: packet = ActionPacket() # TODO finish all fields
+        elif self.packet_type == PacketEnum.ActionReply.value: packet = ActionReplyPacket()
+        elif self.packet_type == PacketEnum.TurnBegin.value: packet = TurnBeginPacket()
+        elif self.packet_type == PacketEnum.TurnEnd.value: packet = TurnEndPacket()
+        elif self.packet_type == PacketEnum.CompletedStateTransfer.value: packet = CompletedStateTransferPacket()
+        else: raise ValueError(f'Unknown packet type: {self.packet_type}')
+
+        for field in packet.field_names:
+            field_type = packet.types[field]
+            if field_type == 'int': packet.set_content(field, self.get_int())
+            elif field_type == 'str': packet.set_content(field, self.get_str())
+            elif field_type == 'array': packet.set_content(field, self.get_array())
+            else: raise ValueError(f'Unknown field type: {field_type}')
+
+        return packet
+            
+
+    def make_packet_old(self, packet_type):
         if packet_type == PacketEnum.Hello.value:
             hello = HelloPacket()
-            hello.set_content('greeting', bytestream.decode('ascii'))
+            hello.set_content('greeting', self.get_str())
             return hello
+
         elif packet_type == PacketEnum.HelloReply.value:
             hello_reply = HelloPacket()
-            hello_reply.set_content('greeting', bytestream.decode('ascii'))
+            hello_reply.set_content('greeting', self.get_str())
             return hello_reply
+
         elif packet_type == PacketEnum.Map.value:
             mapp = MapPacket()
             # TODO size? maybe smaller, maybe comes in 2 packets.
-            mapp.set_content('map', np.frombuffer(bytestream, dtype=np.int32))
+            mapp.set_content('map', self.get_array())
             return mapp
+
         elif packet_type == PacketEnum.UnitInfo.value:  # TODO finish all fields
             unit_info = UnitInfoPacket()
-            unit_info.set_content('unit_id', int.from_bytes(bytestream, byteorder='big', signed=False))  # TODO double check endianness
+            unit_info.set_content('unit_id', self.get_int())
             return unit_info
+            
         elif packet_type == PacketEnum.CivInfo.value:  # TODO finish all fields
             civ_info = CivInfoPacket()
-            civ_info.set_content('nation_tag', int.from_bytes(bytestream, byteorder='big', signed=False))
+            civ_info.set_content('nation_tag', self.get_int())
             return civ_info
+
         elif packet_type == PacketEnum.CityInfo.value:  # TODO finish all fields
             city_info = CityInfoPacket()
-            city_info.set_content('city_name', bytestream.decode('ascii'))
+            city_info.set_content('city_name', self.get_str())
             return city_info
+
         elif packet_type == PacketEnum.Action.value:  # TODO Finish all fields
             action = ActionPacket()
-            action.set_content('action', bytestream.decode('ascii'))
+            action.set_content('action', self.get_str())
             return action
+
         elif packet_type == PacketEnum.ActionReply.value:
             action_reply = ActionReplyPacket()
-            action_reply.set_content('action', bytestream.decode('ascii'))
+            action_reply.set_content('action', self.get_str())
             return action_reply
+
         elif packet_type == PacketEnum.TurnBegin.value:
             turn_begin = TurnBeginPacket()
-            turn_begin.set_content('turn_begin', int.from_bytes(bytestream, byteorder='big', signed=False))
+            turn_begin.set_content('turn_begin', self.get_int())
             return turn_begin
+
         elif packet_type == PacketEnum.TurnEnd.value:
             turn_end = TurnEndPacket()
-            turn_end.set_content('turn_end', bytestream.decode('ascii'))
+            turn_end.set_content('turn_end', self.get_str())
             return turn_end
+
         elif packet_type == PacketEnum.CompletedStateTransfer:
             done = CompletedStateTransferPacket()
-            done.set_content('done', bytestream.decode('ascii'))
+            done.set_content('done', self.get_str())
+            return done
+
         else:
             raise ValueError("Unknown packet type")
+
+
+
+def test(bytestream):
+    packet = PacketFactory(bytestream).make_packet()
+    for field in packet.field_names:
+        print(f'{field}: {packet.content[field]}')
+    encoded = packet.encode()
+    if encoded == bytestream:
+        print('encoded matches bytestream')
+        print(f'\tgot: {encoded}')
+    else:
+        print('encoded does not match bytestream')
+        print(f'\texpected: {bytestream}')
+        print(f'\t     got: {encoded}')
+    print()
+
+if __name__ == '__main__':
+    # hello: 'hello'
+    test(b'\x00\x0a\x00\x00hello\x00')
+
+    # hello reply: 'helloreply'
+    test(b'\x00\x0f\x00\x01helloreply\x00')
+
+    # map: [1 2 3]
+    test(b'\x00\x14\x00\x02\x00\x00\x00\x03\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x03')
+
+    # unit info: id = 10
+    test(b'\x00\x08\x00\x03\x00\x00\x00\x0a')
+
+    # civ info: nation_tag = 7
+    test(b'\x00\x08\x00\x04\x00\x00\x00\x07')
+
+    # city info: city_name = 'city', pop = 12, owned_by = 'me'
+    test(b'\x00\x10\x00\x05city\x00\x00\x00\x00\x0cme\x00')
+
+    # action: action = 'do smth', action_specifiers = 'magestically and philanthropically'
+    test(b'\x00\x2f\x00\x06do smth\x00magestically and philanthropically\x00')
+
+    # action reply: action = 'pray'
+    test(b'\x00\x09\x00\x07pray\x00')
+
+    # turn begin: 2
+    test(b'\x00\x08\x00\x08\x00\x00\x00\x02')
+
+    # turn end: '9'
+    test(b'\x00\x06\x00\x099\x00')
+
+    # completed state transfer: done = 'yea its done'
+    test(b'\x00\x11\x00\x0ayea its done\x00')
