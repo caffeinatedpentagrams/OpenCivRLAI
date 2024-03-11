@@ -179,67 +179,6 @@ class PacketFactory:
             else: raise ValueError(f'Unknown field type: {field_type}')
 
         return packet
-            
-
-    def make_packet_old(self, packet_type):
-        if packet_type == PacketEnum.Hello.value:
-            hello = HelloPacket()
-            hello.set_content('greeting', self.get_str())
-            return hello
-
-        elif packet_type == PacketEnum.HelloReply.value:
-            hello_reply = HelloPacket()
-            hello_reply.set_content('greeting', self.get_str())
-            return hello_reply
-
-        elif packet_type == PacketEnum.Map.value:
-            mapp = MapPacket()
-            # TODO size? maybe smaller, maybe comes in 2 packets.
-            mapp.set_content('map', self.get_array())
-            return mapp
-
-        elif packet_type == PacketEnum.UnitInfo.value:  # TODO finish all fields
-            unit_info = UnitInfoPacket()
-            unit_info.set_content('unit_id', self.get_int())
-            return unit_info
-            
-        elif packet_type == PacketEnum.CivInfo.value:  # TODO finish all fields
-            civ_info = CivInfoPacket()
-            civ_info.set_content('nation_tag', self.get_int())
-            return civ_info
-
-        elif packet_type == PacketEnum.CityInfo.value:  # TODO finish all fields
-            city_info = CityInfoPacket()
-            city_info.set_content('city_name', self.get_str())
-            return city_info
-
-        elif packet_type == PacketEnum.Action.value:  # TODO Finish all fields
-            action = ActionPacket()
-            action.set_content('action', self.get_str())
-            return action
-
-        elif packet_type == PacketEnum.ActionReply.value:
-            action_reply = ActionReplyPacket()
-            action_reply.set_content('action', self.get_str())
-            return action_reply
-
-        elif packet_type == PacketEnum.TurnBegin.value:
-            turn_begin = TurnBeginPacket()
-            turn_begin.set_content('turn_begin', self.get_int())
-            return turn_begin
-
-        elif packet_type == PacketEnum.TurnEnd.value:
-            turn_end = TurnEndPacket()
-            turn_end.set_content('turn_end', self.get_str())
-            return turn_end
-
-        elif packet_type == PacketEnum.CompletedStateTransfer:
-            done = CompletedStateTransferPacket()
-            done.set_content('done', self.get_str())
-            return done
-
-        else:
-            raise ValueError("Unknown packet type")
 
 
 
