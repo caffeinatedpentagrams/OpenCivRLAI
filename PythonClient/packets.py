@@ -9,11 +9,13 @@ class Packet:
         self.field_names = []  # Contains the right ordering! NEVER ACCESS THE DICT WITH .keys(); GET THE NAMES FROM
         # HERE THEN ACCESS THE DICT
         self.content = {}
+        self.types = {}
 
-    def _add_field(self, field_name, maxlen):
+    def _add_field(self, field_name, maxlen, typestring):
         self.field_names.append(field_name)
         self.maxlens[field_name] = maxlen
         self.content[field_name] = ""
+        self.types[field_name] = typestring
         # The maxlen for integers is given in bytes. e.g. uint32 would be 4 bytes!
 
     def initialize_fields(self, initializer_list):
@@ -46,7 +48,7 @@ class Packet:
         data = struct.pack('>H', len(data) + 2) + data
         return data
 
-    def decode(self):
+    def decode(self, message):
         pass
 
 # TODO subclass packet for every packet type we need!

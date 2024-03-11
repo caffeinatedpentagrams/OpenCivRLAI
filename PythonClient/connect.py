@@ -14,10 +14,6 @@ void start_autoconnecting_to_server(void);'''
 import socket
 
 
-def login():
-    packid = 4
-
-
 def connect_to_server(username, hostname, port, errbuf):
     if len(errbuf) > 0 and errbuf is not None:
         errbuf[0] = '\0'

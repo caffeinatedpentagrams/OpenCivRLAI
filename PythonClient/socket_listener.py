@@ -6,6 +6,10 @@ import packets
 class SocketClient:
     def __init__(self, server_ip, server_port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 65536)
+        self.client_socket.settimeout(1)
+        self._partial_packet = b''
+        self._partial_packet_length = 0
         print("Created socket")
         try:
             self.client_socket.connect((server_ip, server_port))
@@ -25,7 +29,27 @@ class SocketClient:
             print("Starting decoding...")
             while True:
                 response = self.client_socket.recv(1024)
-            print(response.decode())
+                packid = response[3]
+                print(packid)
         finally:
             self.client_socket.close()
             print("Closed")
+
+    def read_packet(self):
+        response = self.client_socket.recv(65536)
+        size = response[:2]
+        response = response[2:]
+        data = self._partial_packet
+        while len(response) >= size:
+            packid = response[:2]  # TODO this is sometimes just one during the initialize protocol!
+            data += response[:size]
+            # TODO initialize the appropriate packet
+            response = response[size:]
+        if len(response) > 0:
+            self._partial_packet_length = response[:2]
+            self._partial_packet = response[2:]
+        else:
+            self._partial_packet = b''
+            self._partial_packet_length = 0
+
+
