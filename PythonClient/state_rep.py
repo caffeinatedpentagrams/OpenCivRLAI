@@ -2,6 +2,7 @@ import enum
 from collections import namedtuple
 from enum import Enum
 import technology
+from actions_enum import ActionEnum
 
 # name: (cost, upkeep)
 BUILDABLE_BUILDINGS = {'aqueduct': (60, 2), 'bank': (80, 2), 'cathedral': (80, 3), 'coinage': (0, 0),
@@ -24,30 +25,31 @@ class Unit:
         self.exists = False
         self.isBusy = False
         self.current_action = None
+        self.actions = []
 
-    def _add_action(self, action_name, funcptr):
-        self.actions[action_name] = funcptr
+    def _add_action(self, action_enum: ActionEnum):
+        self.actions.append(action_enum)
 
     def act(self, action_name):
         if not self.exists:
             raise ValueError("Actor does not exist!")
         if action_name in self.actions:
-            self.busy_turns = self.actions[action_name]
             self.current_action = action_name
         else:
             raise ValueError("Invalid action!")
 
     def on_begin_turn(self):
-        if self.exists and not self.isBusy:
-            self.current_action = None
+        if self.exists and not self.isBusy:  # TODO Find out how we know e.g. when a worker is done working
+            self.current_action = None  # TODO i.e. from packet only, how can we know if we are no longer busy?
 
     def on_end_turn(self):
         pass  # TODO
 
 
 class MovingUnit(Unit):
-    def __init__(self, xcoord, ycoord):
+    def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord)
+        self.entity_id = entity_id
         self.actions = {'move': self.move}
 
     def move(self, direction):  # direction should be passed as instance of the Direction enum!
@@ -58,8 +60,8 @@ class MovingUnit(Unit):
 
 
 class Worker(MovingUnit):  # If override superclass, should always call superclass method!
-    def __init__(self, xcoord, ycoord):
-        super().__init__(xcoord, ycoord)
+    def __init__(self, xcoord, ycoord, entity_id):
+        super().__init__(xcoord, ycoord, entity_id)
         self._add_action('irrigate', self.irrigate)
         self._add_action('mine', self.mine)
         self._add_action('build_road', self.build_road())
@@ -75,8 +77,8 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
 
 
 class Settler(MovingUnit):
-    def __init__(self, xcoord, ycoord):
-        super().__init__(xcoord, ycoord)
+    def __init__(self, xcoord, ycoord, entity_id):
+        super().__init__(xcoord, ycoord, entity_id)
         self._add_action('settle', 0)
 
     def settle(self):  # TODO
@@ -84,17 +86,18 @@ class Settler(MovingUnit):
 
 
 class Explorer(MovingUnit):  # TODO Probably don't even need to overload
-    def __init__(self, xcoord, ycoord):
-        super().__init__(xcoord, ycoord)
+    def __init__(self, xcoord, ycoord, entity_id):
+        super().__init__(xcoord, ycoord, entity_id)
 
     def queue_multiple_one_tile_moves(self):
         pass  # TODO probably allow 2-tiles movement, double check wiki.
 
 
 class City(Unit):
-    def __init__(self, xcoord, ycoord):
+    def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord)
         self._add_action('build_building', self.build_building)
+        self.entity_id = entity_id
         self.exists = False
         self.isBusy = False
         self.buildings = []
