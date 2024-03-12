@@ -1,13 +1,12 @@
 from enum import Enum
 import technology
-from enums import Direction
-from enums import ActionEnum
+from enums import *
 
 # name: (cost, upkeep)
 BUILDABLE_BUILDINGS = {'aqueduct': (60, 2), 'bank': (80, 2), 'cathedral': (80, 3), 'coinage': (0, 0),
                        'colosseum': (70, 4), 'ganary': (40, 1), 'harbour': (40, 1), 'library': (60, 1),
                        'marketplace': (60, 0), 'palace': (70, 0), 'temple': (30, 1), 'university': (120, 3)}
-buildable_units = {'settler': (), 'worker': ()}   # TODO upkeep ?
+buildable_units = {'settler': (), 'worker': ()}  # TODO upkeep ?
 
 
 class Unit:
@@ -39,7 +38,7 @@ class Unit:
         pass  # TODO
 
     def get_ontile_entity_id(self):
-        pass # TODO
+        pass  # TODO
 
 
 class MovingUnit(Unit):
@@ -66,7 +65,7 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         self.production = 0  # TODO find val
 
     def irrigate(self):  # TODO find duration
-         if self.food > 0:
+        if self.food > 0:
             # Each irrigation step consumes:1 and adds:2 (produce)
             self.food -= 1
             self.food += 2
@@ -77,16 +76,14 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         if self.production > 0:
             self.production -= 1
             self.production += 2
-        pass
-            print("Worker mines resources")
         else:
-            print("Not enough production")
+            pass
         init_duration = 2  # Initialized
         # Mining is dependent on terrain
         return init_duration
 
     def build_road(self, terrain_type):  # TODO find duration
-        road_cost = 1 # TODO find cost
+        road_cost = 1  # TODO find cost
         if self.production >= road_cost:
             self.production -= road_cost
         else:
@@ -101,11 +98,6 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
             duration = init_duration
         return duration
 
-class City:
-    def __init__(self, xcoord, ycoord):
-        self.xpos = xcoord
-        self.ypos = ycoord
-        self.exists = True
 
 class Settler(MovingUnit):
     def __init__(self, xcoord, ycoord, entity_id):
@@ -128,6 +120,8 @@ class Explorer(MovingUnit):  # TODO Probably don't even need to overload
 class City(Unit):
     def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord)
+        self.max_population = 10  # TODO is this right?
+        self.population = 0
         self._add_action(ActionEnum.BuildBuildingAction, self.build_building)
         self.entity_id = entity_id
         self.exists = False
@@ -136,7 +130,7 @@ class City(Unit):
         self.production = 0
         self.science = 0
         self.gold_income = 0
-        self.luxury = 0  # TODO verify!
+        self.luxury = 0  # TODO how does luxury work?
         # TODO add city attributes
 
     def build_building(self, building):  # TODO check
@@ -153,17 +147,10 @@ class City(Unit):
         self.population += 1
         if self.population > self.max_population:
             self.population = self.max_population
-        self.workers()
+        # TODO something with workers?
 
     def build_unit(self, args):
         pass  # TODO
-
-
-class Tax(Enum):
-    SCIENCE = 0
-    GOLD = 1
-    LUXURY = 2
-
 
 class Country:
     def __init__(self):
@@ -191,6 +178,7 @@ class Country:
     def update_from_packet(self,
                            civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
         pass
+
     def research_technology(self, techname):
         if techname not in self.tech_tree.get_researchable():
             return False  # TODO Invalid Action
@@ -226,4 +214,3 @@ class Country:
             return self.worker_list[index - 2]
         else:
             return self.settler_list[index]
-

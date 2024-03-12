@@ -31,3 +31,8 @@ class PacketEnum(Enum):
     TurnEnd = 9
     CompletedStateTransfer = 10
     ResearchInfo = 11
+
+class Tax(Enum):
+    SCIENCE = 0
+    GOLD = 1
+    LUXURY = 2
