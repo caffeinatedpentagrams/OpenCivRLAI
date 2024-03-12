@@ -14,59 +14,73 @@ int main() {
   // receive hello
   type = c_socket_receive_packet(packet);
   printf("greeting: %s\n", ((struct HelloPacket*) packet)->greeting);
+  printf("expecting: hello\n");
   printf("\n");
 
   // receive hello reply
   type = c_socket_receive_packet(packet);
   printf("greeting: %s\n", ((struct HelloReplyPacket*) packet)->greeting);
+  printf("expecting: helloreply\n");
   printf("\n");
 
   // receive map
   type = c_socket_receive_packet(packet);
   printf("map[0]: %d\n", ((struct MapPacket*) packet)->map[0]);
+  printf("expecting: 15\n");
   printf("\n");
 
   // receive unit info
   type = c_socket_receive_packet(packet);
   printf("unit_id: %d\n", ((struct UnitInfoPacket*) packet)->unit_id);
+  printf("expecting: 13\n");
   printf("\n");
 
   // receive civ info
   type = c_socket_receive_packet(packet);
   printf("nation_tag: %d\n", ((struct CivInfoPacket*) packet)->nation_tag);
+  printf("expecting: 20\n");
   printf("\n");
 
   // receive city info
   type = c_socket_receive_packet(packet);
   printf("city_name: %s\n", ((struct CityInfoPacket*) packet)->city_name);
+  printf("expecting: city\n");
   printf("pop: %d\n", ((struct CityInfoPacket*) packet)->pop);
+  printf("expecting: 100\n");
   printf("owned_by: %s\n", ((struct CityInfoPacket*) packet)->owned_by);
+  printf("expecting: me\n");
   printf("\n");
 
   // receive action
   type = c_socket_receive_packet(packet);
   printf("action: %s\n", ((struct ActionPacket*) packet)->action);
+  printf("expecting: action\n");
   printf("action_specifiers: %s\n", ((struct ActionPacket*) packet)->action_specifiers);
+  printf("expecting: magestically\n");
   printf("\n");
 
   // receive action reply
   type = c_socket_receive_packet(packet);
   printf("action: %s\n", ((struct ActionReplyPacket*) packet)->action);
+  printf("expecting: reply\n");
   printf("\n");
 
   // receive turn begin
   type = c_socket_receive_packet(packet);
   printf("turn_begin: %d\n", ((struct TurnBeginPacket*) packet)->turn_begin);
+  printf("expecting: 18\n");
   printf("\n");
 
   // receive turn end
   type = c_socket_receive_packet(packet);
   printf("turn_end: %s\n", ((struct TurnEndPacket*) packet)->turn_end);
+  printf("expecting: end\n");
   printf("\n");
 
   // receive completed state transfer
   type = c_socket_receive_packet(packet);
   printf("done: %s\n", ((struct CompletedStateTransferPacket*) packet)->done);
+  printf("expecting: yeah\n");
   printf("\n");
 
   free(packet);

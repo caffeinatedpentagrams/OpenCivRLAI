@@ -1,25 +1,10 @@
 import socket
-import argparse
 from socket_listener import SocketClient
 from packets import *
 
 
-def get_args():
-    parser = argparse.ArgumentParser(description='A simple program with argparse')
-
-    parser.add_argument('--serverip', '-ip', type=str, help='freeciv server IP', required=True)
-    parser.add_argument('--serverport', '-port', type=int, help='freeciv server port', required=True)
-
-    args = parser.parse_args()
-
-    ip = args.serverip
-    port = args.serverport
-
-    return ip, port
-
-
 if __name__ == '__main__':
-    ip, port = get_args()
+    ip, port = 'localhost', 5560
     listener = SocketClient(ip, port)
 
     # send hello
@@ -85,48 +70,87 @@ if __name__ == '__main__':
     # receive hello
     packet = listener.receive_packet()
     print(packet.content['greeting'])
+    print('expecting: ', end='')
+    print('hi')
+    print()
 
     # receive hello reply
     packet = listener.receive_packet()
     print(packet.content['greeting'])
+    print('expecting: ', end='')
+    print('hi reply')
+    print()
 
     # receive map
     packet = listener.receive_packet()
     print(packet.content['map'])
+    print('expecting: ', end='')
+    print('[3, 0, 0, ...]')
+    print()
 
     # receive unit info
     packet = listener.receive_packet()
     print(packet.content['unit_id'])
+    print('expecting: ', end='')
+    print(5)
+    print()
 
     # receive civ info
     packet = listener.receive_packet()
     print(packet.content['nation_tag'])
+    print('expecting: ', end='')
+    print(7)
+    print()
 
     # receive city info
     packet = listener.receive_packet()
     print(packet.content['city_name'])
+    print('expecting: ', end='')
+    print('city city')
     print(packet.content['pop'])
+    print('expecting: ', end='')
+    print(123)
     print(packet.content['owned_by'])
+    print('expecting: ', end='')
+    print('me me')
+    print()
 
     # receive action
     packet = listener.receive_packet()
     print(packet.content['action'])
+    print('expecting: ', end='')
+    print('doing the thing')
     print(packet.content['action_specifiers'])
+    print('expecting: ', end='')
+    print('quickly')
+    print()
 
     # receive action reply
     packet = listener.receive_packet()
     print(packet.content['action'])
+    print('expecting: ', end='')
+    print('im tired')
+    print()
 
     # receive turn begin
     packet = listener.receive_packet()
     print(packet.content['turn_begin'])
+    print('expecting: ', end='')
+    print(13)
+    print()
 
     # receive turn end
     packet = listener.receive_packet()
     print(packet.content['turn_end'])
+    print('expecting: ', end='')
+    print('turn ended wake up')
+    print()
 
     # receive completed state transfer
     packet = listener.receive_packet()
     print(packet.content['done'])
+    print('expecting: ', end='')
+    print('finally')
+    print()
 
     listener.close()
