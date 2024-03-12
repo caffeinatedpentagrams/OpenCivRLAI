@@ -62,29 +62,29 @@ class HelloPacket(Packet):  # 0
         super().__init__(0)
         self._add_field("greeting", 10, 'str')
 
-class HelloReplyPacket(Packet):  # 1
+class HelloReplyPacket(Packet):  # 1 TODO Adit
     def __init__(self):
         super().__init__(1)
         self._add_field("greeting", 10, 'str')
 
-class MapPacket(Packet):  # 2
+class MapPacket(Packet):  # 2 TODO Adit
     def __init__(self):
         super().__init__(2)
         self._add_field('map', 102400, 'array')
 
-class UnitInfoPacket(Packet):  # 3
+class UnitInfoPacket(Packet):  # 3 TODO Adit
     def __init__(self):
         super().__init__(3)
         self._add_field('unit_id', 100, 'int')
         # TODO more fields? what are they?
 
-class CivInfoPacket(Packet):  # 4
+class CivInfoPacket(Packet):  # 4 TODO Adit
     def __init__(self):
         super().__init__(4)
         self._add_field('nation_tag', 20, 'int')
         # TODO add fields
 
-class CityInfoPacket(Packet):  # 5
+class CityInfoPacket(Packet):  # 5 TODO Adit
     def __init__(self):
         super().__init__(5)
         self._add_field('city_name', 100, 'str')
@@ -99,22 +99,22 @@ class ActionPacket(Packet):  # 6
         self._add_field('action_specifiers', 25000, 'str')
         # TODO maybe add more?
 
-class ActionReplyPacket(Packet):  # 7
+class ActionReplyPacket(Packet):  # 7 TODO Adit
     def __init__(self):
         super().__init__(7)
         self._add_field('action', 100, 'str')
 
-class TurnBeginPacket(Packet):  # 8
+class TurnBeginPacket(Packet):  # 8 TODO Adit
     def __init__(self):
         super().__init__(8)
         self._add_field('turn_begin', 1000, 'int')
 
-class TurnEndPacket(Packet):  # 9
+class TurnEndPacket(Packet):  # 9 TODO can be baked into ActionPacket
     def __init__(self):
         super().__init__(9)
         self._add_field('turn_end', 100, 'str')
 
-class CompletedStateTransferPacket(Packet):  # 10
+class CompletedStateTransferPacket(Packet):  # 10 TODO Adit
     def __init__(self):
         super().__init__(10)
         self._add_field('done', 100, 'str')

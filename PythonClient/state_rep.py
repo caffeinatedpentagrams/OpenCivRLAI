@@ -1,6 +1,7 @@
 import enum
 from collections import namedtuple
 from enum import Enum
+import technology
 # name: (cost, upkeep)
 BUILDABLE_BUILDINGS = {'aqueduct': (60, 2), 'bank': (80, 2), 'cathedral': (80, 3), 'coinage': (0, 0),
                        'colosseum': (70, 4), 'ganary': (40, 1), 'harbour': (40, 1), 'library': (60, 1),
@@ -107,33 +108,29 @@ class Country:
         self.luxury = 0  # TODO?? what is luxury?
         self.luxury_tax = 0
         self.gold_tax = 0
-        self.tech_tree = None # TODO placeholder
+        self.tech_tree = technology.TechnologyTree()
+        self.taxpoints = []  # TODO this has a default in the game
+
+        self.worker_list = []
+        self.settler_list = []
         self.city_list = []
-        self.taxpoints = []
+        for i in range(5):
+            self.worker_list.append(Worker(-1, -1))
+        for i in range(2):
+            self.settler_list.append(Settler(-1, -1))  # These are garbage values, TODO should probably change constructors!
 
-    def calculate_science(self):  # Updates and returns the science!
-        s = 0
-        for c in self.city_list:
-            s += c.science
-        self.science = s
-        return self.science
+    def update_from_packet(self, civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
+        pass
 
-    def calculate_net_income(self):
-        s = 0
-        for c in self.city_list:
-            s += c.net_income
-        self.net_income = s
-        return self.net_income
+    def research_technology(self, techname):
+        if techname not in self.tech_tree.get_researchable():
+            return False  # TODO Invalid Action
+        elif self.tech_tree.currently_researching is not None:
+            return False  # TODO Invalid Action
+        else:
+            self.tech_tree.add_research_progress(techname, self.science)
+            return True
 
-    def calculate_luxury(self):
-        s = 0
-        for c in self.city_list:
-            s += c.luxury
-        self.luxury = s
-        return self.luxury
-
-    def research_technology(self):
-        pass # TODO
 
     def change_taxrate(self, i, type):
         self.taxpoints[i] = type  # type is a Tax enum

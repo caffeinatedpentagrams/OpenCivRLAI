@@ -1,11 +1,13 @@
 # https://upload.wikimedia.org/wikipedia/commons/4/4c/Freeciv-2.1.8_technology_tree.png
 
 class Technology:
-    def __init__(self, name, requirements, turns):
+    def __init__(self, name, requirements, turns, cost):
         self.name = name
         self.requirements = requirements
         self.turns = turns
         self.researched = False
+        self.cost = cost
+        self.progress = 0
 
     def __str__(self):
         return self.name
@@ -86,6 +88,8 @@ class TechnologyTree:
             'chivalry': chivalry,
         }
 
+        self.currently_researching = None
+
     def get_researchable(self):
         researchable = []
         for tech in self.techs.values():
@@ -107,7 +111,15 @@ class TechnologyTree:
 
         tech.researched = True
 
-if __name__ == '__main__':
+    def add_research_progress(self, tech, progress):
+        self.techs[self.currently_researching] += progress
+        if self.techs[self.currently_researching].progress > self.techs[self.currently_researching].cost:
+            self.techs[self.currently_researching].researched = True
+            self.currently_researching = None
+            # TODO find out if we accumulate the unused progress and apply it to the next researched item?
+
+# TODO make proper unit test
+if __name__ == '__test__':
     tree = TechnologyTree()
     print(*tree.get_researchable(), sep=', ', end='\n\n')
 
