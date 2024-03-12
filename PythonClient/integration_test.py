@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     # send map
     mapp = MapPacket()
-    mapp.set_content('map', [15] * 1024)
+    mapp.set_content('map', [15] * 4096)
     listener.send_packet(mapp)
 
     # send unit info

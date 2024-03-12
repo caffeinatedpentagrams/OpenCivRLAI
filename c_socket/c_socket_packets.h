@@ -10,7 +10,7 @@ struct HelloReplyPacket {
 };
 
 struct MapPacket {
-  int map[1024];
+  int map[4096];
 };
 
 struct UnitInfoPacket {
