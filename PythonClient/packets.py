@@ -49,6 +49,8 @@ class Packet:
                 data += struct.pack('>I', arg)
             elif self.types[field] == 'array':
                 data += struct.pack('>I', len(arg))
+                if 'list' in str(type(arg)):
+                    arg = np.array(arg)
                 data += arg.astype('>u4').tobytes()
 
         data = struct.pack('>H', len(data) + 2) + data

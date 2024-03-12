@@ -16,9 +16,12 @@ class SocketClient:
             self.client_socket.connect((server_ip, server_port))
             print("Connected!")
 
-        finally:
+        except:
             self.client_socket.close()
-            print("Closed")
+            print("Failed to connect, closed")
+
+    def close(self):
+        self.client_socket.close()
 
     def receive_packet(self):
         data = self.client_socket.recv(2)
