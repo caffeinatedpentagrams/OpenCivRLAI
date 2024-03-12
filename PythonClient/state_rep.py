@@ -58,14 +58,70 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         self._add_action('mine', self.mine)
         self._add_action('build_road', self.build_road())
 
-    def irrigate(self):  # TODO find duration
-        pass # TODO
+    # TODO: placeholder get_terrain(x, y)
+    # https://freeciv.fandom.com/wiki/Terrain#Working_Terrain
+    def irrigate(self):
+        terrain = get_terrain(self.x_pos, self.y_pos)
+        irrigate_turns = {
+          'deep_ocean': -1,
+          'desert': 5,
+          'forest': 5,
+          'glacier': -1,
+          'grassland': 5,
+          'hills': 10,
+          'jungle': 15,
+          'lake': -1,
+          'mountains': -1,
+          'ocean': -1,
+          'plains': 5,
+          'swamp': 15,
+          'tundra': 5,
+        }
+        if irrigate_turns[terrain] < 0:
+            raise ValueError(f'cannot irrigate in {terrain}')
+        self.busy_turns = irrigate_turns[terrain]
 
-    def mine(self):  # TODO find duration
-        pass
+    def mine(self):
+        terrain = get_terrain(self.x_pos, self.y_pos)
+        mine_turns = {
+          'deep_ocean': -1,
+          'desert': 5,
+          'forest': 15,
+          'glacier': 10,
+          'grassland': 10,
+          'hills': 10,
+          'jungle': 15,
+          'lake': -1,
+          'mountains': 10,
+          'ocean': -1,
+          'plains': 15,
+          'swamp': 15,
+          'tundra': -1,
+        }
+        if mine_turns[terrain] < 0:
+            raise ValueError(f'cannot mine in {terrain}')
+        self.busy_turns = mine_turns[terrain]
 
-    def build_road(self):  # TODO find duration
-        pass
+    def build_road(self):
+        terrain = get_terrain(self.x_pos, self.y_pos)
+        build_road_turns = {
+          'deep_ocean': -1,
+          'desert': 2,
+          'forest': 4,
+          'glacier': 4,
+          'grassland': 2,
+          'hills': 4,
+          'jungle': 4,
+          'lake': -1,
+          'mountains': 6,
+          'ocean': -1,
+          'plains': 2,
+          'swamp': 4,
+          'tundra': 2,
+        }
+        if build_road_turns[terrain] < 0:
+            raise ValueError(f'cannot build road in {terrain}')
+        self.busy_turns = build_road_turns[terrain]
 
 def Settler(MovingUnit):
     def __init__(self, xcoord, ycoord):
