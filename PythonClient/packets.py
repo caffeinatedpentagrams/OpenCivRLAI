@@ -70,27 +70,35 @@ class HelloReplyPacket(Packet):  # 1 TODO Adit
 class MapPacket(Packet):  # 2 TODO Adit
     def __init__(self):
         super().__init__(2)
-        self._add_field('map', 102400, 'array')
+        self._add_field('map', 102400, 'array')  # TODO check len
 
 class UnitInfoPacket(Packet):  # 3 TODO Adit
     def __init__(self):
         super().__init__(3)
         self._add_field('unit_id', 100, 'int')
-        # TODO more fields? what are they?
+        self._add_field('owner', 100, 'str')
+        self._add_field('nationality', 100, 'str')
+        self._add_field('coord', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('upkeep', 1, 'int')  # comes as uint8_t acc to packets.def
 
 class CivInfoPacket(Packet):  # 4 TODO Adit
     def __init__(self):
         super().__init__(4)
-        self._add_field('nation_tag', 20, 'int')
         # TODO add fields
 
 class CityInfoPacket(Packet):  # 5 TODO Adit
     def __init__(self):
         super().__init__(5)
-        self._add_field('city_name', 100, 'str')
-        self._add_field('pop', 100, 'int')
-        self._add_field('owned_by', 100, 'str')
-        # TODO more
+        self._add_field('id', 8, 'int') # TODO double check type packets.def id; key
+        self._add_field('coord', 8, 'int')
+        self._add_field('owner', 8, 'int') # TODO double check type, packets.def PLAYER
+        self._add_field('size', 32, 'int')  # TODO doubel check type, packets.def CITIZENS
+        self._add_field('radius', 1, 'int')
+        self._add_field('food_stock', 2, 'int') # THIS IS SIGNED
+        self._add_field('shield_stock', 2, 'int')  # TODO what is this?
+        self._add_field('production_kind', 1, 'int')  # TODO what is this?
+        self._add_field('production_value', 1, 'int')
+        self._add_field('improvements', 5000, 'str') # We will force this to contain a list of the buildings
 
 class ActionPacket(Packet):  # 6
     def __init__(self):
@@ -118,6 +126,16 @@ class CompletedStateTransferPacket(Packet):  # 10 TODO Adit
     def __init__(self):
         super().__init__(10)
         self._add_field('done', 100, 'str')
+
+class ResearchInfoPacket(Packet):  # 11 TODO Adit
+    def __init__(self):
+        super().__init__(11)
+        self._add_field('id', 4, 'int')  # TODO check type
+        self._add_field('techs_researched', 4, 'int')  #  TODO how tf is this encoded?
+        self._add_field('researching', 100, 'str')  # TODO what is a TECH packets.def
+        self._add_field('researching_cost', 4, 'int')
+        self._add_field('bulbs_researched', 4, 'int')  # TODO what is this
+        # TODO check line 1025 in packets.def; unsure if further fields needed
 
 class PacketEnum(enum.Enum):
     Hello = 0

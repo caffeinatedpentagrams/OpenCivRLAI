@@ -7,16 +7,19 @@ Actions should output corresponding fields for their corresponding packet
 
 
 class Action(ABC):
-    def __init__(self):
-        pass
+    def __init__(self, country):
+        self.country = country
 
     def execute(self):  # Treated as abstract method.
+        pass
+    
+    def islegal(self):
         pass
 
 
 class ResearchAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -24,8 +27,8 @@ class ResearchAction(Action):
 
 
 class BuildBuildingAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -33,8 +36,8 @@ class BuildBuildingAction(Action):
 
 
 class SettleAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -42,8 +45,8 @@ class SettleAction(Action):
 
 
 class IrrigateAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -51,8 +54,8 @@ class IrrigateAction(Action):
 
 
 class MineAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -60,8 +63,8 @@ class MineAction(Action):
 
 
 class RoadAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -69,8 +72,8 @@ class RoadAction(Action):
 
 
 class ChangeTaxPolicyAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):
@@ -78,8 +81,8 @@ class ChangeTaxPolicyAction(Action):
 
 
 class EndTurnAction(Action):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, country):
+        super().__init__(country)
         pass
 
     def execute(self):

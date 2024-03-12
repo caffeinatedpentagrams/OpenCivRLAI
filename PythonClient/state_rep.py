@@ -88,7 +88,7 @@ class Explorer(MovingUnit):  # TODO Probably don't even need to overload
         super().__init__(xcoord, ycoord)
 
     def queue_multiple_one_tile_moves(self):
-        pass  # TODO
+        pass  # TODO probably allow 2-tiles movement, double check wiki.
 
 
 class City(Unit):
@@ -116,19 +116,20 @@ class Tax(Enum):
 
 class Country:
     def __init__(self):
-        self.science = 0
-        self.science_tax = 0
-        self.gold_stored = 0
-        self.net_income = 0
+        self.turns_lived = 0  # USED IN MODEL INPUT
+        self.science = 0  # USED IN MODEL INPUT
+        self.gold_stored = 0  # USED IN MODEL INPUT
+        self.net_income = 0  # USED IN MODEL INPUT
         self.luxury = 0  # TODO?? what is luxury?
-        self.luxury_tax = 0
-        self.gold_tax = 0
-        self.tech_tree = technology.TechnologyTree()
+        self.luxury_tax = 0  # USED IN MODEL INPUT
+        self.gold_tax = 0  # USED IN MODEL INPUT
+        self.science_tax = 0  # USED IN MODEL INPUT
+        self.tech_tree = technology.TechnologyTree()  # USED IN MODEL INPUT
         self.taxpoints = []  # TODO this has a default in the game
 
-        self.worker_list = []
-        self.settler_list = []
-        self.city_list = []
+        self.worker_list = []  # USED IN MODEL INPUT
+        self.settler_list = []  # USED IN MODEL INPUT
+        self.city_list = []  # USED IN MODEL INPUT
         for i in range(5):
             self.worker_list.append(Worker(-1, -1))
         for i in range(2):
