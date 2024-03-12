@@ -57,21 +57,55 @@ class MovingUnit(Unit):
 
 
 class Worker(MovingUnit):  # If override superclass, should always call superclass method!
-    def __init__(self, xcoord, ycoord, entity_id):
+    def __init__(self, xcoord, ycoord, entity_id, upkeep=0):
         super().__init__(xcoord, ycoord, entity_id)
         self._add_action(ActionEnum.IrrigateAction, self.irrigate)
         self._add_action(ActionEnum.MineAction, self.mine)
         self._add_action(ActionEnum.RoadAction, self.build_road)
+        self.upkeep = upkeep
+        self.production = 0  # TODO find val
 
-    def irrigate(self, args):  # TODO find duration
-        pass  # TODO
+    def irrigate(self):  # TODO find duration
+         if self.food > 0:
+            # Each irrigation step consumes:1 and adds:2 (produce)
+            self.food -= 1
+            self.food += 2
+        else:  # TODO check
+            pass
 
-    def mine(self, args):  # TODO find duration
+    def mine(self):  # TODO find duration
+        if self.production > 0:
+            self.production -= 1
+            self.production += 2
         pass
+            print("Worker mines resources")
+        else:
+            print("Not enough production")
+        init_duration = 2  # Initialized
+        # Mining is dependent on terrain
+        return init_duration
 
-    def build_road(self, args):  # TODO find duration
-        pass
+    def build_road(self, terrain_type):  # TODO find duration
+        road_cost = 1 # TODO find cost
+        if self.production >= road_cost:
+            self.production -= road_cost
+        else:
+            pass
+        init_duration = 1  # Init
+        if terrain_type == "forest":
+            duration = init_duration * 1.5  # Duration for building in different conditions is different (e.g forests)
 
+        elif terrain_type == "mountain":
+            duration = init_duration * 2
+        else:
+            duration = init_duration
+        return duration
+
+class City:
+    def __init__(self, xcoord, ycoord):
+        self.xpos = xcoord
+        self.ypos = ycoord
+        self.exists = True
 
 class Settler(MovingUnit):
     def __init__(self, xcoord, ycoord, entity_id):
@@ -105,8 +139,21 @@ class City(Unit):
         self.luxury = 0  # TODO verify!
         # TODO add city attributes
 
-    def build_building(self, args):  # TODO
-        pass
+    def build_building(self, building):  # TODO check
+        building_cost = 100  # Production cost to construct a building
+        if self.production >= building_cost:
+            self.production -= building_cost
+            self.buildings.append(building)
+            print(f"{building} constructed building in the city.")
+        else:
+            print("Not enough production points ")
+
+    def grow(self):
+        # Population increase
+        self.population += 1
+        if self.population > self.max_population:
+            self.population = self.max_population
+        self.workers()
 
     def build_unit(self, args):
         pass  # TODO
@@ -144,7 +191,6 @@ class Country:
     def update_from_packet(self,
                            civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
         pass
-
     def research_technology(self, techname):
         if techname not in self.tech_tree.get_researchable():
             return False  # TODO Invalid Action
