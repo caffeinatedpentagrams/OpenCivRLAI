@@ -2,6 +2,7 @@ import socket
 import struct
 import enum
 import numpy as np
+from enums import *
 
 
 class Packet:
@@ -77,7 +78,7 @@ class UnitInfoPacket(Packet):  # 3 TODO Adit
         self._add_field('unit_id', 100, 'int')
         self._add_field('owner', 100, 'str')
         self._add_field('nationality', 100, 'str')
-        self._add_field('coord', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('coord', 8, 'int')  # field is x, y in 4-byte integers
         self._add_field('upkeep', 1, 'int')  # comes as uint8_t acc to packets.def
 
 class CivInfoPacket(Packet):  # 4 TODO Adit
@@ -102,7 +103,6 @@ class CityInfoPacket(Packet):  # 5 TODO Adit
 class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which can be a tile, a unit, or a city)
     def __init__(self):
         super().__init__(6)
-        self._add_field('action', 100, 'str')
         self._add_field('ACTION_ID', 100, 'int')
         self._add_field('actor_id', 100, 'int')
         self._add_field('target_id', 100, 'int')
@@ -138,20 +138,6 @@ class ResearchInfoPacket(Packet):  # 11 TODO Adit
         self._add_field('bulbs_researched', 4, 'int')  # TODO what is this
         # TODO check line 1025 in packets.def; unsure if further fields needed
 
-class PacketEnum(enum.Enum):
-    Hello = 0
-    HelloReply = 1
-    Map = 2
-    UnitInfo = 3
-    CivInfo = 4
-    CityInfo = 5
-    Action = 6
-    ActionReply = 7
-    TurnBegin = 8
-    TurnEnd = 9
-    CompletedStateTransfer = 10
-    ResearchInfo = 11
-
 class PacketFactory:  # TODO add logic for 11
     # the payload should be passed in
     # i.e. the 2-byte packet length field should be removed
@@ -177,7 +163,7 @@ class PacketFactory:  # TODO add logic for 11
         self.idx += 4 * length
         return value
 
-    def make_packet(self):
+    def make_packet_from_bytestream(self):
         if self.packet_type == PacketEnum.Hello.value: packet = HelloPacket()
         elif self.packet_type == PacketEnum.HelloReply.value: packet = HelloReplyPacket()
         elif self.packet_type == PacketEnum.Map.value: packet = MapPacket()
@@ -201,10 +187,18 @@ class PacketFactory:  # TODO add logic for 11
 
         return packet
 
+    @staticmethod
+    def make_action_packet(action_id: ActionEnum, actor_id: int, target_id: int) -> ActionPacket:
+        packet = ActionPacket()
+        packet.set_content('ACTION_ID', action_id)
+        packet.set_content('actor_id', actor_id)
+        packet.set_content('target_id', target_id)
+        return packet
+
 
 
 def test(bytestream):
-    packet = PacketFactory(bytestream).make_packet()
+    packet = PacketFactory(bytestream).make_packet_from_bytestream()
     for field in packet.field_names:
         print(f'{field}: {packet.content[field]}')
     encoded = packet.encode()[2:] # remove the packet length field before comparison

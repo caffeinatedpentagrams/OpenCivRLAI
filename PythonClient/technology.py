@@ -103,13 +103,13 @@ class TechnologyTree:
                 raise ValueError(f'{tech} does not exist')
             tech = self.techs[tech]
 
-        if tech.researched:
+        if self.techs[tech].researched:
             raise ValueError(f'{tech.name} already researched')
 
         if tech not in self.get_researchable():
             raise ValueError(f'requirements not met for {tech.name}')
 
-        tech.researched = True
+        self.techs[tech].researched = True
 
     def add_research_progress(self, progress):  # TODO Possibly extraneous, probably just get this from packets
         self.techs[self.currently_researching] += progress
