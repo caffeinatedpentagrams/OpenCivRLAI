@@ -1,9 +1,10 @@
 import socket
 import struct
+import struct
 import enum
 import numpy as np
 from enums import *
-
+import torch
 
 class Packet:
     def __init__(self, packid):
@@ -50,6 +51,9 @@ class Packet:
                 data += struct.pack('>I', arg)
             elif self.types[field] == 'array':
                 data += struct.pack('>I', len(arg))
+                # converting to np.array
+                arg = arg.numpy()
+                # nparr = nparr.astype('>u4')
                 data += arg.astype('>u4').tobytes()
 
         data = struct.pack('>H', len(data) + 2) + data
@@ -157,11 +161,16 @@ class PacketFactory:  # TODO add logic for 11
         self.idx += 4
         return value
 
-    def get_array(self):
+
+    def get_tensor(self):
         length = self.get_int()
         value = np.frombuffer(self.bytestream[self.idx : self.idx + 4 * length], dtype='>u4')
+        value = value.astype('int32')
+        tensor = torch.tensor(value)
         self.idx += 4 * length
-        return value
+        # print(type(tensor))
+        return tensor
+
 
     def make_packet_from_bytestream(self):
         if self.packet_type == PacketEnum.Hello.value: packet = HelloPacket()
@@ -182,7 +191,9 @@ class PacketFactory:  # TODO add logic for 11
             field_type = packet.types[field]
             if field_type == 'int': packet.set_content(field, self.get_int())
             elif field_type == 'str': packet.set_content(field, self.get_str())
-            elif field_type == 'array': packet.set_content(field, self.get_array())
+            elif field_type == 'array':
+              if self.get_tensor: packet.set_content(field, self.get_tensor())
+              else: packet.set_content(field, self.get_array())
             else: raise ValueError(f'Unknown field type: {field_type}')
 
         return packet
