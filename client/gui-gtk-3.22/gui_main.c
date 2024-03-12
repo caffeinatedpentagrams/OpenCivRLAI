@@ -1640,6 +1640,7 @@ void ui_init(void)
 **************************************************************************/
 int main(int argc, char **argv)
 {
+  printf("\nInside main() of gui_main.c (inside gtk-3.22\n");
   return client_main(argc, argv, FALSE);
 }
 
@@ -1762,6 +1763,7 @@ static void migrate_options_from_gtk3(void)
 **************************************************************************/
 int ui_main(int argc, char **argv)
 {
+  printf("\nui_main called\n");
   PangoFontDescription *toplevel_font_name;
   guint sig;
 
@@ -1774,8 +1776,10 @@ int ui_main(int argc, char **argv)
 
     /* GTK withdraw gtk options. Process GTK arguments */
     if (!gtk_init_check(&argc, &argv)) {
-      log_fatal(_("Failed to open graphical mode."));
+      printf("\ngui_main.c inside client/gui-gtk-3.22\n");
+      log_fatal(_("Failed <snip-edit-adit> to open graphical mode."));
       exit(EXIT_FAILURE);
+      printf("Supposed to exit but didn't\n");
     }
 
     help_system_init();
@@ -1895,7 +1899,9 @@ int ui_main(int argc, char **argv)
     timer_id = g_timeout_add(TIMER_INTERVAL, timer_callback, NULL);
 
     gui_up = TRUE;
+    printf("\nBefore gtk_main\n");
     gtk_main();
+    printf("\nAfter gtk_main\n");
     gui_up = FALSE;
 
     destroy_server_scans();

@@ -213,7 +213,17 @@ int send_packet_data(struct connection *pc, unsigned char *data, int len,
   /* default for the server */
   int result = 0;
 
+  printf("\nCLIENT SENDING PACKET! TYPE: %d\n%s\n",packet_type,packet_name(packet_type));
 
+  /*if (packet_type==PACKET_UNIT_ORDERS) {
+    struct unit_order order;
+    memcpy(&order, data, len);
+    printf("Ordering a unit do to #: %d\nActivity: %d\ntarget: ?\nsub_target: %d\naction: %d, direction8: %d\n",order.order,order.activity,order.sub_target,order.action,order.dir);
+    }*/
+
+  printf("sending packet type=%s(%d) len=%d to %s",
+             packet_name(packet_type), packet_type, len,
+             is_server() ? pc->username : "server");
   log_packet("sending packet type=%s(%d) len=%d to %s",
              packet_name(packet_type), packet_type, len,
              is_server() ? pc->username : "server");

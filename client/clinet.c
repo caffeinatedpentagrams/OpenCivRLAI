@@ -17,7 +17,6 @@
 
 #include "fc_prehdrs.h"
 #include "hello_world.h"
-#include "state_sender.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -412,15 +411,14 @@ void input_from_server(int fd)
 
   fc_assert_ret(fd == client.conn.sock);
   nb = read_from_connection(&client.conn, FALSE);
+  printf("\ninput_from_server called, recieved packets\n");
   hello();
-  printf("\ninput_from_server called, new turn\n");
-  
   int count = 0;
-  if (count>25) {
-      count = 0;
-      send_state();
+  //if (count>25) {
+      //count = 0;
+      //send_state();
       //WRONG send_packet_data(&client.conn,get_bytes(),D,PACKET_UNIT_DO_ACTION);
-  }
+  //}
   //printf("%.*s",nb,(char *) &client.conn.buffer);
   if (0 <= nb) {
     agents_freeze_hint();

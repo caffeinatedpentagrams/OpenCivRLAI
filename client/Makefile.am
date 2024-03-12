@@ -79,6 +79,9 @@ AM_LIBTOOLFLAGS = --preserve-dup-deps
 # instead linking them directly to the client. This is necessary
 # for static linking.
 freeciv_client_src = $(AUDIO_SDL_FILES) \
+	hello_world.h	\
+	state_aggregator.h \
+	state_aggregator.c \
 	attribute.h	\
 	attribute.c	\
 	citydlg_common.c \
@@ -152,14 +155,9 @@ freeciv_client_src = $(AUDIO_SDL_FILES) \
 	audio.c         \
 	audio.h         \
 	audio_none.c    \
-	audio_none.h    \
-	hello_world.h   \
-	state_aggregator.h \
-	state_aggregator.c \
-	state_sender.h	\
-	state_sender.c	\
-	state_reciever.h \
-	state_reciever.c
+	audio_none.h	
+
+
 
 gui_interface_src = \
 	gui_interface.c \
