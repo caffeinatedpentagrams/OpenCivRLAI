@@ -11,6 +11,7 @@ int client_socket;
 char buffer[65536];
 
 void c_socket_init() {
+  printf("Inside c_socket_init\n");
   c_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (c_socket == -1) {
     perror("socket creation failed");
@@ -19,6 +20,7 @@ void c_socket_init() {
 }
 
 void c_socket_bind_and_listen(int port) {
+  printf("Inside c_socket_bind_and_listen\n");
   struct sockaddr_in addr;
   addr.sin_family = AF_INET;
   addr.sin_addr.s_addr = INADDR_ANY;

@@ -1,4 +1,4 @@
-/***********************************************************************
+/*******************A****************************************************
  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -109,6 +109,9 @@
 
 #include "client_main.h"
 
+/*c socket code */
+#include "c_socket_packets.h"
+#include "c_socket.h"
 
 static enum known_type mapimg_client_tile_known(const struct tile *ptile,
                                                 const struct player *pplayer,
@@ -249,7 +252,9 @@ static void client_game_init(void)
   printf("Entered client_game_init \n\n");
   client.conn.playing = NULL;
   client.conn.observer = FALSE;
-
+  c_socket_init();
+  c_socket_bind_and_listen(5560);
+  c_socket_accept();
   game_init(FALSE);
   printf("Ran game_init\n");
   attribute_init();

@@ -10,10 +10,10 @@
 #include "terrain.h"
 #include "unit.h"
 #include "unittype.h"
+#include "packhand_gen.h"
 
-#include "state_sender.h"
 
-#define MAX_UNITS 40
+#define MAX_UNITS_ADIT 40
 #define MAXIMUM_ADIT 64
 
 struct map_index {
@@ -24,44 +24,45 @@ struct map_index {
     int output[O_LAST];
     int base_time;
     int road_time;
+  struct unit_list* units;
 };
 
 struct unit_basic {
-  int type;
-  int build_cost;
-  int pop_cost; //# workers in unit
-  int att_str;
-  int def_str;
-  int move_rate;
-  int unknown_move_cost;
-  int vision_radius;
-  int hp;
-  int firepower;
-  int city_size;
-  int city_slots;
-  int pos; //index from (x,y)
   int id;
-  int homecity;
-  int moves_left;
-  int upkeep[O_LAST];
-  bool has_orders; // Use this field to only order units without current orders
+  int type;
+  int x;
+  int y;
+  //  int build_cost;
+  //int pop_cost; //# workers in unit
+  //int att_str;
+  //int def_str;
+  //int move_rate;
+  //int unknown_move_cost;
+  //int vision_radius;
+  //int hp;
+  //int firepower;
+  //int city_size;
+  //int city_slots;
+  //int pos; //index from (x,y)
+  //int homecity;
+  //int moves_left;
+  //int upkeep[O_LAST];
+  //bool has_orders; // Use this field to only order units without current orders
 };
 
-#define D sizeof(struct map_index)
+#define D sizeof(int)
 
-//struct unit_basic units[MAX_UNITS];
-extern struct unit_basic units[MAX_UNITS];
-extern char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D];
+extern struct unit_basic units[MAX_UNITS_ADIT];
+extern char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT];
 
-//char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
+struct map_index* tile_to_vec(struct tile* tile);
+void dummy();
 
-void* tile_to_vec(struct tile* tile);
+void update_map(int x, int y, int map_index);
 
-void update_map(int x, int y, struct map_index* ptr);
+void single_unit_update(struct unit_basic* old, struct packet_unit_info* new); 
 
-void single_unit_update(struct unit_basic* old, struct unit* new); 
-
-void update_units(struct unit* punit);
+void update_units(struct packet_unit_info* punit);
 
 #ifdef __cplusplus
 extern "C" {
