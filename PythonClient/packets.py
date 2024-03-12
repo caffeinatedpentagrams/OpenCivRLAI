@@ -54,8 +54,7 @@ class Packet:
         data = struct.pack('>H', len(data) + 2) + data
         return data
 
-# TODO subclass packet for every packet type we need!
-# TODO make PacketFactory??
+# TODO all coord fields should be one int for each coord!
 
 class HelloPacket(Packet):  # 0
     def __init__(self):
@@ -100,11 +99,13 @@ class CityInfoPacket(Packet):  # 5 TODO Adit
         self._add_field('production_value', 1, 'int')
         self._add_field('improvements', 5000, 'str') # We will force this to contain a list of the buildings
 
-class ActionPacket(Packet):  # 6
+class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which can be a tile, a unit, or a city)
     def __init__(self):
         super().__init__(6)
         self._add_field('action', 100, 'str')
-        self._add_field('action_specifiers', 25000, 'str')
+        self._add_field('ACTION_ID', 100, 'int')
+        self._add_field('actor_id', 100, 'int')
+        self._add_field('target_id', 100, 'int')
         # TODO maybe add more?
 
 class ActionReplyPacket(Packet):  # 7 TODO Adit
@@ -149,8 +150,9 @@ class PacketEnum(enum.Enum):
     TurnBegin = 8
     TurnEnd = 9
     CompletedStateTransfer = 10
+    ResearchInfo = 11
 
-class PacketFactory:
+class PacketFactory:  # TODO add logic for 11
     # the payload should be passed in
     # i.e. the 2-byte packet length field should be removed
     def __init__(self, bytestream):
@@ -187,6 +189,7 @@ class PacketFactory:
         elif self.packet_type == PacketEnum.TurnBegin.value: packet = TurnBeginPacket()
         elif self.packet_type == PacketEnum.TurnEnd.value: packet = TurnEndPacket()
         elif self.packet_type == PacketEnum.CompletedStateTransfer.value: packet = CompletedStateTransferPacket()
+        elif self.packet_type == PacketEnum.ResearchInfo.value: packet = ResearchInfoPacket()
         else: raise ValueError(f'Unknown packet type: {self.packet_type}')
 
         for field in packet.field_names:

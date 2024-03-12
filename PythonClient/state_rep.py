@@ -95,6 +95,9 @@ class City(Unit):
     def __init__(self, xcoord, ycoord):
         super().__init__(xcoord, ycoord)
         self._add_action('build_building', self.build_building)
+        self.exists = False
+        self.isBusy = False
+        self.buildings = []
         self.production = 0
         self.science = 0
         self.gold_income = 0

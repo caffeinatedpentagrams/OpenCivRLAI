@@ -97,7 +97,7 @@ class TechnologyTree:
                 researchable.append(tech)
         return researchable
 
-    def research(self, tech):
+    def research(self, tech):  # TODO check, also duplicated logic.
         if 'str' in str(type(tech)):
             if tech not in self.techs:
                 raise ValueError(f'{tech} does not exist')
@@ -111,12 +111,17 @@ class TechnologyTree:
 
         tech.researched = True
 
-    def add_research_progress(self, tech, progress):
+    def add_research_progress(self, progress):  # TODO Possibly extraneous, probably just get this from packets
         self.techs[self.currently_researching] += progress
-        if self.techs[self.currently_researching].progress > self.techs[self.currently_researching].cost:
+        if self.techs[self.currently_researching].progress >= self.techs[self.currently_researching].cost:
+            accum_progress = (self.techs[self.currently_researching].progress -
+                              self.techs[self.currently_researching].cost)  # TODO needed?
             self.techs[self.currently_researching].researched = True
             self.currently_researching = None
             # TODO find out if we accumulate the unused progress and apply it to the next researched item?
+
+    def is_busy(self):
+        return self.currently_researching is not None
 
 
 # TODO make proper unit test
