@@ -1,0 +1,108 @@
+## Process this file with automake to produce Makefile.in
+
+ACLOCAL_AMFLAGS = -I m4 -I dependencies/m4
+AM_DIST_FORMATS = gzip xz zip
+
+if CLIENT
+CSUBDIRS = client
+else
+CSUBDIRS = 
+endif
+
+if SRV_LIB
+SSUBDIRS = ai server
+else
+SSUBDIRS =
+endif
+
+if MAKE_DATA
+DSUBDIRS = data
+else
+DSUBDIRS =
+endif
+
+SUBDIRS = gen_headers $(DSUBDIRS) dependencies utility common tests windows $(SSUBDIRS) $(CSUBDIRS) translations doc tools lua bootstrap
+
+EXTRA_DIST =	autogen.sh 			\
+		configure.ac			\
+		m4/build-to-host.m4		\
+		m4/c99.m4			\
+		m4/c11.m4			\
+		m4/c++11.m4			\
+		m4/codeset.m4			\
+		m4/compiler.m4			\
+		m4/debug.m4			\
+		m4/expanddir.m4			\
+		m4/fc-sdl2.m4			\
+		m4/fcdb-mysql.m4		\
+		m4/fcdb-postgres.m4		\
+		m4/fcdb-sqlite3.m4		\
+		m4/features.m4			\
+		m4/gettext.m4			\
+		m4/gettimeofday.m4		\
+		m4/gtk-2.0.m4			\
+		m4/gtk2-client.m4		\
+		m4/gtk3-client.m4		\
+		m4/gtk3.22-client.m4		\
+		m4/host-cpu-c-abi.m4		\
+		m4/iconv.m4			\
+		m4/intl.m4			\
+		m4/intlmacosx.m4		\
+		m4/lib-ld.m4			\
+		m4/lib-link.m4			\
+		m4/lib-prefix.m4		\
+		m4/locale.m4			\
+		m4/mysql.m4			\
+		m4/magickwand.m4		\
+		m4/mapimg-magickwand.m4		\
+		m4/nls.m4			\
+		m4/no-client.m4			\
+		m4/pkg.m4			\
+		m4/po.m4			\
+		m4/postgres.m4			\
+		m4/progtest.m4			\
+		m4/qt5.m4			\
+		m4/qt5-darwin.m4		\
+		m4/qt-client.m4			\
+		m4/readline.m4			\
+		m4/sdl.m4			\
+		m4/sdl2-client.m4		\
+		m4/sqlite3.m4			\
+		m4/sound.m4			\
+                m4/tcc.m4			\
+		m4/vsnprintf.m4			\
+		m4/web-client.m4		\
+		m4/winsock2.m4			\
+		m4/testmatic.m4			\
+		flatpak/build_flatpak.sh	\
+		flatpak/org.freeciv.gtk322.yml	\
+		flatpak/org.freeciv.mp.gtk3.yml	\
+		flatpak/org.freeciv.mp.gtk4.yml	\
+		flatpak/org.freeciv.qt.yml	\
+		flatpak/org.freeciv.sdl2.yml	\
+		scripts/mapimg2anim		\
+		scripts/setup_auth_server.sh	\
+		scripts/diff_ignore		\
+		scripts/freeciv.supp		\
+		NEWS-3.0
+
+noinst_HEADERS= fc_version
+
+docs =			\
+	ABOUT-NLS	\
+	AUTHORS		\
+	ChangeLog	\
+	COPYING		\
+	INSTALL		\
+	NEWS		\
+	NEWS-3.0
+
+doc_DATA = $(docs)
+
+src-check:
+	cd tests && $(MAKE) $(AM_MAKEFLAGS) src-check
+
+doc:
+	doxy_srcdir="$(top_srcdir)/" doxygen $(top_srcdir)/doc/freeciv.doxygen
+
+.PHONY: src-check doc

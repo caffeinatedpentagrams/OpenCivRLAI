@@ -1,0 +1,2191 @@
+=========================
+Welcome to Freeciv 3.0.10
+=========================
+
+The changes in the 3.0.x series are summarised below.
+For changes prior to 3.0, see NEWS. For more detailed changes,
+see the ChangeLog file.
+
+
+CHANGES FROM 3.0.9 to 3.0.10
+----------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.10>, 2024-02-09)
+
+3.0.10 is a generic bugfix release in freeciv-3.0 series.
+Focus has been in portability issues, but also a couple
+of fatal runtime errors have been resolved.
+
+Server / General
+
+    * Fixed nation color selection assert failures when moving
+      from pre-game to turn 1 RM#1
+    * Fixed a crash when city removal left a unit stranded RM#81
+
+Low-level changes
+
+    * Fixed growing of the internal string handling buffer, fixing, e.g.,
+      issues with very long lines in the savegame RM#3
+    * Fixed fc_vsnprintf() return value on Windows, fixing, e.g.,
+      issues on loading the tutorial scenario RM#58
+
+General
+
+    * Various internal changes which should only affect developers. RM#101
+
+Tools
+Ruleup
+
+    * Fixed bad memory access while loading freeciv-2.6 format ruleset
+      RM#223
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      RM#11 RM#150
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#48955 RM#64
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Polish, Russian
+         + Incomplete translations:
+            Finnish (100% core, 93% nations, 100% ruledit)
+
+Build/portability
+
+    * Refreshed bootstrap files from their upstreams
+      osdn#48956 RM#5 RM#4 RM#89 RM#185 RM#186 RM#188 RM#187 RM#202 RM#208
+    * Fixed some clang analyzer warnings RM#37 osdn#48626
+    * MagickWand headers and libraries searched also
+      by pkgconf name MagickWand-6.Q16HDRI RM#36
+    * Fixed clang-18 compiler warnings
+      RM#90 RM#99 RM#118 RM#128 RM#133 RM#140
+    * Fixed clang case fallthrough warnings
+      osdn#138 RM#172 RM#171 RM#178 RM#190 RM#192 RM#196
+    * Fixed c23 compiler warnings RM#177 RM#197
+    * Flatpak updates
+         + Download SDL2_gfx from sourceforge RM#92
+         + Fixed sdl2-client flatpak build on arm RM#182
+    * Metainfo updates
+         + Metainfo includes recommended minimum resolution
+           for each client RM#180
+
+
+CHANGES FROM 3.0.8 to 3.0.9
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.9>, 2023-11-09)
+
+3.0.9 is a generic bugfix release in freeciv-3.0 series.
+
+Server / General
+
+    * Set diplomatic relations state correctly between team members
+      osdn#48295
+    * Fixed assert failures when city grows to freeciv's internal
+      max city size (255) osdn#48296
+    * Sammarinese city name Borgo Maggiore corrected osdn#48316
+    * Cargo gets bounced when transport is lost due to terrain change
+      osdn#46277
+    * Fixed crash with recursive autoattacks in case of occupychance
+      setting being > 0 osdn#48300
+    * Fixed memory corruption when transport is not bounced,
+      but cargo is osdn#48392
+    * Corrected amount treasury gets increased by a city
+      in some situations osdn#48391
+    * Cities stop working tiles turned unworkable at turn change osdn#46423
+    * Fixed clearing city border claims when player gets removed
+      from the game osdn#48837
+
+Changes affecting players (supplied rulesets)
+
+    * Units hidden by extras no longer impose ZoC osdn#47700
+
+    * nations
+         + Portuguese viscounty replaced by county osdn#48531
+         + Han dynasty removed from modern era group osdn#48764 osdn#48714
+         + The new nation from Mongols civil war now might be China
+           osdn#48780
+
+    * scenarios
+         + Bordering Glaciers in italy scenario replaced by
+           Inaccessible terrain osdn#42869
+
+Changes affecting other rulesets / modders
+
+    * Fixed problems in passing integer values through lua calls osdn#48722
+
+Changes affecting server operators
+
+    * Fixed handling of invalid player flag on savegame load osdn#48563
+
+General
+
+    * Fixed memory leaks, bad memory access, and improved cleanup
+      on shutdown
+      osdn#48275 osdn#48399 osdn#48445 osdn#48454 osdn#48446 osdn#47186
+      osdn#48787 osdn#48797 osdn#48788 osdn#48821 osdn#48807
+    * Optimizations
+      osdn#48274 osdn#47794 osdn#48635 osdn#48711 osdn#47737 osdn#48525
+      osdn#47345 osdn#48838 osdn#48678
+    * Various internal changes which should only affect developers.
+      osdn#48315 osdn#48197 osdn#48368 osdn#41796 osdn#47961 osdn#48587
+      osdn#48594 osdn#48645 osdn#48652 osdn#46414 osdn#48707 osdn#48526
+      osdn#48266 osdn#48731 osdn#48771 osdn#48772 osdn#48768 osdn#48869
+
+AI
+
+    * AI no longer plans and tries to cancel shared vision from
+      team members osdn#48152
+    * Fixed several places where wants were rounded to integers,
+      often causing low want (lower than '1') to be not wanted
+      at all ('0')
+      osdn#47736 osdn#48370 osdn#48421 osdn#48842
+    * Fixed diplomatic states corruption after Senate blocked AI's
+      war declaration osdn#47786
+    * Made AI missile carriers able to launch multiple missiles osdn#45927
+    * AI missile carriers now launch only such missiles that they
+      are carrying themselves osdn#48627
+
+Clients
+
+    * gtk
+         + Made it possible to offer techs in a treaty even if player
+           has no embassy to see what techs the other player already has
+           osdn#45552
+         + gtk3/gtk3.22: Made Battle Groups menu insensitive for observers
+           osdn#48298
+         + gtk3/gtk3.22: Fixed bad padding in theme osdn#48669
+         + gtk3/gtk3.22: Fixed bad tooltip contrast in theme osdn#48670
+         + gtk3.22: Theme gets applied to all windows, not just root one
+           osdn#48580 osdn#48770
+         + gtk3/gtk3.22: Window title mentions gui type osdn#48600
+         + gtk3.22: Fixed conflicts between system theme and loaded theme
+           osdn#45601
+
+    * Qt
+         + Hud shows when one is observer, and not a controlling player
+            osdn#48132
+         + Fixed wrong unit convert times shown in help osdn#48377
+         + Fixed supposedly non-fatal tileset errors causing a crash,
+           and display of fatal errors before aborting osdn#47915
+         + Fixed Science Dialog crash because of a Future Tech osdn#47787
+         + Window title mentions gui type osdn#48603
+         + Battle Groups menu added osdn#48732 osdn#48860
+
+    * sdl2
+         + Improvements to theme provided font size setting usage
+           osdn#48271 osdn#48427 osdn#48573 osdn#48574 osdn#48629
+           osdn#48641
+         + Added commandline parameter '-- --Font SIZE osdn#48305
+         + Fixed units report crash when player has no units osdn#48379
+         + Fixed help tech tree crash when tech requirements are not
+           in first slots osdn#48436
+
+Tools
+Manual Generator
+
+    * Seperate buildings by a ruler osdn#48440
+    * Setting page format fixed osdn#48762
+
+Ruledit
+
+    * In experimental mode builds, newly initialized objects get
+      their flags properly cleared osdn#48767
+
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#48693 osdn#48710 osdn#48709 osdn#48761 osdn#48743
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#48182 osdn#48438 osdn#48374 osdn#48543 osdn#48877
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Polish, Russian
+         + Incomplete translations:
+            German (83% core, 99% nations, 4% ruledit)
+            Finnish (100% core, 93% nations, 100% ruledit)
+            French (99% core, 100% nations, 100% ruledit)
+            Indonesian (31% core, 49% nations, 3% ruledit)
+
+Build/portability
+
+    * Refreshed bootstrap files from their upstreams
+      osdn#48263 osdn#48378 osdn#48537 osdn#48540 osdn#48611 osdn#48706
+      osdn#48799 osdn#48890 osdn#48889
+    * Fixed some clang analyzer warnings
+      osdn#48265 osdn#48363 osdn#48290 osdn#48406 osdn#48456 osdn#48536
+      osdn#48541 osdn#48555 osdn#48570 osdn#48636 osdn#48688 osdn#48623
+      osdn#48776 osdn#48834 osdn#48624 osdn#48677 osdn#48875 osdn#48904
+    * Crosser updates
+         + Registry key and installation directory names unified
+           with default msys2 based installers osdn#47343
+    * Windows Installer (default msys2 ones) snapshot builds now
+      get ChangeLog refreshed to match current commit osdn#44497
+    * Generating source files with tolua is now silent under automake's
+      silent mode osdn#47468
+    * Flatpak updates
+         + Running autogen.sh done once on host, not on each container
+           osdn#48394
+         + Use autotools build system instead of rolling our own list
+           of commands for simple system osdn#48430
+         + Freedesktop sdk and platform updated to 23.08 osdn#48599
+         + Gnome sdk and platform updated to 45 osdn#48689
+         + Qt sdk and platform updated to 5.15-23.08 osdn#48861
+    * Fixed compiler warning about uninitialized variable caused
+      by bad compiler heuristics osdn#48544 osdn#48737
+    * Deprecated function call fixed in gtk4 Modpack Installer osdn#48744
+    * Metainfo updates
+         + Qt modpack installer screenshot updated osdn#48775
+    * Fixed gcc-14 development version compiler warnings
+      osdn#48849 osdn#48850
+
+
+CHANGES FROM 3.0.7 to 3.0.8
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.8>, 2023-06-30)
+
+3.0.8 is a generic bugfix release.
+
+Server / General
+
+    * Fixed server file descriptor leak when loading lua command files
+      osdn#47609
+    * Silenced some unused entry warnings when loading saved games
+      osdn#47793 osdn#47709 osdn#47670
+    * Fixed memory handling issues when number of continents change
+      on a map with no lakes at all osdn#47825
+    * Fixed handling of unit shield upkeep osdn#47938 osdn#48023
+    * Fixed erroneously failing worker task sanity checks osdn#47542
+    * Fixed loading acceptance of zero-clause treaties from savegames
+      osdn#48127
+
+Changes affecting players (supplied rulesets)
+
+    * Fixed some path finding miscalculations osdn#47731 osdn#47746
+    * Observers are kept in sync with city investigation
+      osdn#46186 osdn#48046
+    * Worklist items currently unreachable because of terrain class
+      (Land / Oceanic) requirement are now purged rather than postponed.
+      Requirements of exact terrain are still just postponed osdn#47493
+
+    * experimental
+         + All buildings now have graphics tags in them, even those
+           that supplied tilesets do not provide graphics for.
+           This makes it possible for a custom tileset to provide
+           those graphics osdn#48086
+
+Changes affecting other rulesets / modders
+
+    * Units within transport no longer cause ZoC osdn#47656
+    * Fixed crash with requirements on range Traderoute osdn#47653
+
+Changes affecting server operators
+
+    * Victory type logged to server console osdn#42618
+
+General
+
+    * Fixed memory leaks, bad memory access, and improved cleanup
+      on shutdown
+      osdn#47900 osdn#45906 osdn#47660 osdn#47982 osdn#46191 osdn#48120
+      osdn#48143 osdn#45570
+    * Optimizations osdn#47738 osdn#45917 osdn#47838 osdn#47959 osdn#47729
+    * Various internal changes which should only affect developers.
+      osdn#47671 osdn#47797 osdn#47894 osdn#47909 osdn#48026 osdn#48104
+
+AI
+
+    * Fixed several places where wants were rounded to integers,
+      often causing low want (lower than '1') to be not wanted
+      at all ('0')
+      osdn#46286 osdn#47776 osdn#47901 osdn#47957 osdn#47973 osdn#48097
+    * Fixed an issue in how AI evaluates whether building a new building
+      would enable or disable unit actions. Notable consequences of
+      this bug was how AI was afraid to build Coinage, and went
+      for idle Caravans instead osdn#42169
+    * Make AI prepared for a building providing multiple requirements
+      for effect osdn#47831
+    * Fixed crash with recursive autoworker displacement osdn#47992
+
+Clients
+
+    * Fixed clipping of the draw area on gui independent part
+      of client code. Notably this made gtk-clients to give warnings
+      like "Invalid rectangle passed" osdn#42262
+    * Fixed potential crash in an attempt to use server settings before
+      server has sent them osdn#47663
+    * Tell if there's no version information in metaserver reply
+       osdn#47943 osdn#48056
+
+    * Editor mode
+         + Tile changes now trigger related side effects osdn#46424
+
+    * gtk
+         + Properly update available techs list when last real tech
+           discovered, and Future Techs become available osdn#45434
+         + Help Browser nation pages now show flag image osdn#47824
+         + Help Browser shows images of extras on their pages osdn#47624
+         + Client shows when one is observer, and not a controlling player
+           osdn#48045
+         + Made applying fullscreen option from the options dialog
+           to take effect immediately osdn#47531
+         + Fixed applying "Small Font" setting. Previously it wasn't
+           effective at all osdn#48186
+         + gtk3/gtk3.22 Fixed mixup in font size, causing size set
+           in settings in points getting applied in pixels osdn#48185
+
+    * qt
+         + Fixed sorting of nations dialog columns osdn#47856
+         + Fixed crash when the client-side game state gets inconsistent
+           between server sent packages osdn#47882
+         + Made applying fullscreen option from the options dialog
+           to take effect immediately osdn#48180
+
+    * sdl2
+         + Theme font size is actually used. This initial implementation
+           is just a start, but better than nothing
+           osdn#47681 osdn#47703 osdn#48037 osdn#48100
+         + Fixed issues with transparent parts of text surfaces osdn#47564
+         + Fixed unused entry warnings when loading the theme osdn#45866
+
+Tools
+Manual Generator
+
+    * Terrains page layout improved osdn#47819
+
+Ruledit
+
+    * Added extra values editing dialog osdn#47818
+    * Effects count now shown on stats osdn#47906
+
+Tilesets, Art, etc
+
+    * Corrected/updated flag file formats osdn#47742
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#48163
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#47785 osdn#47840 osdn#47932 osdn#47985 osdn#48015 osdn#48113
+      osdn#48027 osdn#47859 osdn#47796 osdn#48276
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Polish, Russian
+         + Incomplete translations:
+            Finnish (100% core, 93% nations, 100% ruledit),
+            French (99% core, 100% nations, 99% ruledit)
+
+Build/portability
+
+    * Refreshed bootstrap files from their upstreams
+      osdn#47725 osdn#47769 osdn#47855 osdn#47890 osdn#48078 osdn#48076
+      osdn#48077 osdn#48207 osdn#48242
+    * Compressing supplied scenarion files is now silent under
+      automake's silent mode osdn#47761
+    * Fixed some clang analyzer warnings
+      osdn#47765 osdn#47811 osdn#47850 osdn#47891 osdn#47926 osdn#45822
+      osdn#48025 osdn#47994 osdn#48069 osdn#48081 osdn#48109 osdn#48194
+      osdn#48139
+    * Autotools: Added large files support osdn#47830
+    * Autotools: Added year 2038 support, if autoconf supports it osdn#47710
+    * Flatpak updates
+         + Made flatpak .yml format more standard osdn#47760
+         + Qt-client flatpak no longer include ruledit that would
+           be hidden within the container anyway osdn#47910
+    * Metadata updates
+         + New server screenshot osdn#48128
+    * Crosser improvements
+         + Updated Crosser environment to use to version 2.6 osdn#47665
+         + Crosser based installers now use 64bit side of
+           the Windows Registry osdn#47724
+    * fc_gitrev_gen.h now removed by 'make distclean' osdn#47976
+    * Fixed compile error with gcc-14 development version osdn#48248
+
+
+CHANGES FROM 3.0.6 to 3.0.7
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.7>, 2023-04-07)
+
+3.0.7 is a generic bugfix release.
+
+Windows: When it comes time to uninstall this version, it does so cleanly.
+Former versions failed to remove some of the Registry Keys they had written.
+Those keys are harmless, but this failed the expectation that uninstall
+removes such things from user's machine.
+
+Server / General
+
+    * Silenced some unused entry warnings when loading saved games osdn#47498
+    * Long ruleset descriptions are no longer truncated at the client end.
+      Both server and client need to be of new version for this fix
+      to take effect osdn#47658
+
+Changes affecting players (supplied rulesets)
+
+    * Fixed loading non-scenario savegame saved by a tex-AI enabled server,
+      to server that does not have tex-AI enabled osdn#47521
+
+    * civ1
+         + No gold is given to players in the beginning by default osdn#47454
+
+    * civ2
+         + Units in airbase are now shown to their allies, not to
+           the allies of the airbase owner osdn#47655
+
+Changes affecting other rulesets / modders
+
+    * Fixed errors with techs that have Never as one of their requirement
+      osdn#46544 osdn#45115 osdn#47574 osdn#47762
+    * Improvements to ruleset sanity checking osdn#44613
+    * Changing tile via lua scripting now triggers side-effects like
+      bouncing units osdn#46425
+    * Clients now receive updated information when player gold reserves
+      have been changed by a lua script osdn#47386
+    * Fixed potential crash with Heal Unit action osdn#47603
+    * Units hiding within an extra (base) are now shown to their allies,
+      not to the allies of the extra owner osdn#47655
+
+Changes affecting server operators
+
+    * Civil War now respects maxplayers setting osdn#45587
+    * Silenced spammy "Did not find a cm solution..." message osdn#47570
+    * Wait for the "interrupt" autosave to finish before quitting
+      the program, when threaded save is enabled osdn#47540
+
+General
+
+    * Fixed creation of a directory for map images osdn#47550
+    * Optimizations
+      osdn#46534 osdn#45420 osdn#46417 osdn#45744 osdn#45677 osdn#46436
+    * Various internal changes which should only affect developers.
+      osdn#46441 osdn#46317 osdn#46313 osdn#46466 osdn#46668 osdn#47308
+      osdn#47305 osdn#46464 osdn#46420 osdn#46343 osdn#47352 osdn#46445
+      osdn#47619 osdn#47620
+
+Clients
+
+    * Show Irrigation option fixed - Irrigation was being drawn regardless
+      of the value osdn#47316
+    * Corrections to timeout display at client end osdn#44902
+    * Fixed a warning in how client passes log level parameter to
+      the internal server osdn#45583
+    * Fixed client crash after failure to load some tileset files osdn#47318
+
+    * gtk
+         + Do not show empty Production tab on diplomat's
+           city investigation dialog osdn#45318
+         + gtk3/gtk3.22 Area of the Battle Animation is now set correctly
+           on screen osdn#47705
+
+    * qt
+         + Corrected the way Irrigate and Mine related menu entries
+           get renamed when there's multiple units on focus osdn#45805
+         + Added About Current Tileset entry to Help menu
+           osdn#47638 osdn#47758
+
+    * sdl2
+         + New -- --swrenderer command line option to force SW renderer
+           to use despite configuration options osdn#47300
+         + Diplomacy dialog now provides button to propose Alliance osdn#46604
+         + Support all graphics formats provided by SDL2_image library,
+           not just png osdn#46413
+         + Fix help crash when a building has only negated requirements
+           osdn#47559
+         + Orders menus for present and supported units now correctly
+           opens from the city dialog osdn#47455
+         + Fix tech help crash osdn#47615
+
+Tools
+Ruledit
+
+    * Terrain Details editing dialog added osdn#46587
+    * Various editing dialogs now support changing graphics tags of
+      the ruleset items osdn#47303
+    * Launch directly to the editing mode if the ruleset has been selected
+      on the command line already osdn#46007
+
+Manual Generator
+
+    * Improved output about buildings' build and obsoletion requirements
+      osdn#47297
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#42196 osdn#46594 osdn#46558 osdn#46001 osdn#46501 osdn#47340
+      osdn#46670 osdn#45887
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#47355 osdn#46519 osdn#47698 osdn#47720
+
+Translations
+
+    * New translation:
+         + Latin American Spanish (1% core, 0% nations, 0% ruledit)
+    * Updated translations:
+         + Complete translations: Polish, Russian
+         + Incomplete translations:
+            Catalan (99% core, 100% nations, 100% ruledit),
+            Spanish (87% core, 99% nations, 40% ruledit),
+            Finnish (100% core, 93% nations, 100% ruledit),
+            French (99% core, 100% nations, 100% ruledit)
+
+Build/portability
+
+    * Refreshed bootstrap files from their upstreams
+      osdn#42070 osdn#42081 osdn#43525 osdn#42509 osdn#42766 osdn#42834
+      osdn#43413 osdn#43559 osdn#43635 osdn#43993 osdn#44435 osdn#45094
+      osdn#47432 osdn#45444 osdn#43022 osdn#45657 osdn#46337 osdn#46374
+      osdn#46462 osdn#46516 osdn#46483 osdn#46592 osdn#46585 osdn#47336
+      osdn#45725
+    * Fixed compiler warning when making a build with json-protocol enabled
+      osdn#46556
+    * Preparations for upcoming autoconf-2.72 osdn#46511
+    * Made Windows builds to live a bit better together
+      when co-installed osdn#46663
+    * Support for building gtk4 modpack installer flatpak
+      osdn#47286 osdn#47372 osdn#47770
+    * Fixed some clang analyzer warnings
+      osdn#47346 osdn#47289 osdn#47452 osdn#47453 osdn#47465 osdn#47449
+      osdn#47591 osdn#47678
+    * Generating files from common/ is now silent under automake's
+      silent mode osdn#46458
+    * Fixed potential problem in detecting pthreads availability osdn#47474
+    * Fixed configure listing result of the C11 threading selection twice
+      osdn#47500
+    * Improved error checking for crosser based builds osdn#46611
+    * Appdata files from a release build now includes NEWS URL
+      osdn#47641 osdn#47706
+    * Crosser based installers are now correctly installed under
+      "Program Files" and not "Program Files (x86)" by default osdn#47648
+    * Windows Uninstaller of this version properly removes Registry Keys
+      the installation has written osdn#47690 osdn#47713
+    * Fixed gtk2-client build with gtk+ versions older than 2.20 osdn#47728
+
+
+CHANGES FROM 3.0.5 to 3.0.6
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.6>, 2023-02-02)
+
+3.0.6 is a bugfix release in freeciv-3.0 series. The focus has been
+in supporting current bleeding edge systems, to make freeciv compatible
+with latest releases of other components and tools.
+
+Server / General
+
+    * When the worklist item cannot be currently built, server now detects
+      more cases where it will be impossible to ever build it and purges
+      the worklist item instead of just postponing osdn#45563
+    * Silenced some unused entry warnings when loading saved games osdn#46144
+    * Freeciv now uses new libcurl API, instead of one deprecated in
+      latest versions, to communicate with the metaserver and,
+      in case of modpack installer, to fetch files osdn#46345
+    * When starting from a saved game, dead players are no longer
+      counted towards ready/unready player counts in pre-game osdn#44621
+         + Dead players do not affect whether game can start or not
+           (no need to wait for them)
+         + Gtk- and Qt-clients' pre-game dialog "Start" button is
+           never sensitive when the client is attached to a dead player
+    * Fixed problems with the filename encoding when saving mapimg
+      on Windows osdn#45507
+    * Fixed bad memory access issue after player who had already
+      founded cities has been removed from the game osdn#46503
+
+Changes affecting other rulesets / modders
+
+    * Fixes to Path Finding troubles when terrain move costs are high,
+      in terms of move fragment count osdn#46039 osdn#46136
+    * Improvements to ruleset loading code error handling osdn#46196
+    * Unit Vision Range is now always recalculated at turn change for
+      any changes in requirements to take effect osdn#46182
+    * Cities currently working a tile is now forced to stop doing that at
+      the moment the tile changes in a way that Tile_Workable effect
+      is no longer active osdn#44706
+
+Changes affecting server operators
+
+    * Stopped endless spam on server console about iconv inability to
+      convert between encodings. Just tell it once when the issue
+      is first encountered osdn#46497
+
+Low-level changes
+
+    * Fixed re-entrancy problem in getting current time, e.g.,
+      if both metaserver communication and regular game (main thread)
+      would want to write log at the same moment osdn#46228
+
+General
+
+    * Fixed memory leaks, bad memory access, and improved cleanup
+      on shutdown osdn#46418 osdn#46584
+    * Optimizations osdn#46120 osdn#46416 osdn#46487
+    * Various internal changes which should only affect developers.
+      osdn#45831 osdn#46177 osdn#46108 osdn#46149 osdn#46227 osdn#46301
+      osdn#43049 osdn#46421 osdn#46410
+
+AI
+
+    * Stop AI from erroneously thinking that a Growth_Food effect with
+      a negative value would give food osdn#46290
+    * Reduced number of cases where AI desire to kill specific target
+      would overflow, and thus make it to think that very desirable
+      target is not good at all osdn#46513
+
+Clients
+
+    * Improved the way client determines which server settings to save
+      as user-preferred ones osdn#43748
+         + Ruleset defaults are no longer saved as "non-default"
+         + Value explicitly set to same as the default gets saved
+    * Client now resends user's desired server settings after ruleset
+      has been changed, and server has resetted the settings for that
+      osdn#43747
+    * Fixed an issue causing client quit sound from playing osdn#46426
+    * Make sure editor gui closes immediately when server disables
+      edit mode osdn#46439
+    * Fixed client crashes when description of unit's activities were
+      constructed simultaneously for multiple units osdn#46559
+
+    * gtk
+         + Tooltip shown about nations on nation dialog and endgame
+           score list now describes client's player's relating to
+           that player osdn#45792
+         + Made help browser links for buildings' and wonders' requirements
+           to work regardless of the requirement type osdn#46433 osdn#46551
+         + Corrected keys to control Battle Groups osdn#46588
+
+    * qt
+         + Sorting of the Nations Dialog columns now happens by correct rules
+           (e.g., AI attitude sorted by friendliness, not alphabetically)
+           osdn#46289
+         + Fixed issues, potetially even client crash, with
+           prev/next city buttons osdn#46404
+         + Fixed crash when gui-specific help requested by "-- --help"
+           commandline parameters osdn#46660
+
+    * sdl2
+         + Fixed issues stemming from button drawing being ambigious about
+           how it worked osdn#45689
+         + Fixed revolution dialog crash when player cannot change to
+           any government osdn#46450
+         + Make controlled disconnect from the server on client quit
+           osdn#46478
+
+Tools
+Ruledit
+
+    * experimental mode builds only:
+      Consider ruleset items listed in appearance_reqs or disappearance_reqs
+      of an extra, or first_reqs of a road, to be used by the ruleset.
+      They cannot be removed as long as those references stay. osdn#46443
+
+freeciv-manual
+
+    * Generated server options page no longer tells the ruleset used
+      when creating it; ruleset makes no diffence to the server options
+      osdn#46381
+
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#45936 osdn#46229 osdn#46045 osdn#45943
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#45309 osdn#46100 osdn#46451
+
+Translations
+
+    * Updated translations:
+         + Complete translations: French, Polish, Russian
+         + Incomplete translations:
+           Finnish (100% core, 93% nations, 100% ruledit)
+
+Build/portability
+
+    * Generating metainfo is now silent under automake's silent mode
+      osdn#46185
+    * Metainfo improvements
+         + content_rating added osdn#46375
+         + provided/binary added for the server metainfo osdn#46500
+    * Fixed some clang analyzer warnings
+      osdn#46204 osdn#46293 osdn#46292 osdn#46348 osdn#46349 osdn#46384
+      osdn#45687 osdn#46336 osdn#46488 osdn#46543 osdn#46545
+    * Fixed gcc-13 (current development version) compiler warnings osdn#46300
+    * Made the code to comply with c2x (likely to come out as c23) standard,
+      as implemented in gcc-13
+      osdn#46310 osdn#46306 osdn#46367 osdn#46372
+    * Fixed configure time mysql version check
+      (usually not needed - any version accepted) osdn#46449
+    * Crosser build improvements
+         + Build process now prints all errors to stderr osdn#46127
+         + Never consider warnings, seen with latest MinGW compilers,
+           from Qt headers as errors osdn#46428
+    * Fixed compiler warning seen on Void Linux / musl about
+      including "sys/signal.h" osdn#44997
+    * Fixed Qt-client linking issue. It was seen with msys2 clang64 toolchain,
+      but could affect other toolchains osdn#46575
+    * Flatpaks now have ipc permissions to improve x11 performance osdn#46565
+
+
+CHANGES FROM 3.0.4 to 3.0.5
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.5>, 2022-12-16)
+
+3.0.5 is a generic bugfix release.
+
+
+Server / General
+
+    * Improvements to savegame error diagnostics osdn#45341 osdn#45343
+    * Silenced some unused entry warnings when loading saved games
+      osdn#45671 osdn#45856 osdn#46143
+    * Limit players to current max tax rates after loading a savegame
+      from a time they were higher osdn#44186
+    * Reduced the cases where player loses bulbs when they have
+      leftover bulbs from tech finished previous turn change,
+      and caravan provided bulbs on top of that, and they switch
+      between various techs to research next osdn#45685
+    * Disallowed barbarians from creating more than one unit of a type
+      expected to be unique osdn#44863
+    * Improvements to when worklist item get postponed and when
+      completely purged osdn#46029 osdn#45982
+    * Sea units that regularly need supplies, or die, now automatically
+      save themselves to the coast when possible osdn#45948
+
+Changes affecting players (supplied rulesets)
+
+    * civ2civ3/sandbox
+         + Homeless units (e.g. starting diplomat) can no longer bribe
+           other units. It made it possible to get armies of homeless,
+           and thus free of maintenance, units. osdn#45070
+
+Changes affecting other rulesets / modders
+
+    * Improved error diagnostics in inifile (e.g. rulesets) loading osdn#45573
+    * Lua functions unit_move() and unit_teleport() now check legality
+      of the move osdn#44769
+
+Changes affecting server operators
+
+    * Removed unnecessary padding from the savegame files osdn#45855
+
+Low-level changes
+
+    * Fixes to the directory creation
+         + Do not try to create what really isn't a directory
+           osdn#45830 osdn#45841 osdn#46036
+         + Give sensible errors about directory creation failures osdn#44940
+    * Robustness improvements to low-level fallback functionalities used,
+      e.g., in Windows builds osdn#45905
+    * Fixed city culture value overflow on server/client communication
+      osdn#46014
+
+General
+
+    * Fixed memory leaks, bad memory access, and improved cleanup
+      on shutdown osdn#45787 osdn#45771 osdn#45903 osdn#45825 osdn#45547
+    * Optimizations osdn#45634 osdn#45676 osdn#45961
+    * Various internal changes which should only affect developers.
+      osdn#45756 osdn#45733 osdn#45780 osdn#44852 osdn#45598 osdn#45509
+      osdn#45629 osdn#45791 osdn#45915 osdn#45964 osdn#45530 osdn#45921
+      osdn#45990 osdn#45034 osdn#45259 osdn#45973 osdn#46135 osdn#44872
+      osdn#46193
+
+AI
+
+    * Fixed AI evaluation of value of tech parasite buildings
+      (e.g. Great Library on most rulesets) in case of pooled research
+      being turned off between team members, and dead opponents osdn#45588
+    * Properly update AI's information when continents get renumbered
+      (merged or split) osdn#45767
+    * Fixed erroneously high want for a Martial Law unit as a defender
+      when there actually isn't need for defensive capacity osdn#45595
+    * Make AI to count logarithmic trade revenue bonus correctly when
+      evaluating if trade route is worth the effort osdn#46049
+    * Fixed a bug in bodyguard selection when the want for military units
+      is high, but not an actual emergency osdn#46091
+    * Fixed a crash when hunter cannot attack its target.
+      Now it doesn't waste time hunting such targets at all osdn#46176
+
+Clients
+
+    * Client is now aware if someone's research details are not updated
+      any more, and doesn't show such outdated informatio any more osdn#45076
+    * Fixed client crash on unfortunate timing of menus updating exact
+      moment worker finish tile changing activity osdn#45781
+    * Display (opponent) score of 0 as Unknown as that's what the
+      server indicates with it (this logic will improve in freeciv-3.1)
+      osdn#45970
+    * Fixed which version of the wall graphics are shown about
+      opponents' cities osdn#46092
+
+    * gtk
+         + Fixed "Gtk-WARNING gadget with negative dimensions" warning
+           in most cases it occurred osdn#42263
+         + Added tootip for the nationdlg rows osdn#45512
+         + Fixed <ctrl> + <shift> + key combinations to work on edit mode
+           osdn#45802
+         + Fixed an infinite loop in editor mode osdn#45874
+         + gtk3 and gtk3.22: Added Battle Groups menu osdn#45924
+
+    * qt
+         + Menu entry for targetless revolution is now insensitive if
+           current rules do now allow it osdn#45782
+         + Nations dialog Relations and Techs panes can now be toggled
+           on or off osdn#45048
+         + Made it possible to toggle one's own Away state from the
+           nations display AI menu osdn#44858
+         + Pop down possibly remaining older tile info before opening
+           a new one. This avoids popups that were left on screen until
+           client was closed osdn#44177
+         + Fixed Classic theme syntax osdn#44857
+         + Graphics for extras shown in the help browser osdn#44859
+
+    * sdl2
+         + Fixed unused entry: file.gx warning from theme loading osdn#45031
+         + Fixed the Patrol Here functionality from the tile menu osdn#45925
+         + Improved client launch time initialization checks osdn#46000
+         + Fixed renaming cities to take effect osdn#45986
+         + Fixed the Paradrop Here functionality from the tile menu osdn#45981
+
+Tools
+Ruledit / Ruleup
+
+    * Save trade settings section comment to game.ruleset osdn#45386
+
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#45796 osdn#45969 osdn#45534
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#44955 osdn#45833 osdn#44918 osdn#45880 osdn#45829 HRM#734372
+      osdn#45849 osdn#46003 osdn#46089 osdn#44787 osdn#46146 osdn#44197
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, French, Polish
+         + Incomplete translations:
+           Finnish (100% core, 93% nations, 100% ruledit)
+    * Fixed fetching translations of the names of the nations from
+      the core nationset, for the game to actually show translated names
+      osdn#45761
+    * Marked more strings for translations osdn#45989
+    * Fixes to translator comments osdn#45835
+
+Build/portability
+
+    * Fixed some clang analyzer warnings
+      osdn#45812 osdn#45417 osdn#45770 osdn#45813 osdn#45850 osdn#45920
+      osdn#45848 osdn#45872 osdn#45985 osdn#46087 osdn#46104 osdn#46099
+      osdn#46107 osdn#46124 osdn#46162
+    * Fixed warnings with -Warray-bounds enabled osdn#45541 osdn#45853
+    * -Warray-bounds warnings enabled on debug builds again osdn#45543
+    * Readline runtime detection now has a autoconf cache variable for
+      users to override test results osdn#45460
+    * Support for building couple of more flatpak types
+         + Qt-client osdn#45814
+         + Sdl2-client osdn#46111 osdn#46145
+    * Improved metainfo
+      osdn#45840 osdn#45868 osdn#45616 osdn#45837 osdn#46168
+         + Updated screenshots osdn#46106 osdn#46130 osdn#46184
+    * fc-sdl2.m4 refreshed from libsdl upstream, to match SDL2-2.24.1
+      osdn#45847
+    * Fixed case where crosser-based build would include extraneous files
+      from the previous builds osdn#45865
+    * Crosser improvements
+         + Updated Crosser environment to use to version 2.5 osdn#45701
+         + Additional error checking of the suitability of the environment
+           osdn#46126
+    * Fixed compiler warnings with macos clang++ osdn#45941 osdn#45998
+    * Mariadb configurator is now searched by name mariadb_config too
+      osdn#46015
+    * Fixed build failures when readline headers define system macros
+      because they have not been defined yet osdn#46225
+    * Configure no longer selects C11 threads as the thread implementation
+      when they do not work with the C++ compiler, and there are
+      C++ components to be built osdn#46216
+
+
+CHANGES FROM 3.0.3 to 3.0.4
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.4>, 2022-10-09)
+
+3.0.4 is a generic bugfix release.
+
+
+Server / General
+
+    * Prevent player from starting research a new Future Tech,
+      when they have lost ability to research them while researching
+      the previous one osdn#44592
+    * Silenced some unused entry warnings when loading saved games
+      osdn#45526 osdn#45527
+    * Units lost due to missing shield upkeep are now included to
+      player's lost units count osdn#44887
+    * Fixed memory corruption issue when number of continents change
+      due to land to ocean transformation osdn#45768
+
+Changes affecting players (supplied rulesets)
+
+    * Fixed illegal range definitions in supplied rulesets osdn#45262
+    * Legality of the activities of the units in the surrounding tiles
+      are checked also when city in the tile gets destroyed osdn#45408
+
+    * sandbox
+         + Attackers have 50% chance of moving to killed unit's tile
+           after the combat osdn#45154
+
+Changes affecting other rulesets / modders
+
+    * Killing gameloss unit by any means now gives loot on rulesets
+      where gameloss_style set so osdn#44672
+    * Server now detects invalid requirement range definitions and
+      warns about them. They will be hard errors on a future version
+      osdn#44710
+    * Fixed potential crash after an error loading nations ruleset
+      osdn#45537
+
+Changes affecting server operators
+
+    * Fixed loading savegames from freeciv versions older than 3.0
+      with Defending Unit Win events in event cache osdn#44809
+    * Loading older savegame versions with known research count
+      problems produce less warnings osdn#45344
+    * Fixed loading base building orders from savegames older
+      than freeciv-2.3 osdn#45692
+
+Low-level changes
+
+    * Fixed potential crash on specfile error handling osdn#45008
+    * Fixed crash when handling an error from deeply included data file
+      osdn#45418
+    * Fixed problems in transferring users' ping times to the clients
+      osdn#45499
+    * Fixed network protocol problems when there's more than
+      255 connections to the server. This fix works only if
+      both the server and client have been updated. osdn#45501
+    * Fixed buffer overflow on creating savegames, e.g., on Windows
+      osdn#45682
+    * Improved boundary checks in constructing text strings osdn#45719
+
+General
+
+    * Fixed memory leaks and improved cleanup on shutdown
+      osdn#45033 osdn#45138 osdn#45317 osdn#45308 osdn#45422 osdn#45545
+      osdn#45544
+    * Optimizations osdn#45123 osdn#45614
+    * Various internal changes which should only affect developers.
+      osdn#45273 osdn#45047 osdn#45113 osdn#45316 osdn#45416 osdn#45481
+      osdn#45480 osdn#45060 osdn#45630 osdn#45579 osdn#45597 osdn#45342
+      osdn#45510 osdn#45662 osdn#45722 osdn#45694 osdn#45711 osdn#45674
+
+AI
+
+    * Improved accuracy of AI calculations osdn#45278
+    * Fixed restricting AI to max tax rates when they change osdn#44188
+    * More correct max tax rates restrictions applied to the new player
+      from Civil War osdn#44187
+    * Fixed AI to select techs when in a team in a game without
+      pooled research osdn#45397
+    * When AI is currently researching Future Tech and regular tech
+      becomes available (e.g. when formerly known one is lost),
+      AI switch to researching that regular one osdn#44419
+    * Fixed AI diplomats targeting cities that have a id higher than 64k
+      osdn#45116
+
+Clients
+
+    * Fixed crash when changing ai_manual_turn_done client option
+      osdn#45310
+    * Make sure that the transport selection dialog does not show
+      transports unsuitable for the cargo osdn#45331
+    * Fixed editor crash with terrains with no resources defined for them
+      osdn#45390
+    * Make sure editor gui opens immediately when server enables edit mode
+      osdn#45456
+    * Fixed editor handling of scenario reserved player property osdn#45491
+    * Make sure no negative ping time is ever shown osdn#45500
+
+    * gtk
+         + Added tooltips to worklist build targets osdn#45257
+         + Added tooltip telling the nation the endgame score
+           display row is about osdn#45461
+
+    * qt
+         + Improved client initialization sequence to match
+           Qt recommendations osdn#43873
+         + Fixed installation of cities icon on NightStalker theme
+           osdn#45451
+         + Fixed client behavior when the target city gets destroyed
+           before spy finishes stealing a tech osdn#45411
+
+    * sdl2
+         + Display intelligence information about Wonders osdn#44992
+         + Fixed adding Gold clauses to a treaty osdn#45032
+         + Fixed installation of CJK fonts osdn#45433
+         + Fixed selection of buildings for which icon is shown
+           in the happiness dialog osdn#45577
+         + Place luxury icon correctly on happiness dialog osdn#45578
+         + Fixed chatline functionality osdn#45702
+
+Tools
+Ruledit
+
+    * Added Sanity Check button osdn#43103 osdn#44372 osdn#45395
+
+Manual Generator
+
+    * Made to work correctly on NDEBUG builds again osdn#45508
+
+Tilesets, Art, etc
+
+    * Corrected/updated flag file formats osdn#45382 osdn#45405
+    * Fixed unused entry error in alio's hills.spec osdn#45574
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#43081 osdn#45535 osdn#45469 osdn#45635 osdn#45589 osdn#45334
+      osdn#45599
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#45566 osdn#45462 osdn#45505 osdn#45529 osdn#45758 osdn#45084
+    * Corrected format of ruledit man page osdn#45533
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, French, Polish
+         + Incomplete translations:
+           Esperanto (32% core, 18% nations, 33% ruledit)
+           Finnish (100% core, 93% nations, 100% ruledit)
+           German (83% core, 99% nations, 5% ruledit)
+           Russian (99% core, 100% nations, 97% ruledit)
+    * Marked more strings for translations osdn#45525
+
+Build/portability
+
+    * Fixed some clang analyzer warnings
+      osdn#44868 osdn#45231 osdn#45275 osdn#45233 osdn#45315 osdn#45445
+      osdn#45307 osdn#45538 osdn#45539 osdn#45569 osdn#45633 osdn#45663
+      osdn#45668 osdn#45673 osdn#45679 osdn#45536 osdn#45688
+    * Improvements to crosser based builds
+         + Updated Crosser environment to use to version 2.4 osdn#44724
+         + Use gettimeofday() on crosser based Windows builds instead
+           of fallbacks osdn#45260
+         + Crosser based build process scales number of jobs to
+           number of processor cores by default osdn#43949
+    * Support for building also modpack installer flatpak osdn#45104
+    * Updated freedekstop runtime used by flatpak to 22.08 osdn#45615
+    * Added more URL fields to appdata files osdn#45617
+    * QT_NO_DEBUG not set on highest debug build level osdn#41774
+    * Fix clang compiler warnings from luasql osdn#44815
+    * Mariadb configurator is now searched by name mariadb-config too
+      osdn#45703
+
+
+CHANGES FROM 3.0.2 to 3.0.3
+---------------------------
+
+   (from <https://www.freeciv.org/wiki/NEWS-3.0.3>, 2022-08-05)
+
+3.0.3 is a bugfix release.
+
+There's a vulnerability fixed in modpack installer. All users
+of older versions are adviced to upgrade.
+
+Default metaserver connection URL and URL used to fetch default modpack list
+have been updated to use https -protocol. This should cause no problems if
+https has been working for you all the time. However, if it was already broken
+(e.g. you couldn't download modpacks located on https even with earlier freeciv
+version), this makes the problem worse for you. The most likely cause for any
+problems with https is that root certificates (cacerts) are not set up properly.
+From freeciv side, building with the configuration option --with-cacert-path
+may help. In case everything else fails, we provide, for now, a .project file
+that you can use to build freeciv so that metaserver and modpack list
+default URLs still use http:
+--with-project-definition=<freeciv srcdir>/bootstrap/http.project
+We won't support that on freeciv-3.1.
+
+
+Server / General
+
+    * Sanity check, and fix, player researched techs count loaded from
+      the savegame. Older versions may have saved miscounted value osdn#44595
+    * Disallowed creation more than one unit of a type expected to be unique
+         + By editor osdn#44793
+         + By lua script HRM#870631
+    * Fixed IPv6 LAN announcement handling HRM#912661
+    * Fixed some "unused entry" warnings when loading saved game osdn#44958
+    * City worker gets removed from a tile that gets fogged for the owner
+      HRM#697685
+    * Default metaserver access is set to use https-protocol osdn#44806
+    * Disallowed creation more than maxplayers players from the editor
+      osdn#44811
+
+Changes affecting players (supplied rulesets)
+
+    * Legality of the activities of the units in the surrounding tiles are
+      checked also when the tile terrain changes because of climate change
+      osdn#44155
+
+    * 'civ1/civ1
+         + AI may build air units HRM#922066
+
+Changes affecting other rulesets / modders
+
+    * Improved handling of lua-script initiated unit owner change.
+      osdn#44778 osdn#45056
+    * Animals are initially placed further away from the players HRM#697677
+    * Added sanity check that resources defined for the terrains really
+      are resources osdn#45099
+    * Fixed client end problems in receiving requirements of type NationGroup
+      osdn#45109
+    * Fixed potential issue with modpacks with multiple city wall
+      graphic types and fogged tiles osdn#45063
+
+General
+
+    * Fixed memory leaks and improved cleanup on shutdown
+      osdn#44785 osdn#44755 osdn#44832 osdn#44754 osdn#44885 osdn#44893
+      osdn#44948 osdn#44983 osdn#44945 osdn#45022 osdn#45035 osdn#45184
+    * Optimizations osdn#44688 osdn#44879 osdn#44797 osdn#44611
+    * Various internal changes which should only affect developers.
+      osdn#44401 osdn#44759 osdn#44810 osdn#44854 osdn#44882 osdn#44849
+      osdn#44905 osdn#44115 osdn#45011 osdn#44994 osdn#45002 osdn#42889
+      osdn#44713 osdn#45159 osdn#44837 osdn#44612 osdn#43059
+
+AI
+
+    * Fixed AI want for techs providing paradropping units osdn#44926
+    * Fixed crash when a unit without homecity has waited for a ferry too long
+      osdn#44987
+    * AI no longer revolts to get rid of Senate, if it would not help
+      osdn#44847
+
+Clients
+
+    * gtk
+         + Log initialization failures instead of just quitting osdn#44118
+         + Numpad '+' and '-' now work for controlling zoom osdn#44846
+         + Allow setting worker tasks also when the governor is active
+           HRM#697695
+         + Fixed memory handling problem in server list display osdn#44944
+         + Transport selection dialog will show up when loading unit
+           with L)oad key osdn#43950
+
+    * qt
+         + Fixed font selection problems osdn#44389 osdn#44906
+         + Raise dialogs when they are accessed again. On macOS they
+           often ended behind the main window before this osdn#43943 osdn#44851
+         + Fixed changing color options from the options dialog osdn#44947
+         + Display intelligence information about Wonders osdn#44990
+         + Stopped flags on map from shrinking after user visited
+           nations report HRM#857120
+         + Make diplomacy dialog UI adjustments for disabled trading_gold
+           server setting more sane osdn#45149
+         + Made intelligence information display higher by one line of text,
+           in case leader title wraps to two lines osdn#45191
+         + Fixed potential memory problem after using scaled tileset osdn#45130
+
+    * sdl2
+         + Fixed size of the scaled unit icons osdn#44892 osdn#44891
+         + Intelligence dialog can now be always opened, as it has some
+           information even when players have no contact osdn#44991
+         + Fixed memory handling issues when selecting action from
+           small diplomacy dialog osdn#45046
+
+Tools
+Modpack installer
+
+    * Default modpack list accessed by https-protocol osdn#44807
+    * Vulnerability related to handling potentially crafted modpack URLs fixed
+      osdn#45299
+
+Tilesets, Art, etc
+
+    * Corrected/updated flag file formats osdn#45069
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#44668 osdn#44829 osdn#44826 osdn#44954 osdn#44981 osdn#45019
+      osdn#44941 osdn#41841 osdn#45043
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#44896 osdn#45164
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, French, Polish, Russian
+         + Incomplete translations:
+           Finnish (100% core, 91% nations, 100% ruledit)
+    * Marked more strings for translations osdn#44957
+
+Build/portability
+
+    * Added configure option --with-localedir osdn#44525
+    * Windows msys2 environment updated to 220529 (29-May-22) snapshot
+      osdn#44056
+    * Warn when building gtk3-client instead of gtk3.22-client when
+      dependencies of latter would be available osdn#44792
+    * Fixed some clang analyzer warnings
+      osdn#44679 osdn#44617 osdn#44856 osdn#44937 osdn#44833 osdn#44897
+    * Fixed build on systems with unsigned time_t osdn#44886
+    * Fixed build when Qt headers require PIC, but user has enabled PIE
+      osdn#44917
+    * Flatpak safety improvements
+         + Give permissions only to .freeciv subdirectory,
+           not entire home directory osdn#44925
+         + Prefer wayland osdn#45103
+    * Replaced strncat() call with a portable fc_strlcat() one osdn#44919
+    * Provide http.project configuration osdn#45071
+    * Fixed detection of cross-MagickWand-config osdn#45009
+    * Fixed compiler warnings on x32 platform osdn#44920
+    * Updated bootstrap files from gnulib upstream osdn#45025
+    * Added autoconf cache variable for gettimeofday detection,
+      to make it possible to set it when cross-compiling osdn#45050
+
+
+CHANGES FROM 3.0.1 to 3.0.2
+---------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.2>, 2022-06-12)
+
+3.0.2 is a generic bugfix release.
+
+Server / General
+
+    * Savegame integrity check improvements osdn#44211
+    * Improved the way lua variables are included to the savegame osdn#44447
+
+Changes affecting players (supplied rulesets)
+
+    * Also unit's further orders are cancelled, not only the current one,
+      when it turns illegal osdn#44370 osdn#44504 osdn#44519
+    * Unit upgrade is disallowed when it's in the process of converting
+      osdn#43328
+    * Activities illegal for the new unit type are cancelled after
+      unit upgrade and conversion osdn#44410
+    * When a city is disbanded to an unit, and that unit cannot stay
+      at the spot, it now can escape to neighboring tile HRM#692482
+    * Supplied scenarios have been refreshed to match how 3.0.1 saves them
+      osdn#44152
+    * Destroyed cities are now removed from the maps of players seeing them
+      through Reveal_Cities' effect, like then one civ1 ruleset
+      Apollo Program gives osdn#444028
+    * Fixed generated team names like Team 1 to be consistent which team
+      they refer to in all situations osdn#44382
+    * Corrected the number of "other units killed" when the attacked tile
+      has also unreachable units osdn#44416
+    * Fixed bookkeeping of number of techs known, when one is about to
+      receive a tech but fails to do so.
+      This affects research cost of later techs osdn#44593
+    * Prevented startunits setting from creating multiple units of a type
+      that is supposed to be unique osdn#44685
+    * Fixed the player created by a civil war to have as many future techs
+      as the original player osdn#44737
+
+    * experimental
+         + Upkeep of Engineers is now switched to gold once the player
+           knows The Corporation osdn#43848
+
+    * Europe 1900 WWI scenario
+         + Added missing information for tex AI module osdn#44445
+
+Changes affecting other rulesets / modders
+
+    * Check that resources have "extra" defined now works correctly osdn#44191
+    * Fixed zombies appearing on the client side when unit was created by lua
+      upon receiving "unit_lost" signal HRM#867958
+    * Made lua city creation methods to not allow illegal city placement
+      osdn#44508
+    * Improved ruleset load time checking against illegal city_size values
+      for units for which it's relevant osdn#44730
+    * Log messages about ruleset errors are less likely to get cut.
+      They can now be as long as other log messages osdn#44704
+
+Changes affecting server operators
+
+    * Fixed /create command used midgame not to assume that there's
+      a dead player's slot for it to take when there is not osdn#44495
+    * maxplayers setting can now be changed also after the game has started
+      osdn#44567
+    * /create command used midgame now respects maxplayers setting osdn#44185
+
+Low-level changes
+
+    * Improved freeciv's idea of what are the minimum and maximum values
+      an effect can ever reach in a given ruleset. This allows both
+      gui and AI to adjust better to the ruleset osdn#44303
+    * Fixed chance for a diplomat to win a battle sometimes being over 100%
+      osdn#44291
+
+General
+
+    * Minor optimizations osdn#44089 osdn#43432 osdn#44090
+    * Fixed memory leaks
+      osdn#44492 osdn#44432 osdn#44618 osdn#44682 osdn#44790
+    * Various internal changes which should only affect developers.
+      HRM#700913 osdn#41785 osdn#44130 osdn#44212 osdn#44178 osdn#44415
+      osdn#43620 osdn#43900 osdn#44547 osdn#43970 osdn#44404
+
+Clients
+
+    * Client now sends the governors data to the server just before it
+      requests saving the game, so more up-to-date data will be saved
+      osdn#44304
+    * freeciv-3.1 development version scenarios are no longer listed as
+      compatible with freeciv-3.0 osdn#44452
+    * Fixed potential crash when unit awaiting details of its orders dies
+      osdn#44757
+
+    * gtk
+          +Added tooltip for the "Size" line in the city dialog osdn#44515
+
+    * qt
+         + Added tooltip for the "Size" line in the city dialog osdn#44409
+         + Fixed memory handling problem in server list display osdn#44421
+         + Fixed option dialog crash osdn#44484
+
+    * sdl2
+         + Fixed memory handling problem when the diplomacy dialogs
+           are being closed osdn#44687
+
+Tools
+Ruledit
+
+    * Have the "same name" toggle consistenly toggled initially in all tabs
+      osdn#44140
+    * Made the initial size of the window bigger HRM#721403
+
+Ruleup
+
+    * Fixed rare case of some resources not loading correctly from
+      a 2.6 ruleset osdn#44190
+    * Fixed upgrading activities of units doing terrain transforming
+      Irrigation on Mine activitity in a 2.6 ruleset osdn#44591
+
+Tilesets, Art, etc
+
+    * Corrected/updated flag file formats osdn#44427 osdn#44619 osdn#44701
+
+Help / Documentation
+
+    * Vulnerability reporting email address updated osdn#44479
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#44194 osdn#44331 osdn#44120 osdn#44438 osdn#44473 osdn#43857
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#44309 osdn#44039 osdn#44453 osdn#43945
+
+Translations
+
+    * Updated translations:
+         + Complete translations: French, Polish, Russian
+         + Incomplete translations:
+           Catalan (99% core, 100% nations, 100% ruledit)
+           Finnish (100% core, 91% nations, 100% ruledit)
+           German (76% core, 85% nations, 5% ruledit)
+    * Marked strings for translations where they erroneously were not.
+      osdn#44556
+
+Build/portability
+
+    * Natural languages (translations) support now works on
+      crosser-based Qt-client installers osdn#44293 osdn#44294 osdn#44292
+    * Applied CVE-2022-28805 fix to included lua osdn#44467
+    * Improved macOS configure options for building Qt-programs
+         + Added new --with-qt5-framework option osdn#44412
+         + Fixed --with-qt5-framework-bin option osdn#44422
+    * Fixed compiler warnings from builds where asserts are not enabled
+      osdn#44395 osdn#43868
+    * Fixed some clang analyzer warnings osdn#44449 osdn#44437 osdn#44569
+    * Appdata files have been renamed as org.freeciv.*.appdata.xml osdn#44466
+    * project_license field has been added to appdata files osdn#44712
+    * Fixed compiler warnings from clang-15 (development version)
+      osdn#44563 osdn#44564
+    * Added support for flatpak packaging osdn#44463
+
+
+CHANGES FROM 3.0.0 to 3.0.1
+---------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.1>, 2022-04-14)
+
+3.0.1 is a generic bugfix release.
+
+Server / General
+
+    * Fixed "turn_begin" lua signal, affecting especially 32bit Windows
+      builds. This, e.g., makes various welcome messages to show up osdn#41662
+    * Fixed some problems in builds where asserts are not enabled.
+      More work remains. osdn#43871 osdn#44129 osdn#44019 osdn#44020
+    * Fixed error messages sometimes appearing when a city has been removed
+      but units remain (e.g. in case of Sentried Helicopter) osdn#44057
+    * Correctly convert it, when savegame with AI level "Experimental"
+      is loaded to a non-debug build osdn#44165
+    * Don't kill the nation when client requires removal of a gameloss unit
+      in editor mode osdn#44274
+    * Fixed a bug that updated city info was in some cases sent to owner
+      when it was supposed to get sent to everyone else osdn#44158
+    * Correctly set resources on player's Fog-of-War map, for tiles which
+      they don't currently see, when loading a saved game osdn#44176
+    * If scenario lua script uses direction variables, value of those is
+      no longer stored to savegames at all. Current freeciv version can't
+      load that information, and such savegames generated by earlier versions
+      only crashed the server at savegame loading time.
+      Lua direction objects will function properly in freeciv-3.1 HRM#880895
+
+Changes affecting players (supplied rulesets)
+
+    * Start area is revealed also for the start city osdn#43652
+
+    * alien
+         + transform_result and transform_time consistent on all terrains
+           osdn#43625
+
+Changes affecting other rulesets / modders
+
+    * Added deprecation warning about insensical singlepole and
+      alltemperate requirement combinations osdn#44181
+    * Fixed crash in lua tile:is_enemy() method when there's no city
+      on that tile HRM#943039
+
+Changes affecting server operators
+
+    * Metamessage is no longer resetted on ruleset load osdn#43759
+
+General
+
+    * Various internal changes which should only affect developers.
+      osdn#43835 osdn#43879 osdn#43745 osdn#43982 osdn#43996 osdn#43912
+      osdn#43645 osdn#44131 osdn#43460 osdn#44184 osdn#42916 osdn#44016
+      osdn#44196 osdn#44102 osdn#44119
+
+AI
+
+    * Alight cargo unit immediately when transport reaches destination osdn#43639
+
+Clients
+
+    * Always properly initialize output streams for forked server osdn#42471
+    * Enable better audio quality when possible
+      osdn#43549 osdn#43999 osdn#44018
+    * Client's return value now correctly indicates an error when it fails
+      osdn#43780
+
+    * gtk
+         + Fixed drawing citizens for cities over size 30 osdn#43823
+
+    * qt
+         + Fixed memory corruption issues when detecting which
+           gfx formats client supports osdn#43755
+         + Worked around MacOS behavior of removing "Options" submenu osdn#43944
+         + Renamed menu item "Players" as "Nations" to match naming in left pane
+           osdn#43946
+
+Tools
+Modpack Installer
+
+    * Added window icon for Qt GUI osdn#44002
+
+Ruledit
+
+    * Added window icon osdn#43553 osdn#44017
+    * Set initial text for buttons in enablers tab osdn#44030
+
+Tilesets, Art, etc
+
+    * MacOS icons included in the source tarball osdn#44314
+    * Corrected/updated flag file formats
+      osdn#44026 osdn#44033 osdn#44087 osdn#44148
+
+Help / Documentation
+
+    * Miscellaneous improvements to in-game text and user documentation.
+      osdn#43864 osdn#43709 osdn#43793 osdn#44301
+    * Miscellaneous changes to developer/install/ruleset docs.
+      osdn#43885 osdn#43612 osdn#43861 osdn#44022 osdn#44117 HRM#874200
+      osdn#44195 osdn#44125 osdn#44285
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, Polish, Russian
+         + Incomplete translations:
+           German (76% core, 85% nations, 5% ruledit)
+           Finnish (100% core, 91% nations, 100% ruledit)
+    * Marked strings for translations where they erroneously were not.
+      osdn#43980 osdn#44029
+    * Include core domain translations to Windows ruledit installer osdn#43981
+
+Build/portability
+
+    * Updates from the gnulib upstream: osdn#43588 osdn#43636
+    * Fix lua compile for AmigaOS osdn#43571
+    * Fixed problems in Windows snapshot builds being flagged as "modified"
+      in their version number even when they are not.
+         + Crosser-based builds osdn#43890
+         + Official msys2 builds osdn#43891 osdn#44143
+    * Detect pthreads as thread implementation also when they
+      require "-lpthread" osdn#43561
+    * Support also such C11 thread implementations that are
+      not built on top of pthreads HRM#852950
+    * Added configure option --without-iconv osdn#43572
+    * Updated Crosser environment to use to version 2.3
+      osdn#44047 osdn#43921 osdn#44110
+    * Fixed libcharset configure check osdn#43600
+    * Updated default Appdata/Metainfo installation directory osdn#44091
+
+
+CHANGES FROM 3.0.0-RC2 to 3.0.0
+-------------------------------
+
+   For those who've been trying the betas, these are the changes since the
+   last release candidate, 3.0.0-RC2:
+     * Documentation updates: osdn#43862
+     * Updated translations:
+       Esperanto (31% core, 17% nations, 34% ruledit)
+       French (complete)
+
+
+CHANGES FROM 3.0.0-RC1 to 3.0.0-RC2
+-----------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.0-RC2>, 2022-02-08)
+
+3.0.0-RC2 is the second Release Candidate of freeciv-3.0.
+A couple of bugs have been fixed since Candidate 1.
+
+Server / General
+Changes affecting players (supplied rulesets)
+
+    * Fixed how resources are removed from the map, for any reason
+      osdn#43782
+
+    * multiplayer
+         + Hex topology (the overall default of freeciv-3.0) is used
+           by default osdn#43760
+
+Changes affecting other rulesets / modders
+
+    * Fixed unit losing veterancy levels when it's being converted
+      to another osdn#43778
+
+Help / Documentation
+
+    * Alina Lenk added to the list of maintainers osdn#43767
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#43770
+
+Translations
+
+    * Updated translations:
+         + Complete translations: French
+         + Incomplete translations:
+           Esperanto (30% core, 17% nations, 34% ruledit)
+
+Build/portability
+
+    * Made macOS to use proper vsnprintf() instead of a fallback method
+      osdn#43737
+
+
+CHANGES FROM 3.0.0-beta3 to 3.0.0-RC1
+-------------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.0-RC1>, 2022-02-03)
+
+3.0.0-RC1 is the first Release Candidate of freeciv-3.0.
+Several bugs have been fixed since beta3.
+
+Server / General
+
+    * Fixed memory leak with sending trade routes to client osdn#43054
+
+Changes affecting players (supplied rulesets)
+
+    * Fixed a bug that in some cases trade partner city was not revealed
+      to the player of the destination city when traderoute was established
+      osdn#42968
+    * Under multiresearch mode, correctly save information to savegame
+      if player has just gained a tech, and should not lose bulbs when
+      changing target osdn#43161
+    * Message about unit escaping combat now gets consistently sent
+      from the tile where the combat occurred, not from a tile random
+      unit escaped to osdn#43099
+    * Consider it land bombardment (for reduced firepower) when a ship
+      attacks from a city against another land tile osdn#42960
+    * Fixed a bug that shield stock given changes from editor were
+      nullified when production was changed osdn#42685
+    * Fixed handling of case where multiple defenders may escape the combat
+      osdn#43206
+    * Fixed erroneous message about obsolete build target after it
+      has already been updated HRM#921933
+    * Bombarding is disallowed when target tile is known not to contain
+      any units that would be affected HRM#848555
+    * Fixed crash when force-selling transported units for balancing budget
+      HRM#853295
+    * Prevent multiple gov changes after a single anarchy with
+      revolentype RandQuick. It was an exploit, and was already prevented
+      for Quickening osdn#43334
+    * Improved user visible names of disband actions in supplied rulesets
+      osdn#43595
+    * Fixed message about an action blocking another osdn#43643
+    * Fixed crash with a startunit setting with no startunits osdn#43651
+
+    * alien
+         + Upkeep cost of wonders marked as zero, which it has effectively
+           always been osdn#43002
+
+    * civ1
+         + All units occupy tiles osdn#42923
+         + Remove infra from city center tile when city destroyed
+           osdn#43039
+
+    * civ2
+         + Disallow upgrading units osdn#43404
+
+Changes affecting other rulesets / modders
+
+    * Do not erroneously accept Traderoute range for a Good requirement
+      osdn#42944
+    * Sanity check that ruleset does not try to set nonzero
+      upkeep cost for a wonder. It has no effect, and never had
+      osdn#42994
+    * Fixed lua players_iterate() to process all remaining players
+      after some are removed HRM#883551
+    * Lua debug function listenv() has been reimplemented to avoid
+      crashes and hangs with it osdn#43388
+    * Make Good requirement to be false when traderoute is inactive
+      osdn#43542
+    * Fixed assert errors when lua script modified extras on
+      map_generated signal osdn#43584
+    * Apply Move_Bonus sensibly to a unit with base move rate less
+      than min_speed osdn#43587
+
+Changes affecting server operators
+
+    * Fixed a bug that GAMEOVER savegame was not created for an autogame
+      with no clients connected osdn#42172
+
+General
+
+    * Various internal changes which should only affect developers
+      osdn#42930 osdn#42898 osdn#42867 osdn#43076 osdn#42931 osdn#42989
+      HRM#852929 osdn#42568 osdn#43087 osdn#43040 osdn#43213 osdn#43239
+      osdn#43296 osdn#43008 osdn#43393 osdn#43376 osdn#43428 osdn#43465
+      osdn#43430 osdn#43365 osdn#43533 osdn#43552 osdn#43597 osdn#43665
+
+AI
+
+    * Support sea moving caravans osdn#42567
+    * Fixed bug preventing AI from changing government when revolentype
+      is Quickening osdn#43392
+    * Don't try to Upgrade Unit when it's not enabled in the ruleset
+      osdn#42574
+    * Avoid infinite recursion when the ruleset has special restrictions
+      to city founding osdn#43638
+
+Clients
+
+    * Fixed changing the tileset when the topology is non-hex isometric
+      osdn#42956
+    * Fixed assert failure when client receives dead player's
+      research information osdn#42988
+    * Draw integrating cardinal roads (rivers) correctly
+      osdn#43153 osdn#43633
+
+    * gtk
+         + gtk3.22 & gtk3 New Wonders List Intelligence Dialog shows
+           all the wonders of any foreign player HRM#883354 osdn#43043
+         + Cleanly destroy toplevel Window on quit osdn#43072
+         + Cleanly free some protected widgets on quit osdn#43222
+         + Made Upgrade Unit buttons insensiteve when active ruleset
+           disallows upgrade osdn#43424
+
+    * Qt
+         + Fixed reversed leader sex selection osdn#42936
+         + Show default ruler title for players whose government is
+           not known. It used to show the Anarchy title in these situations
+           osdn#42938
+         + Fixed a crash before writing shortcuts information when quitting
+           client without ever visiting actual game osdn#43019
+         + Make explicit leader sex selection to work
+           (sex used to be selected only when taking predefined leader)
+           osdn#42964
+         + Allow adjusting leader of the nation player has already selected
+           in the nation selection dialog osdn#43024
+         + Fixed nations dialog crash after a new player has been created
+           as a result of a civil war osdn#42545
+         + Improved city dialog sizing and goto dialog layouts HRM#937959
+
+    * sdl2
+         + Don't mess with obsolete SDL_VIDEO_CENTERED environment variable
+           osdn#43551
+
+Tools
+Ruledit
+
+    * New editable properties:
+         + Unit type move rate osdn#43016
+         + Building genus osdn#43102
+    * Save comment about ruledit section to the nations.ruleset osdn#42891
+    * Fixed saving of goods_selection setting to the ruleset osdn#43158
+    * In Windows, prepend Windows Documents path to default save path
+      osdn#43370
+
+Ruleup
+
+    * In saved rulesets, StartUnit unit type flags have 'U' capitalized,
+      like in supplied rulesets osdn#43001
+
+Modpack installer
+
+    * Made gtk3- and gtk2- gui to quit cleanly osdn#43187
+    * gtk3- and gtk2- guis free main window on quit osdn#43074
+    * Fixed opening a new quit dialog when one has already been closed
+      in gtk4 gui osdn#43073
+    * Corrected placement of quit dialog in gtk4 gui osdn#43248
+
+Tilesets, Art, etc
+
+    * Added icon for freeciv-ruledit HRM#657383 osdn#43574
+    * Set antarctica_alt as alternative flag art for Antarctica osdn#43303
+    * Corrected/updated flag file formats
+      osdn#43021 osdn#43458 osdn#43617
+
+Help / Documentation
+
+    * Christian Prochaska removed from the list of active maintainers.
+      Thank you for all you did for the project. osdn#43434
+    * Miscellaneous improvements to in-game text and user documentation
+      osdn#42961 osdn#42901 HRM#764909 osdn#42995 osdn#43145 osdn#42609
+      osdn#43298 osdn#43318
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#41100 osdn#42839 osdn#42894 osdn#43065 osdn#42877 osdn#41958
+      osdn#42925 osdn#43182 osdn#43349 osdn#43300 osdn#43600 osdn#43648
+      osdn#43758
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, French, Polish, Russian
+         + Incomplete translations:
+           Finnish (100% core, 91% nations, 100% ruledit)
+
+Build/portability
+
+    * Fixed warnings like
+      "macro 'AM_LANGINFO_CODESET' not found in library"
+      from autogen.sh osdn#43034
+    * Crosser environment used in crosser based
+      Windows installers updated to version 2.2 osdn#43259
+    * Improvements to handling on network errors on Windows
+      osdn#42046 osdn#42044
+    * Fixed build with tcc osdn#43352
+    * configure: Fix false positive when checking advanced
+      threading support osdn#43562
+    * Fixed gcc-12 (development version) compiler warnings
+      osdn#43711 osdn#43713
+
+
+CHANGES FROM 3.0.0-beta2 to 3.0.0-beta3
+---------------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.0-beta3>, 2021-10-08)
+
+3.0.0-beta3 fixes some issues still seen with beta2, and is expected
+to be the last beta release before stable 3.0.0 release.
+
+Server / General
+Changes affecting players (supplied rulesets)
+
+    * Ransom is given for each barbarian leader when there's more
+      than one in the same tile (but no other units to defend them).
+      The old behavior was not to give ransom at all as they were
+      considered to be defending each other. osdn#42020
+    * Fixed server setting tradeworldrelpct to affect also
+      the initial one time bonus of the trade route. osdn#42097
+    * Server correctly informs client when loading a savegame fails.
+      It used to always claim that load was succesfull to the client
+      osdn#42189
+    * Game refuses paradropping to a tile with known enemy unit
+      as that would only be certain death for the paradropping unit
+      HRM#869995 osdn#42433 osdn#42434 osdn#42435
+    * Fixed a bug that when player providing shared vision was removed,
+      the vision would remain for the other players HRM#883225
+    * Corrected bribe cost of units with build cost not multiple of ten.
+      Especially this makes bribe cost of units with build cost
+      less than ten not to be zero. HRM#929034
+    * Avoid server getting stuck when loading ruleset that has
+      unit obsoletion loop osdn#42301
+    * Fixed loading a savegame with multiresearch server setting
+      turned on osdn#42499
+    * Fixed server crash when number of cities and units in the game
+      is larger than 65534 HRM#927510
+
+    * civ2civ3 & sandbox
+         + Ships with zero attack power no longer cause unhappiness,
+           fighters with fuel over one turn do osdn#42078
+         + civ2civ3 only Welcome message points directs user to find
+           more information from About Current Ruleset osdn#42329
+         + Reworked the way labels get assigned to the map
+           when it's generated osdn#42708
+
+    * civ1
+         + Made traderoute one-time-bonus gold only osdn#42317
+         + Savepalace server setting is disabled by default osdn#42266
+
+    * civ2
+         + Savepalace server setting is disabled by default osdn#42266
+
+    * alien
+         + Clean format by always setting irrigation_time / plant_time
+           to zero when the activity in question is disabled by
+           relevant _result field. This does not change how
+           the ruleset behaves, but is less confusing to read osdn#42211
+
+    * italy scenario
+         + Wrap map from the correct point so that leftmost part
+           of the map is connected to the rest HRM#691812
+
+    * british isles scenario
+         + Scenario now uses nationset all, so the correct nations
+           from the isles are available and get placed,
+           instead of completely random nations from the core nationset
+           osdn#42939
+
+Changes affecting other rulesets / modders
+
+    * Terrain transform time of zero now really disables transforming,
+      as documented osdn#42120
+    * When action success probability range to show is calculated,
+      TerrainAlter requirements are known to be known for sure osdn#42512
+    * Fixed handling of multipliers (especially one with value of zero)
+      in relation to space part effects osdn#42836
+    * Sanity check that space parts have Special genus HRM#824590
+    * Update city owner's info on clients when caravan
+      helps finish foreign wonder HRM#908746
+    * Fixed helptext trouble with CityTile requirements involved osdn#42872
+    * CoastStrict units can now enter Ocean cities,
+      and cities on 1x1 islands (with no surrounding land tile) osdn#42600
+
+General
+
+    * Minor optimizations osdn#42331 osdn#42865 osdn#42883
+    * Various internal changes which should only affect developers
+      osdn#42117 osdn#42171 osdn#42142 osdn#42146 osdn#42192 osdn#42151
+      osdn#42325 osdn#42043 osdn#41947 osdn#42438 osdn#42340 HRM#909607
+      osdn#42421 osdn#42461 osdn#42456 osdn#42527 osdn#42330 osdn#42477
+      osdn#42505 osdn#42505 osdn#42460 osdn#42504 osdn#42455 osdn#42623
+      osdn#42488 osdn#42577 osdn#42779 osdn#42557 osdn#42843 osdn#42579
+      osdn#42835 osdn#42841 osdn#42868 osdn#42227 osdn#42886
+
+AI
+
+    * AI puts more weight on potential improvement's
+      gold effect (including upkeep) when it's short of gold osdn#42195
+    * Corrected actual AI's use of advisor when it's
+      evaluating governments osdn#42231
+    * Stopped fueled units from unnecessary hopping between bases
+      when they should regenerate HRM#924328
+    * Fixed rare AI crash when tech upkeep was enabled and a player
+      had researched zero techs osdn#42409
+    * AI can again build Fighters (units with fuel of one) HRM#658896
+    * Fixed a problem causing fueled ferries to get stuck osdn#41970
+    * Fixed a problem causing AI to think its income is lower
+      than it actually is, when it plans for a balanced budget osdn#42193
+    * Increased AI's want to conquer cities that
+      have no buildings at all osdn#42778
+    * Improved handling of caravans that can only enter marketplace,
+      not establish trade routes osdn#42518
+    * Corrected AI's estimate of immediate bonus of establishing
+      a trade route when bonus type is not "Both" osdn#42641
+
+Clients
+
+    * Don't promise that there's a one time trade bonus
+      when there is not osdn#42087
+    * Improved indentation of entries in the left panel
+      of the city dialog osdn#42298
+    * Fixed handling of the change of tile that action selection
+      is waited for osdn#42621 osdn#42622
+    * Consistently disable help links to space parts when
+      spacerace disabled HRM#853869
+    * Fixed a crash when drawing a trade route,
+      and the trade partner is unknown osdn#42969
+
+    * gtk3 & gtk3.22
+         + Make sure scrollbar does not hide rightmost column
+           in units and economy reports osdn#42167
+         + gtk3.22 only: Get information from correct display
+           on multi-display setup when user interacts with
+           city's improvement list. It used to always assume
+           default display. osdn#42183
+         + gtk3.22 only: Made tab notice color different
+           from alert color osdn#42295
+         + Fixed pillaging of the default target osdn#42168
+         + Fixed loading unit to the default transport osdn#42303
+
+Tools
+Ruledit
+
+    * Improvements when ruledit compiled in experimental mode
+      for having item removal support
+         + Removal of dependant items was erronously blocked
+           by already removed items osdn#42173
+         + Display name of the action requiring the object
+           that one tries to remove osdn#42464
+    * New editable properties:
+         + Unit attack and defense value osdn#42386
+         + Improvement upkeep osdn#42487
+    * Display enabler count in ruleset stats osdn#42176
+
+Modpack installer
+
+    * freeciv-mp-gtk4 now quits cleanly osdn#42412
+    * freeciv-mp-gtk4 no longer claims to support standard
+      gtk commandline options, that gtk4 does not have osdn#42415
+
+Ruleup
+
+    * Make 2.6 resources turned to extras generator placed osdn#42847
+    * Make sure extra.buildable is always saved when it
+      has a nondefault value osdn#42848
+
+Tilesets, Art, etc
+
+    * Added graphics for Castle HRM#919768 osdn#42440
+    * Fixed amplio2 default city and city_wall sprites to be blank osdn#42441
+    * Corrected/updated flag file formats
+      osdn#42163 osdn#42188 osdn#42208 osdn#42255 osdn#42267 osdn#42291
+      osdn#42300 osdn#42308 osdn#42315 osdn#42326 osdn#42339 osdn#42345
+      osdn#42370 osdn#42378 osdn#42384 osdn#42393 osdn#42399 osdn#42404
+      osdn#42410 osdn#42418 osdn#42432 osdn#42442 osdn#42444 osdn#42463
+      osdn#42469 osdn#42472 osdn#42475 osdn#42481 osdn#42489 osdn#42496
+      osdn#42503 osdn#42507 osdn#42519 osdn#42521 osdn#42526 osdn#42530
+      osdn#42535 osdn#42542 osdn#42546 osdn#42550 osdn#42559 osdn#42564
+      osdn#42566 osdn#42570 osdn#42576 osdn#42590 osdn#42596 osdn#42603
+      osdn#42604 osdn#42608 osdn#42615 osdn#42619 osdn#42636 osdn#42765
+      osdn#42718 osdn#42770
+
+Help / Documentation
+
+    * Freenode network has been replaced by Libera.Chat network
+      as the official freeciv IRC channel osdn#42541
+    * Made man page links to work in MacOS osdn#42178
+    * Added man page freeciv osdn#42138
+    * Document new freeciv-tickets mailing list for developers osdn#42491
+    * Miscellaneous improvements to in-game text and user documentation
+      osdn#42260 osdn#42207 osdn#42337 osdn#42119 osdn#42403 osdn#42558
+      osdn#42539 osdn#42392 osdn#42782 osdn#42652
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#42126 osdn#42143 osdn#42217 osdn#42373 osdn#42411 osdn#42318
+      osdn#42842 osdn#42844 osdn#42695 osdn#42918 osdn#42926
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Catalan, Russian
+         + Incomplete translations:
+           Esperanto (29% core, 17% nations, 35% ruledit)
+           Finnish (100% core, 91% nations, 100% ruledit)
+           French (99% core, 100% nations, 98% ruledit)
+
+Build/portability
+    * Make sure that freeciv's configuration header does not cause
+      trouble when building liblua as part of freeciv.
+      Problems were reported specifically in MacOS build.
+      By default liblua is not built, but existing library is used
+      from the system. osdn#42114
+    * Fixed MacOS build problem where files documenting Version
+      of dependencies was mistaken for a system header osdn#42271
+    * Respect user set MOCCMD on MacOS build osdn#42342
+    * Fixed build on older OSX versions osdn#42439
+    * Qt meta object source generation now respects
+      automake's silent mode osdn#42458
+    * Crosser environment used in crosser based Windows installers
+      updated to version 2.1 osdn#42607 osdn#42067
+    * Fixed compiler warning with clang-13 osdn#42698
+    * Avoid use of depracated 'which' command in scripts osdn#42769
+    * Silenced false-positive gcc-12 compiler warning osdn#42885
+
+
+CHANGES FROM 3.0.0-beta1 to 3.0.0-beta2
+---------------------------------------
+
+   (from <http://www.freeciv.org/wiki/NEWS-3.0.0-beta2>, 2021-05-14)
+
+3.0.0-beta2 fixes a number of issues seen with beta1. These include that
+alien ruleset gets correctly installed, and important change to
+civ2civ3 (default) ruleset that Diplomats or Explorers establishing
+an embassy are consumed in the process.
+
+Server / General
+Changes affecting players (supplied rulesets)
+
+    * Update a city also on other player's clients when its size get
+      reduced because of a nuke osdn#41810 osdn#41860
+    * Made generated random seed less predictable on most platforms.
+      Compared to earlier released 2.6.4, here also Windows and
+      older Linux are supported. HRM#914184 osdn#41838 osdn#41842
+      osdn#41995 osdn#42000 osdn#41918 osdn#42024
+    * Allow goto to a moving transport (but not through one) HRM#647612
+    * Air unit goto avoids wait for refuel when it's not necessary
+      HRM#923677 osdn#42029
+    * Server does not send city info to clients in the middle of calculations
+      where the info might be inconsistent osdn#41851 osdn#41975
+    * When attempting to load a ruleset that is not locked to its ruleset,
+      still fallback to its own ruleset when the current one is incompatible
+      osdn#41994
+    * Already built buildings are purged from the worklist. They used to be
+      just postponed osdn#41925
+    * Terrain changing unit activities are cancelled when climate change
+      changes tile terrain. With the new terrain the target of those actions
+      is not what was started HRM#899919
+    * Avoid endless loop with scenarios having bad starting positions HRM#767127
+
+    * alien ruleset:
+         + Ruleset gets correctly installed osdn#41828
+
+    * civ2civ3 (default) ruleset:
+         + Diplomats or Explorers establishing embassy are consumed in the process
+           osdn#41929
+
+    * sandbox ruleset:
+         + Paradropping to transport is made possible osdn#41740
+         + Added Mechanic unit that can fix certain other units osdn#41845
+
+    * Europe 1900 WWI scenario:
+         + Finnish city of Tammerfors renamed as Tampere osdn#41777
+
+Changes affecting other rulesets / modders
+
+    * When calculating action success chance, surviving tech requirements on
+      World range are known to be known by everyone HRM#922369
+    * Fixed scorelog start check to work correctly with ruleset set start year
+      other than default HRM#820731
+    * Fixed nuking non-native tiles with units that have zero attack_strength
+      osdn#42008
+    * Fixed server crash when illness destroys a city. That can happen only
+      with rulesets that enable illness for size 1 cities osdn#41959
+    * Server now checks that unit's transport can hold the target unit before
+      converting unit HRM#921940
+
+Changes affecting server operators
+
+    * For servers with user authentication, supplied database.lua script uses
+      lua instead of dirty sql query to determine time osdn#41879
+
+General
+
+    * Minor optimizations HRM#921195
+    * Various internal changes which should only affect developers
+      osdn#41759 osdn#41797 HRM#923036 HRM#922785 osdn#41850 osdn#41773 osdn#41858
+      HRM#924387 osdn#41764 osdn#41852 HRM#923660 osdn#41772 HRM#923785 osdn#41873
+      osdn#41847 osdn#41953 osdn#41992 osdn#41931 osdn#41927 osdn#42006 osdn#42007
+      osdn#42010 osdn#41937 osdn#41964 osdn#42098 osdn#42099 osdn#42045 osdn#42053
+      osdn#42101
+
+AI
+
+    * Better air unit handling HRM#924327
+    * Better evaluate value of transports filled with cargo for the invasion attempt
+      HRM#872215
+
+Clients
+
+    * User is now allowed to open a new action selection dialog while another
+      is open osdn#41920
+    * Fixed a governor crash when client does not know the other end of
+      the trade route, but thinks it knows it osdn#41926
+    * Buildings that allow units to perform actions are no longer shown
+      as redundant osdn#41955
+    * Client now knows that attacking a city with units like standard rulesets'
+      Submarine is impossible osdn#42001
+    * Fixed over-zealous assert when action selection gets cancelled osdn#42042
+    * Client now logs about start of new turn on verbose log level osdn#41973
+
+    * sdl2
+         + Fixed screen refreshing when there's no active units osdn#41683
+
+Tools
+Ruledit
+
+    * Made unit tech requirement menu easier to use osdn#41832
+    * New editable properties:
+         + Building build cost osdn#41891
+         + Unit build cost osdn#41950
+         + Description file reference osdn#41946
+    * Allow only numbers to be entered for numeric requirement value osdn#41893
+    * Prevented opening multiple Edit Values dialogs for the same ruleset item
+      osdn#41951
+    * Edit Values dialog related to it is closed when ruleset item is deleted
+      osdn#41957
+    * Other minor fixes osdn#41944 osdn#41945
+
+Tilesets, Art, etc
+
+    * Visible_Walls effects from City Walls and Great Wall are no longer
+      cumulative in supplied rulesets, better supporting potential tilesets
+      with multiple Wall graphics HRM#823341
+    * Added icons for action_decision_want to most tilesets
+      HRM#924321 HRM#924326 HRM#924388
+    * Added Ancient Transport Hub graphics to amplio2 osdn#41868
+    * conver_png script used to generate flag images updated to work with
+      modern inkscape versions osdn#41884 osdn#42002
+    * Fix to hexemplio format osdn#41923
+    * Corrected/updated flag file formats
+      osdn#41966 osdn#42005 osdn#42012 osdn#42016 osdn#42019 osdn#42023 osdn#42022
+      osdn#42025 osdn#42027 osdn#42041 osdn#42050 osdn#42059 osdn#42065 osdn#42069
+      osdn#42076 osdn#42080 osdn#42108 osdn#42115 osdn#42094 osdn#42123 osdn#42132
+      osdn#42150
+
+Help / Documentation
+
+    * List Sveinung Kvilhaugsvik in present maintainers osdn#41820
+    * Miscellaneous other improvements to in-game text and user documentation
+      osdn#41712 osdn#41727 HRM#897730 HRM#892147 osdn#41826 HRM#811425 osdn#41969
+      HRM#727155 osdn#41938 osdn#41962
+    * Miscellaneous changes to developer/install/ruleset docs
+      osdn#41776 osdn#41803 HRM#923438 osdn#41829 osdn#41872 osdn#41833 osdn#41887
+      osdn#41935 osdn#41998 osdn#41943 osdn#42071 osdn#42017 osdn#42049 osdn#42061
+      osdn#42158
+
+Translations
+
+    * Updated translations:
+         + Complete translations: Russian
+         + Incomplete translations:
+           Catalan (92% core, 100% nations, 62% ruledit)
+           Spanish (85% core, 100% nations, 44% ruledit)
+           Finnish (100% core, 91% nations, 100% ruledit)
+           French (99% core, 100% nations, 100% ruledit)
+           Polish (99% core, 100% nations, 100% ruledit)
+    * Changes to which strings are translatable osdn#41866
+
+Build/portability
+
+    * Updated bootstrap files from gnulib upstream
+      osdn#41758 osdn#41754 osdn#41755 osdn#41843 osdn#41818 osdn#41830 osdn#41889
+      osdn#41906 osdn#41999 osdn#42034
+    * Fixed build of tex/threaded AI osdn#41870
+    * Fixed compiler warnings seen with various setups
+      HRM#921179 HRM#921208 HRM#923440 osdn#41905 osdn#41932 osdn#41890 osdn#42021
+      osdn#42058
+    * Fixed false positive when configure looks for moc-qt5 command osdn#41997
