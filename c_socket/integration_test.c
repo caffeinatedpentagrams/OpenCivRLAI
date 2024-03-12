@@ -31,7 +31,8 @@ int main() {
   printf("unit_id: %d\n", ((struct UnitInfoPacket*) packet)->unit_id);
   printf("owner: %s\n", ((struct UnitInfoPacket*) packet)->owner);
   printf("nationality: %s\n", ((struct UnitInfoPacket*) packet)->nationality);
-  printf("coord: %d\n", ((struct UnitInfoPacket*) packet)->coord);
+  printf("coordx: %d\n", ((struct UnitInfoPacket*) packet)->coordx);
+  printf("coordy: %d\n", ((struct UnitInfoPacket*) packet)->coordy);
   printf("upkeep: %d\n", ((struct UnitInfoPacket*) packet)->upkeep);
   printf("\n");
 
@@ -42,7 +43,8 @@ int main() {
   // receive city info
   type = c_socket_receive_packet(packet);
   printf("id: %d\n", ((struct CityInfoPacket*) packet)->id);
-  printf("coord: %d\n", ((struct CityInfoPacket*) packet)->coord);
+  printf("coordx: %d\n", ((struct CityInfoPacket*) packet)->coordx);
+  printf("coordy: %d\n", ((struct CityInfoPacket*) packet)->coordy);
   printf("owner: %d\n", ((struct CityInfoPacket*) packet)->owner);
   printf("size: %d\n", ((struct CityInfoPacket*) packet)->size);
   printf("radius: %d\n", ((struct CityInfoPacket*) packet)->radius);
@@ -115,7 +117,8 @@ int main() {
     .unit_id = 5,
     .owner = "owner",
     .nationality = "nationality",
-    .coord = 4,
+    .coordx = 4,
+    .coordy = 6,
     .upkeep = 3
   };
   c_socket_send_unit_info_packet(&unit_info);
@@ -127,7 +130,8 @@ int main() {
   // send city info
   struct CityInfoPacket city_info = {
     .id = 1,
-    .coord = 2,
+    .coordx = 2,
+    .coordy = 12,
     .owner = 3,
     .size = 4,
     .radius = 5,

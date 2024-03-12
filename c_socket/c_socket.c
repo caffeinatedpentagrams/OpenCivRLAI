@@ -132,7 +132,8 @@ void c_socket_send_unit_info_packet(struct UnitInfoPacket* packet) {
   c_socket_append_int(send_buffer, packet->unit_id, &len);
   c_socket_append_str(send_buffer, packet->owner, &len);
   c_socket_append_str(send_buffer, packet->nationality, &len);
-  c_socket_append_int(send_buffer, packet->coord, &len);
+  c_socket_append_int(send_buffer, packet->coordx, &len);
+  c_socket_append_int(send_buffer, packet->coordy, &len);
   c_socket_append_int(send_buffer, packet->upkeep, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
@@ -158,7 +159,8 @@ void c_socket_send_city_info_packet(struct CityInfoPacket* packet) {
   int len = 4;
 
   c_socket_append_int(send_buffer, packet->id, &len);
-  c_socket_append_int(send_buffer, packet->coord, &len);
+  c_socket_append_int(send_buffer, packet->coordx, &len);
+  c_socket_append_int(send_buffer, packet->coordy, &len);
   c_socket_append_int(send_buffer, packet->owner, &len);
   c_socket_append_int(send_buffer, packet->size, &len);
   c_socket_append_int(send_buffer, packet->radius, &len);

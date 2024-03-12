@@ -17,7 +17,8 @@ struct UnitInfoPacket {
   int unit_id;
   char owner[100];
   char nationality[100];
-  int coord;
+  int coordx;
+  int coordy;
   int upkeep;
 };
 
@@ -25,7 +26,8 @@ struct CivInfoPacket {};
 
 struct CityInfoPacket {
   int id;
-  int coord;
+  int coordx;
+  int coordy;
   int owner;
   int size;
   int radius;

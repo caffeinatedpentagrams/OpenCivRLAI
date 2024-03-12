@@ -43,7 +43,8 @@ int packets_make(char* buffer, int payload_len, void* packet) {
       packets_read_int(buffer, &((struct UnitInfoPacket*) packet)->unit_id, &idx);
       packets_read_str(buffer, ((struct UnitInfoPacket*) packet)->owner, &idx);
       packets_read_str(buffer, ((struct UnitInfoPacket*) packet)->nationality, &idx);
-      packets_read_int(buffer, &((struct UnitInfoPacket*) packet)->coord, &idx);
+      packets_read_int(buffer, &((struct UnitInfoPacket*) packet)->coordx, &idx);
+      packets_read_int(buffer, &((struct UnitInfoPacket*) packet)->coordy, &idx);
       packets_read_int(buffer, &((struct UnitInfoPacket*) packet)->upkeep, &idx);
       break;
 
@@ -52,7 +53,8 @@ int packets_make(char* buffer, int payload_len, void* packet) {
 
     case CityInfo:
       packets_read_int(buffer, &((struct CityInfoPacket*) packet)->id, &idx);
-      packets_read_int(buffer, &((struct CityInfoPacket*) packet)->coord, &idx);
+      packets_read_int(buffer, &((struct CityInfoPacket*) packet)->coordx, &idx);
+      packets_read_int(buffer, &((struct CityInfoPacket*) packet)->coordy, &idx);
       packets_read_int(buffer, &((struct CityInfoPacket*) packet)->owner, &idx);
       packets_read_int(buffer, &((struct CityInfoPacket*) packet)->size, &idx);
       packets_read_int(buffer, &((struct CityInfoPacket*) packet)->radius, &idx);

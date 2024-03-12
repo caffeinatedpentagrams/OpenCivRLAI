@@ -27,7 +27,8 @@ if __name__ == '__main__':
     unit_info.set_content('unit_id', 13)
     unit_info.set_content('owner', 'owner')
     unit_info.set_content('nationality', 'nation')
-    unit_info.set_content('coord', 15)
+    unit_info.set_content('coordx', 15)
+    unit_info.set_content('coordy', 51)
     unit_info.set_content('upkeep', 16)
     listener.send_packet(unit_info)
 
@@ -38,7 +39,8 @@ if __name__ == '__main__':
     # send city info
     city_info = CityInfoPacket()
     city_info.set_content('id', 100)
-    city_info.set_content('coord', 101)
+    city_info.set_content('coordx', 101)
+    city_info.set_content('coordy', 10)
     city_info.set_content('owner', 102)
     city_info.set_content('size', 103)
     city_info.set_content('radius', 104)

@@ -79,7 +79,8 @@ class UnitInfoPacket(Packet):  # 3 TODO Adit
         self._add_field('unit_id', 100, 'int')
         self._add_field('owner', 100, 'str')
         self._add_field('nationality', 100, 'str')
-        self._add_field('coord', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('coordx', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('coordy', 8, 'int') # field is x, y in 4-byte integers
         self._add_field('upkeep', 1, 'int')  # comes as uint8_t acc to packets.def
 
 class CivInfoPacket(Packet):  # 4 TODO Adit
@@ -91,14 +92,15 @@ class CityInfoPacket(Packet):  # 5 TODO Adit
     def __init__(self):
         super().__init__(5)
         self._add_field('id', 8, 'int') # TODO double check type packets.def id; key
-        self._add_field('coord', 8, 'int')
+        self._add_field('coordx', 8, 'int')
+        self._add_field('coordy', 8, 'int')
         self._add_field('owner', 8, 'int') # TODO double check type, packets.def PLAYER
         self._add_field('size', 32, 'int')  # TODO doubel check type, packets.def CITIZENS
-        self._add_field('radius', 1, 'int')
-        self._add_field('food_stock', 2, 'int') # THIS IS SIGNED
-        self._add_field('shield_stock', 2, 'int')  # TODO what is this?
-        self._add_field('production_kind', 1, 'int')  # TODO what is this?
-        self._add_field('production_value', 1, 'int')
+        self._add_field('radius', 40, 'int')
+        self._add_field('food_stock', 40, 'int') # THIS IS SIGNED
+        self._add_field('shield_stock', 40, 'int')  # TODO what is this?
+        self._add_field('production_kind', 40, 'int')  # TODO what is this?
+        self._add_field('production_value', 40, 'int')
         self._add_field('improvements', 5000, 'str') # We will force this to contain a list of the buildings
 
 class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which can be a tile, a unit, or a city)
