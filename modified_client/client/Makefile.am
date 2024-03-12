@@ -82,6 +82,10 @@ freeciv_client_src = $(AUDIO_SDL_FILES) \
 	hello_world.h	\
 	state_aggregator.h \
 	state_aggregator.c \
+	c_socket_packets.h \
+	c_socket_packets.c \
+	c_socket.h	\
+	c_socket.c	\
 	attribute.h	\
 	attribute.c	\
 	citydlg_common.c \

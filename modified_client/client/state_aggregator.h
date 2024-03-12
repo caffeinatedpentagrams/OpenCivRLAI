@@ -14,6 +14,7 @@
 #include "state_sender.h"
 
 #define MAX_UNITS 40
+#define MAXIMUM_ADIT 64
 
 struct map_index {
     bool owned;
@@ -50,7 +51,7 @@ struct unit_basic {
 
 //struct unit_basic units[MAX_UNITS];
 extern struct unit_basic units[MAX_UNITS];
-extern char map_state_internal[MAXIMUM][MAXIMUM][D];
+extern char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D];
 
 //char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
 
