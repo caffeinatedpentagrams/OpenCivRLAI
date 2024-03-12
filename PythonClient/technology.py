@@ -1,19 +1,19 @@
 # https://upload.wikimedia.org/wikipedia/commons/4/4c/Freeciv-2.1.8_technology_tree.png
 
 class Technology:
-    def __init__(self, name, requirements, turns, cost):
+    def __init__(self, name, requirements, cost):
         self.name = name
         self.requirements = requirements
-        self.turns = turns
         self.researched = False
-        self.cost = cost
+        self.cost = cost  # TODO check if this wasn't turns, but I think it is science cost
         self.progress = 0
 
     def __str__(self):
         return self.name
 
+
 class TechnologyTree:
-    def __init__(self):
+    def __init__(self):  # TODO Correct costs!
         alphabet = Technology('alphabet', [], 0)
         ceremonial_burial = Technology('ceremonial_burial', [], 0)
         pottery = Technology('pottery', [], 0)
@@ -117,6 +117,7 @@ class TechnologyTree:
             self.techs[self.currently_researching].researched = True
             self.currently_researching = None
             # TODO find out if we accumulate the unused progress and apply it to the next researched item?
+
 
 # TODO make proper unit test
 if __name__ == '__test__':

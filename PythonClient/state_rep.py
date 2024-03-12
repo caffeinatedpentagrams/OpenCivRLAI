@@ -2,17 +2,21 @@ import enum
 from collections import namedtuple
 from enum import Enum
 import technology
+
 # name: (cost, upkeep)
 BUILDABLE_BUILDINGS = {'aqueduct': (60, 2), 'bank': (80, 2), 'cathedral': (80, 3), 'coinage': (0, 0),
                        'colosseum': (70, 4), 'ganary': (40, 1), 'harbour': (40, 1), 'library': (60, 1),
                        'marketplace': (60, 0), 'palace': (70, 0), 'temple': (30, 1), 'university': (120, 3)}
 buildable_units = {'settler': (), 'worker': ()}  # TODO
 
+
 class Direction(Enum):
     NORTH = -1
     SOUTH = 1
     EAST = 1
     WEST = -1
+
+
 class Unit:
     def __init__(self, xcoord, ycoord):
         self.xpos = xcoord
@@ -38,8 +42,7 @@ class Unit:
             self.current_action = None
 
     def on_end_turn(self):
-        pass # TODO
-
+        pass  # TODO
 
 
 class MovingUnit(Unit):
@@ -62,13 +65,14 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         self._add_action('build_road', self.build_road())
 
     def irrigate(self):  # TODO find duration
-        pass # TODO
+        pass  # TODO
 
     def mine(self):  # TODO find duration
         pass
 
     def build_road(self):  # TODO find duration
         pass
+
 
 class Settler(MovingUnit):
     def __init__(self, xcoord, ycoord):
@@ -78,6 +82,15 @@ class Settler(MovingUnit):
     def settle(self):  # TODO
         pass
 
+
+class Explorer(MovingUnit):  # TODO Probably don't even need to overload
+    def __init__(self, xcoord, ycoord):
+        super().__init__(xcoord, ycoord)
+
+    def queue_multiple_one_tile_moves(self):
+        pass  # TODO
+
+
 class City(Unit):
     def __init__(self, xcoord, ycoord):
         super().__init__(xcoord, ycoord)
@@ -85,7 +98,7 @@ class City(Unit):
         self.production = 0
         self.science = 0
         self.gold_income = 0
-        self.luxury = 0 # TODO verify!
+        self.luxury = 0  # TODO verify!
         # TODO add city attributes
 
     def build_building(self):  # TODO
@@ -94,10 +107,12 @@ class City(Unit):
     def build_unit(self):
         pass  # TODO
 
+
 class Tax(Enum):
     SCIENCE = 0
     GOLD = 1
     LUXURY = 2
+
 
 class Country:
     def __init__(self):
@@ -117,9 +132,11 @@ class Country:
         for i in range(5):
             self.worker_list.append(Worker(-1, -1))
         for i in range(2):
-            self.settler_list.append(Settler(-1, -1))  # These are garbage values, TODO should probably change constructors!
+            self.settler_list.append(
+                Settler(-1, -1))  # These are garbage values, TODO should probably change constructors!
 
-    def update_from_packet(self, civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
+    def update_from_packet(self,
+                           civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
         pass
 
     def research_technology(self, techname):
@@ -130,7 +147,6 @@ class Country:
         else:
             self.tech_tree.add_research_progress(techname, self.science)
             return True
-
 
     def change_taxrate(self, i, type):
         self.taxpoints[i] = type  # type is a Tax enum
