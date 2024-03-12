@@ -15,21 +15,32 @@ struct MapPacket {
 
 struct UnitInfoPacket {
   int unit_id;
+  char owner[100];
+  char nationality[100];
+  int coord;
+  int upkeep;
 };
 
-struct CivInfoPacket {
-  int nation_tag;
-};
+struct CivInfoPacket {};
 
 struct CityInfoPacket {
-  char city_name[100];
-  int pop;
-  char owned_by[100];
+  int id;
+  int coord;
+  int owner;
+  int size;
+  int radius;
+  int food_stock;
+  int shield_stock;
+  int production_kind;
+  int production_value;
+  char improvements[5000];
 };
 
 struct ActionPacket {
   char action[100];
-  char action_specifiers[25000];
+  int ACTION_ID;
+  int actor_id;
+  int target_id;
 };
 
 struct ActionReplyPacket {
@@ -48,6 +59,14 @@ struct CompletedStateTransferPacket {
   char done[100];
 };
 
+struct ResearchInfoPacket {
+  int id;
+  int techs_researched;
+  char researching[100];
+  int researching_cost;
+  int bulbs_researched;
+};
+
 enum PacketEnum {
   Hello = 0,
   HelloReply = 1,
@@ -59,7 +78,8 @@ enum PacketEnum {
   ActionReply = 7,
   TurnBegin = 8,
   TurnEnd = 9,
-  CompletedStateTransfer = 10
+  CompletedStateTransfer = 10,
+  ResearchInfo = 11
 };
 
 void packets_read_int(char* buffer, int* out, int* idx);

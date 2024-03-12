@@ -130,6 +130,10 @@ void c_socket_send_unit_info_packet(struct UnitInfoPacket* packet) {
   int len = 4;
 
   c_socket_append_int(send_buffer, packet->unit_id, &len);
+  c_socket_append_str(send_buffer, packet->owner, &len);
+  c_socket_append_str(send_buffer, packet->nationality, &len);
+  c_socket_append_int(send_buffer, packet->coord, &len);
+  c_socket_append_int(send_buffer, packet->upkeep, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;
@@ -142,8 +146,6 @@ void c_socket_send_civ_info_packet(struct CivInfoPacket* packet) {
   send_buffer[3] = (CivInfo >> 0) & 0xff;
   int len = 4;
 
-  c_socket_append_int(send_buffer, packet->nation_tag, &len);
-
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;
   send(client_socket, send_buffer, len, 0);
@@ -155,9 +157,16 @@ void c_socket_send_city_info_packet(struct CityInfoPacket* packet) {
   send_buffer[3] = (CityInfo >> 0) & 0xff;
   int len = 4;
 
-  c_socket_append_str(send_buffer, packet->city_name, &len);
-  c_socket_append_int(send_buffer, packet->pop, &len);
-  c_socket_append_str(send_buffer, packet->owned_by, &len);
+  c_socket_append_int(send_buffer, packet->id, &len);
+  c_socket_append_int(send_buffer, packet->coord, &len);
+  c_socket_append_int(send_buffer, packet->owner, &len);
+  c_socket_append_int(send_buffer, packet->size, &len);
+  c_socket_append_int(send_buffer, packet->radius, &len);
+  c_socket_append_int(send_buffer, packet->food_stock, &len);
+  c_socket_append_int(send_buffer, packet->shield_stock, &len);
+  c_socket_append_int(send_buffer, packet->production_kind, &len);
+  c_socket_append_int(send_buffer, packet->production_value, &len);
+  c_socket_append_str(send_buffer, packet->improvements, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;
@@ -171,7 +180,9 @@ void c_socket_send_action_packet(struct ActionPacket* packet) {
   int len = 4;
 
   c_socket_append_str(send_buffer, packet->action, &len);
-  c_socket_append_str(send_buffer, packet->action_specifiers, &len);
+  c_socket_append_int(send_buffer, packet->ACTION_ID, &len);
+  c_socket_append_int(send_buffer, packet->actor_id, &len);
+  c_socket_append_int(send_buffer, packet->target_id, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;
@@ -224,6 +235,23 @@ void c_socket_send_completed_state_transfer_packet(struct CompletedStateTransfer
   int len = 4;
 
   c_socket_append_str(send_buffer, packet->done, &len);
+
+  send_buffer[0] = (len >> 8) & 0xff;
+  send_buffer[1] = (len >> 0) & 0xff;
+  send(client_socket, send_buffer, len, 0);
+}
+
+void c_socket_send_research_info_packet(struct ResearchInfoPacket* packet) {
+  char send_buffer[65536];
+  send_buffer[2] = (ResearchInfo >> 8) & 0xff;
+  send_buffer[3] = (ResearchInfo >> 0) & 0xff;
+  int len = 4;
+
+  c_socket_append_int(send_buffer, packet->id, &len);
+  c_socket_append_int(send_buffer, packet->techs_researched, &len);
+  c_socket_append_str(send_buffer, packet->researching, &len);
+  c_socket_append_int(send_buffer, packet->researching_cost, &len);
+  c_socket_append_int(send_buffer, packet->bulbs_researched, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;

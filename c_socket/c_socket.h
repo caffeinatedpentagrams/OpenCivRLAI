@@ -30,6 +30,7 @@ void c_socket_send_action_reply_packet(struct ActionReplyPacket* packet);
 void c_socket_send_turn_begin_packet(struct TurnBeginPacket* packet);
 void c_socket_send_turn_end_packet(struct TurnEndPacket* packet);
 void c_socket_send_completed_state_transfer_packet(struct CompletedStateTransferPacket* packet);
+void c_socket_send_research_info_packet(struct ResearchInfoPacket* packet);
 
 void c_socket_close();
 
