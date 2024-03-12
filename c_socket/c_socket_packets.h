@@ -76,7 +76,7 @@ enum PacketEnum {
   UnitInfo = 3,
   CivInfo = 4,
   CityInfo = 5,
-  Action = 6,
+  ActionEnum = 6,
   ActionReply = 7,
   TurnBegin = 8,
   TurnEnd = 9,

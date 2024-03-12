@@ -1,6 +1,6 @@
 FROM debian:bullseye-slim AS builder
  
-COPY src /app/src
+COPY modified_client /app/src
  
 WORKDIR /app/src
  

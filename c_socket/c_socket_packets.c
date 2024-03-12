@@ -65,7 +65,7 @@ int packets_make(char* buffer, int payload_len, void* packet) {
       packets_read_str(buffer, ((struct CityInfoPacket*) packet)->improvements, &idx);
       break;
 
-    case Action:
+    case ActionEnum:
       packets_read_str(buffer, ((struct ActionPacket*) packet)->action, &idx);
       packets_read_int(buffer, &((struct ActionPacket*) packet)->ACTION_ID, &idx);
       packets_read_int(buffer, &((struct ActionPacket*) packet)->actor_id, &idx);
