@@ -429,8 +429,8 @@ void input_from_server(int fd)
       void *packet = get_packet_from_connection(&client.conn, &type);
       if (NULL != packet) {
 	intercept_packet(type, packet, &visited[0], &count);
-	#printf("packet type: %d\n", type);
-	//#printf("END RAW BYTES");
+	printf("packet type: %d\n", type);
+	//printf("END RAW BYTES");
 	client_packet_input(packet, type);
 	free(packet);
       } else {
