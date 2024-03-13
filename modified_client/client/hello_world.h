@@ -125,11 +125,11 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
    if (unitA!=NULL) {
      struct tile tile;
      memcpy(&tile,unitA->tile,sizeof(struct tile));
-     tile.index+=1;
+     //tile.index+=1;
      x = index_to_map_pos_x(tile_index(&tile));
      y = index_to_map_pos_y(tile_index(&tile));
-     printf("Changing location of unit... new location: (%d,%d)\n\n\nHUGE NEWS!!!!\n\n",x,y);
-     request_do_action(ACTION_UNIT_MOVE,unit.id,tile.index,0,"");
+     //printf("Changing location of unit... new location: (%d,%d)\n\n\nHUGE NEWS!!!!\n\n",x,y);
+     request_do_action("ACTION_FOUND_CITY",unit.id,tile.index,0,"");
     }
    
   }

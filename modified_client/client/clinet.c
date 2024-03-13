@@ -415,7 +415,6 @@ void input_from_server(int fd)
   fc_assert_ret(fd == client.conn.sock);
   nb = read_from_connection(&client.conn, FALSE);
   printf("\ninput_from_server called, recieved packets\n");
-  hello();
   int count = 0;
   //if (count>25) {
       //count = 0;
@@ -430,7 +429,7 @@ void input_from_server(int fd)
       void *packet = get_packet_from_connection(&client.conn, &type);
       if (NULL != packet) {
 	intercept_packet(type, packet, &visited[0], &count);
-	//#printf("%p\n", packet);
+	#printf("packet type: %d\n", type);
 	//#printf("END RAW BYTES");
 	client_packet_input(packet, type);
 	free(packet);
@@ -450,14 +449,18 @@ void input_from_server(int fd)
   struct MapPacket map;
   memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
   c_socket_send_map_packet(&map);
-  /*for (int i=0;i<MAX_UNITS_ADIT;i++){
-    struct UnitInfoPacket unit;
-    unit.unit_id = units[i].id;
-    unit.coordx = units[i].x;
-    unit.coordy = units[i].y;
-    c_socket_send_unit_info_packet(&unit);
-    }*/
-  struct UnitInfoPacket unit_info = {
+  for (int i=0;i<MAX_UNITS_ADIT;i++){
+    //struct UnitInfoPacket unit;
+    //unit.unit_id = units[i].id;
+    //unit.coordx = units[i].x;
+    //unit.coordy = units[i].y;
+    c_socket_send_unit_info_packet(&units[i]);
+  }
+  struct CompletedStateTransferPacket done_packet = {
+    .done = "done"
+  };
+  c_socket_send_completed_state_transfer_packet(&done_packet);
+  /*struct UnitInfoPacket unit_info = {
     .unit_id = 5,
     .owner = "owner",
     .nationality = "nationality",
@@ -465,7 +468,7 @@ void input_from_server(int fd)
     .coordy = 6,
     .upkeep = 3
   };
-  c_socket_send_unit_info_packet(&unit_info);
+  c_socket_send_unit_info_packet(&unit_info);*/
 }
 
 /**************************************************************************

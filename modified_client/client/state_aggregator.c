@@ -5,11 +5,13 @@
 #include "unittype.h"
 #include "unit.h"
 #include "packhand_gen.h"
+#include "c_socket_packets.h"
 
 // char map_state[64][64][D]={0}; defined in header
 
 char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT]={0};
-struct unit_basic units[MAX_UNITS_ADIT];
+struct UnitInfoPacket units[MAX_UNITS_ADIT];
+//struct unit_basic units[MAX_UNITS_ADIT];
 
 void dummy(){
   printf("what the fuck\n");
@@ -51,11 +53,13 @@ void update_map(int x,int y, int map_index) {
   //free(ptr);
 }
 
-void single_unit_update(struct unit_basic* old, struct packet_unit_info* new) {
-  old->type = new->type;
-  old->id = new->id;
-  old->x = index_to_map_pos_x(new->tile);
-  old->y = index_to_map_pos_y(new->tile);
+void single_unit_update(struct UnitInfoPacket* old, struct packet_unit_info* new) {
+  old->unit_id = new->id;
+  old->coordx = index_to_map_pos_x(new->tile);
+  old->coordy = index_to_map_pos_y(new->tile);
+  //old->owner = new->owner;
+  //old->nationality = new->nationality;
+  old->upkeep = 1;
 }
 
 void update_units(struct packet_unit_info* punit) {
@@ -63,7 +67,7 @@ void update_units(struct packet_unit_info* punit) {
   if (index>=MAX_UNITS_ADIT) return;
   bool found = false;
   for (int i=0;i<index;i++) {
-    if (units[i].id==punit->id) {
+    if (units[i].unit_id==punit->id) {
       found = true;
       single_unit_update(&units[i],punit);
     }

@@ -11,7 +11,7 @@
 #include "unit.h"
 #include "unittype.h"
 #include "packhand_gen.h"
-
+#include "c_socket_packets.h"
 
 #define MAX_UNITS_ADIT 40
 #define MAXIMUM_ADIT 64
@@ -26,6 +26,15 @@ struct map_index {
     int road_time;
   struct unit_list* units;
 };
+
+/*struct UnitInfoPacket {
+  int unit_id;
+  char owner[100];
+  char nationality[100];
+  int coordx;
+  int coordy;
+  int upkeep;
+  };*/
 
 struct unit_basic {
   int id;
@@ -52,7 +61,7 @@ struct unit_basic {
 
 #define D sizeof(int)
 
-extern struct unit_basic units[MAX_UNITS_ADIT];
+extern struct UnitInfoPacket units[MAX_UNITS_ADIT];
 extern char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT];
 
 struct map_index* tile_to_vec(struct tile* tile);
@@ -60,7 +69,7 @@ void dummy();
 
 void update_map(int x, int y, int map_index);
 
-void single_unit_update(struct unit_basic* old, struct packet_unit_info* new); 
+void single_unit_update(struct UnitInfoPacket* old, struct packet_unit_info* new); 
 
 void update_units(struct packet_unit_info* punit);
 

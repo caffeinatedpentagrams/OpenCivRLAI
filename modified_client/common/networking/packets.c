@@ -43,6 +43,7 @@
 #include "events.h"
 #include "map.h"
 
+#include "unit.h"
 #include "packets.h"
 
 #ifdef USE_COMPRESSION
@@ -215,20 +216,28 @@ int send_packet_data(struct connection *pc, unsigned char *data, int len,
 
   printf("\nCLIENT SENDING PACKET! TYPE: %d\n%s\n",packet_type,packet_name(packet_type));
 
-  /*if (packet_type==PACKET_UNIT_ORDERS) {
+  if (packet_type==PACKET_UNIT_ORDERS) {
+    struct packet_unit_orders unit_orders;
+    memcpy(&unit_orders, data, len);
     struct unit_order order;
-    memcpy(&order, data, len);
-    printf("Ordering a unit do to #: %d\nActivity: %d\ntarget: ?\nsub_target: %d\naction: %d, direction8: %d\n",order.order,order.activity,order.sub_target,order.action,order.dir);
-    }*/
+    printf("Ordering unit %d on src tile %d to go to dest tile %d\n",unit_orders.unit_id,unit_orders.src_tile,unit_orders.dest_tile);
+    printf("length:  %d repeat %d  vigilant %d\n",unit_orders.length,unit_orders.repeat,unit_orders.vigilant);
+    for (int i=0;i<unit_orders.length;i++) {
+      memcpy(&order,&unit_orders.orders[i],sizeof(struct unit_order));
+      printf("Ordering a unit do to #: %d\nActivity: %d\ntarget: ?\nsub_target: %d\naction: %d, direction8: %d\n",order.order,order.activity,order.sub_target,order.action,order.dir);
+    }
+    
+  }
 
-  printf("sending packet type=%s(%d) len=%d to %s",
-             packet_name(packet_type), packet_type, len,
-             is_server() ? pc->username : "server");
   log_packet("sending packet type=%s(%d) len=%d to %s",
              packet_name(packet_type), packet_type, len,
              is_server() ? pc->username : "server");
 
   if (!is_server()) {
+      printf("sending packet type=%s(%d) len=%d to %s\n",
+             packet_name(packet_type), packet_type, len,
+             is_server() ? pc->username : "server");
+      printf("sending request %d", result);
     pc->client.last_request_id_used =
         get_next_request_id(pc->client.last_request_id_used);
     result = pc->client.last_request_id_used;
