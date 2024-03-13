@@ -2,6 +2,7 @@
 #include "c_socket.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main() {
   
@@ -107,9 +108,9 @@ int main() {
   c_socket_send_hello_reply_packet(&hello_reply);
 
   // send map
-  struct MapPacket map = {
-    .map = { 3 }
-  };
+  char rand[65526];
+  struct MapPacket map;
+  memcpy(&map, &rand, sizeof(struct MapPacket));
   c_socket_send_map_packet(&map);
 
   // send unit info
