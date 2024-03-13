@@ -20,7 +20,7 @@ void c_socket_init() {
 }
 
 void c_socket_bind_and_listen(int port) {
-  printf("Inside c_socket_bind_and_listen\n");
+  printf("Inside c_socket_bind_and_list\n");
   struct sockaddr_in addr;
   addr.sin_family = AF_INET;
   addr.sin_addr.s_addr = INADDR_ANY;
@@ -179,8 +179,8 @@ void c_socket_send_city_info_packet(struct CityInfoPacket* packet) {
 
 void c_socket_send_action_packet(struct ActionPacket* packet) {
   char send_buffer[65536];
-  send_buffer[2] = (Action >> 8) & 0xff;
-  send_buffer[3] = (Action >> 0) & 0xff;
+  send_buffer[2] = (ActionEnum >> 8) & 0xff;
+  send_buffer[3] = (ActionEnum >> 0) & 0xff;
   int len = 4;
 
   c_socket_append_str(send_buffer, packet->action, &len);

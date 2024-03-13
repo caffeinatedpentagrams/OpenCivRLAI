@@ -121,16 +121,15 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
    int x = index_to_map_pos_x(unit.tile);
    int y = index_to_map_pos_y(unit.tile);
    printf("Current location of unit: (%d,%d)\n",x,y);
-   *count+=1;
-   if (*count%10==5) {
-     struct unit* unitA = game_unit_by_number(unit.id);
+   struct unit* unitA = game_unit_by_number(unit.id);
+   if (unitA!=NULL) {
      struct tile tile;
      memcpy(&tile,unitA->tile,sizeof(struct tile));
      tile.index+=1;
      x = index_to_map_pos_x(tile_index(&tile));
      y = index_to_map_pos_y(tile_index(&tile));
      printf("Changing location of unit... new location: (%d,%d)\n\n\nHUGE NEWS!!!!\n\n",x,y);
-     request_unit_non_action_move(unitA, &tile);
+     request_do_action(ACTION_UNIT_MOVE,unit.id,tile.index,0,"");
     }
    
   }

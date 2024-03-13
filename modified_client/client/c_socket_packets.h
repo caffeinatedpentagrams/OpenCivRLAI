@@ -10,7 +10,7 @@ struct HelloReplyPacket {
 };
 
 struct MapPacket {
-  int map[1024];
+  int map[4096];
 };
 
 struct UnitInfoPacket {
@@ -76,7 +76,7 @@ enum PacketEnum {
   UnitInfo = 3,
   CivInfo = 4,
   CityInfo = 5,
-  Action = 6,
+  ActionEnum = 6,
   ActionReply = 7,
   TurnBegin = 8,
   TurnEnd = 9,

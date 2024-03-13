@@ -450,13 +450,22 @@ void input_from_server(int fd)
   struct MapPacket map;
   memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
   c_socket_send_map_packet(&map);
-  for (int i=0;i<MAX_UNITS_ADIT;i++){
+  /*for (int i=0;i<MAX_UNITS_ADIT;i++){
     struct UnitInfoPacket unit;
     unit.unit_id = units[i].id;
     unit.coordx = units[i].x;
     unit.coordy = units[i].y;
     c_socket_send_unit_info_packet(&unit);
-  }
+    }*/
+  struct UnitInfoPacket unit_info = {
+    .unit_id = 5,
+    .owner = "owner",
+    .nationality = "nationality",
+    .coordx = 4,
+    .coordy = 6,
+    .upkeep = 3
+  };
+  c_socket_send_unit_info_packet(&unit_info);
 }
 
 /**************************************************************************
