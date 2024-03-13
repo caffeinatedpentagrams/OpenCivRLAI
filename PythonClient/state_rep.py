@@ -281,14 +281,14 @@ def get_state_rep_simple(country):
 
     return full_state_rep
 
-def get_state_rep_sinusoidal(country):
+def get_state_rep_sinusoidal(country, max_coordinate_range=64, embed_dim=64):
     n = max_coordinate_range  # should be a number? add a number
-    embed_dim = # some number representing the number of dimensions of the embeded vector
+    embed_dim = embed_dim     # some number representing the number of dimensions of the embeded vector
 
     worker_list = []
     for i in range(country.worker_list):
         worker_list.append(PositionalEmbedding(n, embed_dim))
-
+    
     worker_matrix = torch.stack(worker_list, dim=0)
     for i, worker in enumerate(country.worker_list):
         worker_matrix[i, worker.xpos, worker.ypos] = 2
@@ -296,14 +296,14 @@ def get_state_rep_sinusoidal(country):
     settler_list = []
     for i in range(country.settler_list):
         settler_list.append(PositionalEmbedding(n, embed_dim))
-
+    
     settler_matrix = torch.stack(settler_list, dim=0)
     for i, settler in enumerate(country.settler_list):
-        worker_matrix[i, settler.xpos, settler.ypos] = 2
+        settler_matrix[i, settler.xpos, settler.ypos] = 2
 
-    science_tax_range, gold_tax_range, luxury_tax_range =      # define the ranges for each one of these, it will be a single number
+    science_tax_range, gold_tax_range, luxury_tax_range = max_coordinate_range        # define the ranges for each one of these, it will be a single number
     max_n = max(science_tax_range, gold_tax_range, luxury_tax_range)
-
+    
     taxpoints_list = []
     for i in range(3):
         taxpoints_list.append(PositionalEmbedding(max_n, embed_dim))
