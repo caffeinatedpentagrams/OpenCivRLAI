@@ -36,11 +36,10 @@ class freeciv_agent(nn.Module):
         return action
 
 # Linear reward 
-def reward(economy, time):
-    a = 0.7
-    b = 0.5
-    c = 1
-    reward = a * economy + b * time + c
+def reward():
+    a = 1
+    
+    reward = a
     return reward
     # Gamma
     #discounted_future_reward = 0
@@ -55,7 +54,7 @@ def main():
     # output_tensor = k         
     country = Country()
     input_tensor = get_state_rep_sinusoidal(country, max_coordinate_range=64, embed_dim=64)
-    output_tensor = 
+    output_tensor = 4
     
     agent = freeciv_agent(input_tensor, output_tensor)  
     optimizer = optim.Adam(agent.parameters(), lr=0.001)  #Adam optimizer
@@ -74,7 +73,7 @@ def main():
             next_state, _, done = env.step(action)
 
             # Reward
-            reward = 1
+            reward = reward()
             #economy = calculate_economy(state)  # Client retrival needed
             #time = calculate_time(state)        # Client retrival needed
             #reward = reward(economy, time)
