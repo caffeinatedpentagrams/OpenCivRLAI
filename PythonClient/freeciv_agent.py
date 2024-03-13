@@ -60,7 +60,7 @@ def main():
     agent = freeciv_agent(input_tensor, output_tensor)  
     optimizer = optim.Adam(agent.parameters(), lr=0.001)  #Adam optimizer
 
-    episodes = 1000 #Tweakable
+    episodes = 100 #Tweakable
 
     for episode in range(episodes):
         # Initialization
@@ -74,14 +74,17 @@ def main():
             next_state, _, done = env.step(action)
 
             # Reward
-            economy = calculate_economy(state)  # Client retrival needed
-            time = calculate_time(state)        # Client retrival needed
-            reward = reward(economy, time)
+            reward = 1
+            #economy = calculate_economy(state)  # Client retrival needed
+            #time = calculate_time(state)        # Client retrival needed
+            #reward = reward(economy, time)
 
             # Trainining
             optimizer.zero_grad()  
             action_probs = agent(torch.tensor(state, dtype=torch.float32).unsqueeze(0))  # Action Prob
-            loss = -torch.log(action_probs[0, action]) * reward  
+            action_index = torch.argmax(action_probs).item() #Selecting the best action
+            loss = -torch.log(action_probs[0, action_index]) * reward
+
             loss.backward()  # Backprop
             optimizer.step()  # Updating Parameters
 
