@@ -279,7 +279,7 @@ static void client_game_free(void)
 {
   printf("Entered client_game_free\n");
   editgui_popdown_all();
-
+  c_socket_close();
   animations_free();
   mapimg_free();
   packhand_free();
