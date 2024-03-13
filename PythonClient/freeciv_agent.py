@@ -2,6 +2,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from state_rep import get_state_rep_sinusoidal
+from state_rep import Country
 
 # Class :: Agent
 class freeciv_agent(nn.Module):
@@ -48,9 +50,13 @@ def reward(economy, time):
 
 # Training loop
 def main():
-    input_tensor = (1, n, m)  
-    output_tensor = k         
-
+       
+    # input_tensor = (1, n, m)  
+    # output_tensor = k         
+    country = Country()
+    input_tensor = get_state_rep_sinusoidal(country, max_coordinate_range=64, embed_dim=64)
+    output_tensor = 
+    
     agent = freeciv_agent(input_tensor, output_tensor)  
     optimizer = optim.Adam(agent.parameters(), lr=0.001)  #Adam optimizer
 
