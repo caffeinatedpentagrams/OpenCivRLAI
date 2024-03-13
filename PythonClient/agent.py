@@ -1,5 +1,13 @@
 from socket_listener import SocketClient
 from packets import Packet, TurnEndPacket, PacketEnum
+import socket
+import numpy as np
+
+import torch
+import torch.nn as nn
+import torch.optim as optim
+import torch.nn.functional as F
+
 
 # TODO
 class Action:
@@ -12,7 +20,8 @@ class Action:
 # TODO
 class State:
     def __init__(self):
-        pass
+        self._map = np.zeros((64,64))
+        self._units = {}
     
     def update(self, packet):
         pass
@@ -25,7 +34,7 @@ class Model:
     def __init__(self):
         pass
     
-    def update(self, state):
+    def forward(self, map_state, unit_state, action_mask):
         return Action()
 
     def illegal_action_penalty(self):
@@ -33,19 +42,20 @@ class Model:
         pass
 
 class Agent:
-    def __init__(self, ip, port, model, action_limit = 10):
+    def __init__(self, socket_client, model=Model(), action_limit = 10):
         self.model = model
         self.action_limit = action_limit
-        self.client = SocketClient(ip, port)
+        self.client = socket_client
         self.state = State()
 
     def run(self):
-        while True:
-            num_actions = 0
-            turn_ended = False
-            self.listen_for_updates_until_turn()
-            while num_actions < self.action_limit:
-                action = model.update(self.state)
+        num_actions = 0
+        turn_ended = False
+        while num_actions < self.action_limit:
+            self.listen_for_updates()
+            for unit in self.state_units:
+                action_mask = self.state._masks[unit]
+                action_probs = self.model.forward(self.state._map,self.state_units[unit],action_mask)
                 if self.state.is_legal(action):
                     self.perform(action)
                     self.listen_for_updates()
@@ -53,7 +63,7 @@ class Agent:
                         turn_ended = True
                         break
                 else:
-                    model.illegal_state_penalty()
+                    self.model.illegal_state_penalty()
                 num_actions += 1
 
             if not turn_ended:
