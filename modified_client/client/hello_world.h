@@ -46,7 +46,7 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
     int x = index_to_map_pos_x(tile.tile);
     int y = index_to_map_pos_y(tile.tile);
     //struct map_index* vec = tile_to_vec(&tile);
-    update_map(x,y,1);
+    update_map(x,y,tile.terrain);
     if (tile.tile < 1<<20 && visited[tile.tile]<128){
       visited[tile.tile] += 1;
       printf("\nTILE_INFO PACKET (15):\ntile_id: %d\n# packets of tile recieved: %d\n(x,y) coords: (%d,%d)",tile.tile,visited[tile.tile],x,y);

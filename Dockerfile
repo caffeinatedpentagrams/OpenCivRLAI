@@ -50,10 +50,11 @@ RUN apt-get update && apt-get install -y \
     libgtk-3-dev
  
 EXPOSE 5556
+EXPOSE 5560
  
 RUN useradd -ms /bin/bash user
  
 USER user
  
-CMD ["./fcser"]
+CMD ["./fcgui"]
  

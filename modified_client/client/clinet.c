@@ -92,6 +92,9 @@
 #include "repodlgs_g.h"
 
 #include "clinet.h"
+#include "c_socket_packets.h"
+#include "c_socket.h"
+#include "state_aggregator.h"
 
 /* In autoconnect mode, try to connect to once a second */
 #define AUTOCONNECT_INTERVAL		500
@@ -442,6 +445,17 @@ void input_from_server(int fd)
     connection_close(&client.conn, _("server disconnected"));
   } else {
     connection_close(&client.conn, _("read error"));
+  }
+  // Send over state to python RL client
+  struct MapPacket map;
+  memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
+  c_socket_send_map_packet(&map);
+  for (int i=0;i<MAX_UNITS_ADIT;i++){
+    struct UnitInfoPacket unit;
+    unit.unit_id = units[i].id;
+    unit.coordx = units[i].x;
+    unit.coordy = units[i].y;
+    c_socket_send_unit_info_packet(&unit);
   }
 }
 
