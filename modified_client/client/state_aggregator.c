@@ -1,60 +1,74 @@
 #include "state_aggregator.h"
 #include <stdio.h>
 #include <stdint.h>
+#include "terrain.h"
 #include "unittype.h"
 #include "unit.h"
+#include "packhand_gen.h"
+#include "c_socket_packets.h"
+#include "c_socket.h"
+#include "control.h"
+#include "game.h"
+#include "name_translation.h"
 
 // char map_state[64][64][D]={0}; defined in header
-char map_state_internal[MAXIMUM][MAXIMUM][D]={0};
-struct unit_basic units[MAX_UNITS];
 
+char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D]={0};
+struct UnitInfoPacket units[MAX_UNITS_ADIT];
+//struct unit_basic units[MAX_UNITS_ADIT];
 
-void* tile_to_vec(struct tile* tile) {
+struct map_index* tile_to_vec(struct tile* tile) {
+  printf("ENTERED TILE_TO_VEC\n");
   struct map_index* pos = malloc(D);
+  if (tile==NULL) {
+    return pos; 
+  }
   if (tile->owner==NULL) {
     pos->owned=false;//Don't care who owns it
   } else {
     pos->owned=true;
   }
-  pos->type = tile->terrain->item_number;
-  pos->mvmt_cost = tile->terrain->movement_cost;
+  struct terrain* terrain = tile->terrain;
+  printf("Inside tile_to_vec... terrain pointer inside tile: %p", terrain);
+  if (tile->resource==NULL) {
+    printf("No resource on this tile\n");
+  }
+  if (terrain==NULL) {
+    printf("Unknown tile, terrain is nullptr!!!\n");
+  } else {
+    /*printf("Terrain (ptr) %p",terrain);
+    pos->type = terrain->item_number;
+     pos->mvmt_cost = tile->terrain->movement_cost;
   pos->def_bonus = tile->terrain->defense_bonus;
   memcpy(&(pos->output[0]),&(tile->terrain->output[0]), O_LAST*sizeof(int));
   pos->base_time = tile->terrain->base_time;
   pos->road_time = tile->terrain->road_time;
+    */}
+  printf("EXITING TILE_TO_VEC\n");
   return pos;
 }
 
-void update_map(int x,int y,struct map_index* ptr) {
-  memcpy(&map_state_internal[x][y], ptr, D);
-  free(ptr);
+void update_map(int x,int y, int map_index) {
+  memcpy(&map_state_internal[x][y], &map_index, D);
+  //map_state_internal[x][y]=1;
+  //free(ptr);
 }
 
-void single_unit_update(struct unit_basic* old, struct unit* new) {
-  struct unit_type* type;
-  type = new;
-  old->type=type->item_number;
-  old->build_cost=type->build_cost;
-  old->pop_cost = type->pop_cost;
-  old->att_str = type->attack_strength;
-  old->def_str = type->defense_strength;
-  old->move_rate = type->move_rate;
-  old->unknown_move_cost = type->unknown_move_cost;
-  old->vision_radius=type->vision_radius_sq;
-  old->hp=new->hp;
-  old->firepower = type->firepower;
-  old->city_size = type->city_size;
-  old->city_slots = type->city_slots;
-  memcpy(&(old->upkeep[0]),&(type->upkeep[0]),sizeof(int)*O_LAST);
-  old->has_orders=new->has_orders;
+void single_unit_update(struct UnitInfoPacket* old, struct packet_unit_info* new) {
+  old->unit_id = new->id;
+  old->coordx = index_to_map_pos_x(new->tile);
+  old->coordy = index_to_map_pos_y(new->tile);
+  //memcpy(old->owner,new->owner);
+  //old->nationality = new->nationality;
+  old->upkeep = 1;
 }
 
-void update_units(struct unit* punit) {
+void update_units(struct packet_unit_info* punit) {
   static int index=0;
-  if (index>=MAX_UNITS) return;
+  if (index>=MAX_UNITS_ADIT) return;
   bool found = false;
   for (int i=0;i<index;i++) {
-    if (units[i].id==punit->id) {
+    if (units[i].unit_id==punit->id) {
       found = true;
       single_unit_update(&units[i],punit);
     }
@@ -64,4 +78,46 @@ void update_units(struct unit* punit) {
     index++;
   }
 
+}
+
+void *communicator(void *vargp) {
+  while (true) {
+    // Send over state to python RL client
+    struct MapPacket map;
+    memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
+    c_socket_send_map_packet(&map);
+    for (int i=0;i<MAX_UNITS_ADIT;i++){
+      c_socket_send_unit_info_packet(&units[i]);
+    }
+    struct CompletedStateTransferPacket done_packet = {
+      .done = "done"
+    };
+    c_socket_send_completed_state_transfer_packet(&done_packet);
+    void* packet = malloc(65536);
+    int type;
+    do {
+      type = c_socket_receive_packet(packet);
+      if (type==TurnEnd) break;
+      struct ActionPacket* ptr = (struct ActionPacket*) packet;
+      struct unit* unitA = game_unit_by_number(ptr->actor_id);
+      if (unitA==NULL) continue;
+      //printf("Attempting to print unit type for %u:  %d   name: %s\n",ptr->actor_id,unitA->utype->item_number,&unitA->utype->name.translated);
+      switch (ptr->ACTION_ID) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+	  request_move_unit_direction(unitA, ptr->ACTION_ID);
+	  break;
+        case 4:
+	  if (unitA->utype->item_number == 0){ // *0 (settler), 2, 48, or 52 correspond to initial 4 units
+	    request_do_action(ACTION_FOUND_CITY,unitA->id,unitA->tile->index,0,"AditLand");
+	  }
+	  break;
+      }
+      
+    } while (type==ActionEnum);
+    key_end_turn();
+    //free(packet);
+  }
 }

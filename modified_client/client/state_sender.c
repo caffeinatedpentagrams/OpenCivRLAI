@@ -9,7 +9,7 @@
 
 #define PORT 8080
 
-int send_state() {
+int send_map() {
   int status, valread, client_fd;
   struct sockaddr_in serv_addr;
   char* data = &map_state_internal[0];

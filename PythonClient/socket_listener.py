@@ -7,7 +7,7 @@ class SocketClient:
     def __init__(self, server_ip, server_port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 65536)
-        self.client_socket.settimeout(1)
+        self.client_socket.settimeout(60000)
         self._partial_packet = b''
         self._partial_packet_length = 0
         print("Created socket")
@@ -16,9 +16,12 @@ class SocketClient:
             self.client_socket.connect((server_ip, server_port))
             print("Connected!")
 
-        finally:
+        except:
             self.client_socket.close()
-            print("Closed")
+            print("Failed to connect, closed")
+
+    def close(self):
+        self.client_socket.close()
 
     def receive_packet(self):
         data = self.client_socket.recv(2)
