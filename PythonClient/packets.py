@@ -71,7 +71,7 @@ class HelloReplyPacket(Packet):  # 1 TODO Adit
 class MapPacket(Packet):  # 2 TODO Adit
     def __init__(self):
         super().__init__(2)
-        self._add_field('map', 102400, 'array')  # TODO check len
+        self._add_field('map', 4096*4, 'array')  # TODO check len
 
 class UnitInfoPacket(Packet):  # 3 TODO Adit
     def __init__(self):
