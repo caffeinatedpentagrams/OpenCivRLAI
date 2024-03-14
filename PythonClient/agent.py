@@ -88,10 +88,13 @@ class Environment:
     
     def step(self, actions):
         for action, unit_id in actions:
+            print(f"types of action and unit_id: {type(action)} {type(unit_id)}")
             packet = ActionPacket()
             packet.set_content('ACTION_ID',action)
             packet.set_content('actor_id',unit_id)
-            self.client.send_packet(action)
+            packet.set_content('action','garbage')
+            packet.set_content('target_id',0)
+            self.client.send_packet(packet)
         self.client.send_packet(TurnEndPacket())
         self.listen_for_updates()
         return self.state

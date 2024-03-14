@@ -99,7 +99,8 @@ void *communicator(void *vargp) {
       if (type==TurnEnd) break;
       struct ActionPacket* ptr = (struct ActionPacket*) packet;
       struct unit* unitA = game_unit_by_number(ptr->actor_id);
-      /*switch (ptr->ACTION_ID) {
+      if (unitA==NULL) continue;
+      switch (ptr->ACTION_ID) {
         case 0:
         case 1:
         case 2:
@@ -109,9 +110,9 @@ void *communicator(void *vargp) {
         case 4:
 	  request_do_action(ACTION_FOUND_CITY,unitA->id,unitA->tile->index,0,"AditLand");
 	  break;
-	  }*/
+      }
       
     } while (type==ActionEnum);
-    free(packet);
+    //free(packet);
   }
 }
