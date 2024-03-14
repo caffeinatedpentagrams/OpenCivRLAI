@@ -240,7 +240,9 @@ class PositionalEmbedding(nn.Module):
         x = x + torch.autograd.Variable(self.pe[:,:seq_len], requires_grad=False)
         return x
 
-def get_state_rep_simple(country):
+def get_state_rep_simple(country, mapsize):
+    worker = None # TODO PLACEHOLDER
+    max_coordinate_range = mapsize
     n = max_coordinate_range  # should be a number? add a number
 
     worker_matrix = torch.zeros((len(country.worker_list), n, n))
@@ -251,7 +253,7 @@ def get_state_rep_simple(country):
     for i, settler in enumerate(country.settler_list):
         settler_matrix[i, settler.xpos, settler.ypos] = 1
 
-    science_tax_range, gold_tax_range, luxury_tax_range =      # define the ranges for each one of these, it will be a single number
+    science_tax_range, gold_tax_range, luxury_tax_range = None     # TODO define the ranges for each one of these, it will be a single number
 
     max_n = max(science_tax_range, gold_tax_range, luxury_tax_range)
     taxpoints_matrix = torch.zeros(3, max_n)
@@ -281,9 +283,10 @@ def get_state_rep_simple(country):
 
     return full_state_rep
 
-def get_state_rep_sinusoidal(country):
+def get_state_rep_sinusoidal(country, mapsize):
+    max_coordinate_range = mapsize
     n = max_coordinate_range  # should be a number? add a number
-    embed_dim = # some number representing the number of dimensions of the embeded vector
+    embed_dim = mapsize# some number representing the number of dimensions of the embeded vector TODO set!
 
     worker_list = []
     for i in range(country.worker_list):
@@ -301,7 +304,7 @@ def get_state_rep_sinusoidal(country):
     for i, settler in enumerate(country.settler_list):
         worker_matrix[i, settler.xpos, settler.ypos] = 2
 
-    science_tax_range, gold_tax_range, luxury_tax_range =      # define the ranges for each one of these, it will be a single number
+    science_tax_range, gold_tax_range, luxury_tax_range = None      # TODO define the ranges for each one of these, it will be a single number
     max_n = max(science_tax_range, gold_tax_range, luxury_tax_range)
 
     taxpoints_list = []
