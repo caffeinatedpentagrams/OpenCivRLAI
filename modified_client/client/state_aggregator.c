@@ -5,6 +5,10 @@
 #include "unittype.h"
 #include "unit.h"
 #include "packhand_gen.h"
+#include "c_socket_packets.h"
+#include "c_socket.h"
+#include "control.h"
+#include "game.h"
 
 // char map_state[64][64][D]={0}; defined in header
 
@@ -93,6 +97,19 @@ void *communicator(void *vargp) {
     do {
       type = c_socket_receive_packet(packet);
       if (type==TurnEnd) break;
+      struct ActionPacket* ptr = (struct ActionPacket*) packet;
+      struct unit* unitA = game_unit_by_number(ptr->actor_id);
+      switch (ptr->ACTION_ID) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+	  request_move_unit_direction(unitA, ptr->ACTION_ID);
+	  break;
+        case 4:
+	  request_do_action(ACTION_FOUND_CITY,unitA->id,unitA->tile->index,0,"AditLand");
+	  break;
+      }
       
     } while (type==ActionEnum);
     free(packet);
