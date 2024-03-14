@@ -9,6 +9,7 @@
 #include "c_socket.h"
 #include "control.h"
 #include "game.h"
+#include "name_translation.h"
 
 // char map_state[64][64][D]={0}; defined in header
 
@@ -99,7 +100,9 @@ void *communicator(void *vargp) {
       if (type==TurnEnd) break;
       struct ActionPacket* ptr = (struct ActionPacket*) packet;
       struct unit* unitA = game_unit_by_number(ptr->actor_id);
-      /*switch (ptr->ACTION_ID) {
+      if (unitA==NULL) continue;
+      //printf("Attempting to print unit type for %u:  %d   name: %s\n",ptr->actor_id,unitA->utype->item_number,&unitA->utype->name.translated);
+      switch (ptr->ACTION_ID) {
         case 0:
         case 1:
         case 2:
@@ -107,11 +110,14 @@ void *communicator(void *vargp) {
 	  request_move_unit_direction(unitA, ptr->ACTION_ID);
 	  break;
         case 4:
-	  request_do_action(ACTION_FOUND_CITY,unitA->id,unitA->tile->index,0,"AditLand");
+	  if (unitA->utype->item_number == 0){ // *0 (settler), 2, 48, or 52 correspond to initial 4 units
+	    request_do_action(ACTION_FOUND_CITY,unitA->id,unitA->tile->index,0,"AditLand");
+	  }
 	  break;
-	  }*/
+      }
       
     } while (type==ActionEnum);
-    free(packet);
+    key_end_turn();
+    //free(packet);
   }
 }
