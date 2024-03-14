@@ -22,6 +22,11 @@ struct UnitInfoPacket {
   int upkeep;
 };
 
+// Contains primary information about the "reward" of the current state
+struct PlayerInfoPacket {
+
+};
+
 struct CivInfoPacket {};
 
 struct CityInfoPacket {

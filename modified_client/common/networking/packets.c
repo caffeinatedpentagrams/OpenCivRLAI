@@ -220,12 +220,20 @@ int send_packet_data(struct connection *pc, unsigned char *data, int len,
     struct packet_unit_orders unit_orders;
     memcpy(&unit_orders, data, len);
     struct unit_order order;
-    printf("Ordering unit %d on src tile %d to go to dest tile %d\n",unit_orders.unit_id,unit_orders.src_tile,unit_orders.dest_tile);
-    printf("length:  %d repeat %d  vigilant %d\n",unit_orders.length,unit_orders.repeat,unit_orders.vigilant);
+    printf("Ordering unit %u on src tile %d to go to dest tile %d\n",(uint16_t)unit_orders.unit_id,unit_orders.src_tile,unit_orders.dest_tile);
+    printf("length:  %d repeat %d  vigilant %d\n",(uint16_t) unit_orders.length,(bool) unit_orders.repeat,(bool) unit_orders.vigilant);
     for (int i=0;i<unit_orders.length;i++) {
+      if (i>0) break;
       memcpy(&order,&unit_orders.orders[i],sizeof(struct unit_order));
       printf("Ordering a unit do to #: %d\nActivity: %d\ntarget: ?\nsub_target: %d\naction: %d, direction8: %d\n",order.order,order.activity,order.sub_target,order.action,order.dir);
     }
+    
+  }
+  else if (packet_type==PACKET_UNIT_DO_ACTION) {
+    struct packet_unit_do_action command;
+    memcpy(&command,data,sizeof(struct packet_unit_do_action));
+    printf("unit id: %u  target: %d, subtarget: %d  action type: %u\n",(uint16_t) command.actor_id,command.target_id,(int16_t)command.sub_tgt_id,(uint8_t)command.action_type);
+    printf("name: %s\n",command.name);
     
   }
 
@@ -381,7 +389,12 @@ int send_packet_data(struct connection *pc, unsigned char *data, int len,
 
   return result;
 }
-
+/*#define send_packet_data(struct connection *pc, unsigned char *data, int len, enum packet_type packet_type) \
+  do { \
+  printf("f called from %s\n",__func__); \
+  send_packet_data_func(); \
+  } while (0)*/
+  
 /**************************************************************************
   Read and return a packet from the connection 'pc'. The type of the
   packet is written in 'ptype'. On error, the connection is closed and

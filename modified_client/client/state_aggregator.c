@@ -5,7 +5,6 @@
 #include "unittype.h"
 #include "unit.h"
 #include "packhand_gen.h"
-#include "c_socket_packets.h"
 
 // char map_state[64][64][D]={0}; defined in header
 
@@ -57,7 +56,7 @@ void single_unit_update(struct UnitInfoPacket* old, struct packet_unit_info* new
   old->unit_id = new->id;
   old->coordx = index_to_map_pos_x(new->tile);
   old->coordy = index_to_map_pos_y(new->tile);
-  //old->owner = new->owner;
+  //memcpy(old->owner,new->owner);
   //old->nationality = new->nationality;
   old->upkeep = 1;
 }
