@@ -30,7 +30,7 @@ class SocketClient:
         data = self.client_socket.recv(packet_len - 2)
         packet_payload = data
 
-        return packets.PacketFactory(data).make_packet_from_bytestream()
+        return packets.PacketFactory(data).make_packet()
 
     def send_packet(self, packet):
         self.client_socket.send(packet.encode())

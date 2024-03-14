@@ -49,6 +49,16 @@ int packets_make(char* buffer, int payload_len, void* packet) {
       break;
 
     case CivInfo:
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->playerno, &idx);
+      packets_read_str(buffer, ((struct PlayerInfoPacket*) packet)->name, &idx);
+      packets_read_str(buffer, ((struct PlayerInfoPacket*) packet)->username, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->score, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->turns_alive, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->is_alive, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->gold, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->percent_tax, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->science, &idx);
+      packets_read_int(buffer, &((struct PlayerInfoPacket*) packet)->luxury, &idx);
       break;
 
     case CityInfo:

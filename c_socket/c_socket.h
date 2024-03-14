@@ -23,7 +23,7 @@ void c_socket_send_hello_packet(struct HelloPacket* packet);
 void c_socket_send_hello_reply_packet(struct HelloReplyPacket* packet);
 void c_socket_send_map_packet(struct MapPacket* packet);
 void c_socket_send_unit_info_packet(struct UnitInfoPacket* packet);
-void c_socket_send_civ_info_packet(struct CivInfoPacket* packet);
+void c_socket_send_player_info_packet(struct PlayerInfoPacket* packet);
 void c_socket_send_city_info_packet(struct CityInfoPacket* packet);
 void c_socket_send_action_packet(struct ActionPacket* packet);
 void c_socket_send_action_reply_packet(struct ActionReplyPacket* packet);

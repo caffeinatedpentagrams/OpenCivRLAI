@@ -87,12 +87,12 @@ class UnitInfoPacket(Packet):  # 3 TODO Adit
 class PlayerInfoPacket(Packet):  # 4 TODO Adit
     def __init__(self):
         super().__init__(4)
-        self._add_field('playerno', 1, 'int')
+        self._add_field('playerno', 4, 'int')
         self._add_field('name', 48, 'str')  # TODO verify MAX_LEN_NAME value
         self._add_field('username', 48, 'str')
         self._add_field('score', 4, 'int')
         self._add_field('turns_alive', 1000, 'int')  # TODO verify sizes or decide on sizes
-        self._add_field('is_alive', 1, 'int')
+        self._add_field('is_alive', 4, 'int')
         self._add_field('gold', 1000, 'int')
         self._add_field('percent_tax', 4, 'int')
         self._add_field('science', 4, 'int')
