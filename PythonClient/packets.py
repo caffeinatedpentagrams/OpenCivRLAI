@@ -49,75 +49,98 @@ class Packet:
                 data += struct.pack('>I', arg)
             elif self.types[field] == 'array':
                 data += struct.pack('>I', len(arg))
+                if 'list' in str(type(arg)):
+                    arg = np.array(arg)
                 data += arg.astype('>u4').tobytes()
 
         data = struct.pack('>H', len(data) + 2) + data
         return data
 
-# TODO subclass packet for every packet type we need!
-# TODO make PacketFactory??
+# TODO all coord fields should be one int for each coord!
 
 class HelloPacket(Packet):  # 0
     def __init__(self):
         super().__init__(0)
         self._add_field("greeting", 10, 'str')
 
-class HelloReplyPacket(Packet):  # 1
+class HelloReplyPacket(Packet):  # 1 TODO Adit
     def __init__(self):
         super().__init__(1)
         self._add_field("greeting", 10, 'str')
 
-class MapPacket(Packet):  # 2
+class MapPacket(Packet):  # 2 TODO Adit
     def __init__(self):
         super().__init__(2)
-        self._add_field('map', 102400, 'array')
+        self._add_field('map', 4096*4, 'array')  # TODO check len
 
-class UnitInfoPacket(Packet):  # 3
+class UnitInfoPacket(Packet):  # 3 TODO Adit
     def __init__(self):
         super().__init__(3)
         self._add_field('unit_id', 100, 'int')
-        # TODO more fields? what are they?
+        self._add_field('owner', 100, 'str')
+        self._add_field('nationality', 100, 'str')
+        self._add_field('coordx', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('coordy', 8, 'int') # field is x, y in 4-byte integers
+        self._add_field('upkeep', 1, 'int')  # comes as uint8_t acc to packets.def
 
-class CivInfoPacket(Packet):  # 4
+class CivInfoPacket(Packet):  # 4 TODO Adit
     def __init__(self):
         super().__init__(4)
-        self._add_field('nation_tag', 20, 'int')
         # TODO add fields
 
-class CityInfoPacket(Packet):  # 5
+class CityInfoPacket(Packet):  # 5 TODO Adit
     def __init__(self):
         super().__init__(5)
-        self._add_field('city_name', 100, 'str')
-        self._add_field('pop', 100, 'int')
-        self._add_field('owned_by', 100, 'str')
-        # TODO more
+        self._add_field('id', 8, 'int') # TODO double check type packets.def id; key
+        self._add_field('coordx', 8, 'int')
+        self._add_field('coordy', 8, 'int')
+        self._add_field('owner', 8, 'int') # TODO double check type, packets.def PLAYER
+        self._add_field('size', 32, 'int')  # TODO doubel check type, packets.def CITIZENS
+        self._add_field('radius', 40, 'int')
+        self._add_field('food_stock', 40, 'int') # THIS IS SIGNED
+        self._add_field('shield_stock', 40, 'int')  # TODO what is this?
+        self._add_field('production_kind', 40, 'int')  # TODO what is this?
+        self._add_field('production_value', 40, 'int')
+        self._add_field('improvements', 5000, 'str') # We will force this to contain a list of the buildings
 
-class ActionPacket(Packet):  # 6
+class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which can be a tile, a unit, or a city)
     def __init__(self):
         super().__init__(6)
         self._add_field('action', 100, 'str')
-        self._add_field('action_specifiers', 25000, 'str')
+        self._add_field('ACTION_ID', 100, 'int')
+        self._add_field('actor_id', 100, 'int')
+        self._add_field('target_id', 100, 'int')
         # TODO maybe add more?
 
-class ActionReplyPacket(Packet):  # 7
+class ActionReplyPacket(Packet):  # 7 TODO Adit
     def __init__(self):
         super().__init__(7)
         self._add_field('action', 100, 'str')
 
-class TurnBeginPacket(Packet):  # 8
+class TurnBeginPacket(Packet):  # 8 TODO Adit
     def __init__(self):
         super().__init__(8)
         self._add_field('turn_begin', 1000, 'int')
 
-class TurnEndPacket(Packet):  # 9
+class TurnEndPacket(Packet):  # 9 TODO can be baked into ActionPacket
     def __init__(self):
         super().__init__(9)
         self._add_field('turn_end', 100, 'str')
 
-class CompletedStateTransferPacket(Packet):  # 10
+class CompletedStateTransferPacket(Packet):  # 10 TODO Adit
     def __init__(self):
         super().__init__(10)
         self._add_field('done', 100, 'str')
+
+class ResearchInfoPacket(Packet):  # 11 TODO Adit
+    def __init__(self):
+        super().__init__(11)
+        self._add_field('id', 4, 'int')  # TODO check type
+        self._add_field('techs_researched', 4, 'int')  #  TODO how tf is this encoded?
+        self._add_field('researching', 100, 'str')  # TODO what is a TECH packets.def
+        self._add_field('researching_cost', 4, 'int')
+        self._add_field('bulbs_researched', 4, 'int')  # TODO what is this
+        # TODO check line 1025 in packets.def; unsure if further fields needed
 
 class PacketEnum(enum.Enum):
     Hello = 0
@@ -131,8 +154,9 @@ class PacketEnum(enum.Enum):
     TurnBegin = 8
     TurnEnd = 9
     CompletedStateTransfer = 10
+    ResearchInfo = 11
 
-class PacketFactory:
+class PacketFactory:  # TODO add logic for 11
     # the payload should be passed in
     # i.e. the 2-byte packet length field should be removed
     def __init__(self, bytestream):
@@ -169,6 +193,7 @@ class PacketFactory:
         elif self.packet_type == PacketEnum.TurnBegin.value: packet = TurnBeginPacket()
         elif self.packet_type == PacketEnum.TurnEnd.value: packet = TurnEndPacket()
         elif self.packet_type == PacketEnum.CompletedStateTransfer.value: packet = CompletedStateTransferPacket()
+        elif self.packet_type == PacketEnum.ResearchInfo.value: packet = ResearchInfoPacket()
         else: raise ValueError(f'Unknown packet type: {self.packet_type}')
 
         for field in packet.field_names:

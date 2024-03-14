@@ -1,0 +1,3 @@
+gcc -o demo demo.c c_socket*.c
+gcc -o unit_test unit_test.c c_socket*.c
+gcc -o integration_test integration_test.c c_socket*.c

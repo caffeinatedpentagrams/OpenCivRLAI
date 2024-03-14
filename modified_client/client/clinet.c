@@ -17,7 +17,6 @@
 
 #include "fc_prehdrs.h"
 #include "hello_world.h"
-#include "state_sender.h"
 
 #include <errno.h>
 #include <stdio.h>
@@ -93,6 +92,9 @@
 #include "repodlgs_g.h"
 
 #include "clinet.h"
+#include "c_socket_packets.h"
+#include "c_socket.h"
+#include "state_aggregator.h"
 
 /* In autoconnect mode, try to connect to once a second */
 #define AUTOCONNECT_INTERVAL		500
@@ -412,15 +414,13 @@ void input_from_server(int fd)
 
   fc_assert_ret(fd == client.conn.sock);
   nb = read_from_connection(&client.conn, FALSE);
-  hello();
-  printf("\ninput_from_server called, new turn\n");
-  
+  printf("\ninput_from_server called, recieved packets\n");
   int count = 0;
-  if (count>25) {
-      count = 0;
-      send_state();
+  //if (count>25) {
+      //count = 0;
+      //send_state();
       //WRONG send_packet_data(&client.conn,get_bytes(),D,PACKET_UNIT_DO_ACTION);
-  }
+  //}
   //printf("%.*s",nb,(char *) &client.conn.buffer);
   if (0 <= nb) {
     agents_freeze_hint();
@@ -429,8 +429,8 @@ void input_from_server(int fd)
       void *packet = get_packet_from_connection(&client.conn, &type);
       if (NULL != packet) {
 	intercept_packet(type, packet, &visited[0], &count);
-	//#printf("%p\n", packet);
-	//#printf("END RAW BYTES");
+	printf("packet type: %d\n", type);
+	//printf("END RAW BYTES");
 	client_packet_input(packet, type);
 	free(packet);
       } else {
@@ -445,6 +445,17 @@ void input_from_server(int fd)
   } else {
     connection_close(&client.conn, _("read error"));
   }
+  // Send over state to python RL client
+  
+  /*struct UnitInfoPacket unit_info = {
+    .unit_id = 5,
+    .owner = "owner",
+    .nationality = "nationality",
+    .coordx = 4,
+    .coordy = 6,
+    .upkeep = 3
+  };
+  c_socket_send_unit_info_packet(&unit_info);*/
 }
 
 /**************************************************************************

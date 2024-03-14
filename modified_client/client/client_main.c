@@ -1,4 +1,4 @@
-/***********************************************************************
+/*******************A****************************************************
  Freeciv - Copyright (C) 1996 - A Kjeldberg, L Gregersen, P Unold
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,6 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h> 
+#include <pthread.h> 
 
 /* utility */
 #include "bitvector.h"
@@ -109,6 +111,11 @@
 
 #include "client_main.h"
 
+/*c socket code */
+#include "c_socket_packets.h"
+#include "c_socket.h"
+
+#include "state_aggregator.h"
 
 static enum known_type mapimg_client_tile_known(const struct tile *ptile,
                                                 const struct player *pplayer,
@@ -249,7 +256,9 @@ static void client_game_init(void)
   printf("Entered client_game_init \n\n");
   client.conn.playing = NULL;
   client.conn.observer = FALSE;
-
+  c_socket_init();
+  c_socket_bind_and_listen(5560);
+  c_socket_accept();
   game_init(FALSE);
   printf("Ran game_init\n");
   attribute_init();
@@ -274,7 +283,7 @@ static void client_game_free(void)
 {
   printf("Entered client_game_free\n");
   editgui_popdown_all();
-
+  c_socket_close();
   animations_free();
   mapimg_free();
   packhand_free();
@@ -706,11 +715,16 @@ int client_main(int argc, char *argv[], bool postpone_tileset)
     }
   }
 
+  // Launch communicator thread
+  pthread_t tid;
+  pthread_create(&tid,NULL,communicator,(void *)&tid);
+  
   /* run gui-specific client */
   uret = ui_main(argc, argv);
 
   /* termination */
   client_exit(uret);
+  pthread_exit(NULL);
 
   /* not reached */
   return EXIT_SUCCESS;

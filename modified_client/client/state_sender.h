@@ -1,9 +1,9 @@
 #ifndef FC__SS_H
 #define FC__SS_H
 
-#define MAXIMUM 32
+#include "state_aggregator.h"
 
-int send_state();
+int send_map();
 
 #ifdef __cplusplus
 extern "C" {
