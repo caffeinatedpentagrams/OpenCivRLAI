@@ -27,6 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h> 
+#include <pthread.h> 
 
 /* utility */
 #include "bitvector.h"
@@ -112,6 +114,8 @@
 /*c socket code */
 #include "c_socket_packets.h"
 #include "c_socket.h"
+
+#include "state_aggregator.h"
 
 static enum known_type mapimg_client_tile_known(const struct tile *ptile,
                                                 const struct player *pplayer,
@@ -711,11 +715,16 @@ int client_main(int argc, char *argv[], bool postpone_tileset)
     }
   }
 
+  // Launch communicator thread
+  pthread_t tid;
+  pthread_create(&tid,NULL,communicator,(void *)&tid);
+  
   /* run gui-specific client */
   uret = ui_main(argc, argv);
 
   /* termination */
   client_exit(uret);
+  pthread_exit(NULL);
 
   /* not reached */
   return EXIT_SUCCESS;

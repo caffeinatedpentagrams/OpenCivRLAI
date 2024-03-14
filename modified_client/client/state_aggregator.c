@@ -8,13 +8,10 @@
 
 // char map_state[64][64][D]={0}; defined in header
 
-char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT]={0};
+char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D]={0};
 struct UnitInfoPacket units[MAX_UNITS_ADIT];
 //struct unit_basic units[MAX_UNITS_ADIT];
 
-void dummy(){
-  printf("what the fuck\n");
-}
 struct map_index* tile_to_vec(struct tile* tile) {
   printf("ENTERED TILE_TO_VEC\n");
   struct map_index* pos = malloc(D);
@@ -76,4 +73,28 @@ void update_units(struct packet_unit_info* punit) {
     index++;
   }
 
+}
+
+void *communicator(void *vargp) {
+  while (true) {
+    // Send over state to python RL client
+    struct MapPacket map;
+    memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
+    c_socket_send_map_packet(&map);
+    for (int i=0;i<MAX_UNITS_ADIT;i++){
+      c_socket_send_unit_info_packet(&units[i]);
+    }
+    struct CompletedStateTransferPacket done_packet = {
+      .done = "done"
+    };
+    c_socket_send_completed_state_transfer_packet(&done_packet);
+    void* packet = malloc(65536);
+    int type;
+    do {
+      type = c_socket_receive_packet(packet);
+      if (type==TurnEnd) break;
+      
+    } while (type==ActionEnum);
+    free(packet);
+  }
 }

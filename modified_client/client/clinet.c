@@ -446,20 +446,7 @@ void input_from_server(int fd)
     connection_close(&client.conn, _("read error"));
   }
   // Send over state to python RL client
-  struct MapPacket map;
-  memcpy(&map,&map_state_internal[0][0],sizeof(struct MapPacket));
-  c_socket_send_map_packet(&map);
-  for (int i=0;i<MAX_UNITS_ADIT;i++){
-    //struct UnitInfoPacket unit;
-    //unit.unit_id = units[i].id;
-    //unit.coordx = units[i].x;
-    //unit.coordy = units[i].y;
-    c_socket_send_unit_info_packet(&units[i]);
-  }
-  struct CompletedStateTransferPacket done_packet = {
-    .done = "done"
-  };
-  c_socket_send_completed_state_transfer_packet(&done_packet);
+  
   /*struct UnitInfoPacket unit_info = {
     .unit_id = 5,
     .owner = "owner",

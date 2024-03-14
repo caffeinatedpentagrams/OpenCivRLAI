@@ -129,7 +129,7 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
      x = index_to_map_pos_x(tile_index(&tile));
      y = index_to_map_pos_y(tile_index(&tile));
      //printf("Changing location of unit... new location: (%d,%d)\n\n\nHUGE NEWS!!!!\n\n",x,y);
-     request_do_action(ACTION_FOUND_CITY,unitA.id,tile.index,0,"AditLand");
+     //request_do_action(ACTION_FOUND_CITY,unitA->id,tile.index,0,"AditLand");
      request_move_unit_direction(unitA, 0);
     }
    
