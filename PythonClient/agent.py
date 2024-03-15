@@ -137,7 +137,7 @@ class Environment:
                 break
 
     def perform(self, action):
-        self.client.send_packet(action.make_packet())
+        self.client.send_packet(action.make_packet_from_bytestream())
 
     def end_turn(self):
         self.client.send_packet(TurnEndPacket())

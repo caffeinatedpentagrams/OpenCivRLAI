@@ -24,10 +24,17 @@ struct UnitInfoPacket {
 
 // Contains primary information about the "reward" of the current state
 struct PlayerInfoPacket {
-
+  int playerno;
+  char name[48];
+  char username[48];
+  int score;
+  int turns_alive;
+  int is_alive;
+  int gold;
+  int percent_tax;
+  int science;
+  int luxury;
 };
-
-struct CivInfoPacket {};
 
 struct CityInfoPacket {
   int id;
