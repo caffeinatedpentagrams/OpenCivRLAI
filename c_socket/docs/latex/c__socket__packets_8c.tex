@@ -1,0 +1,61 @@
+\hypertarget{c__socket__packets_8c}{}\doxysection{src/c\+\_\+socket\+\_\+packets.c File Reference}
+\label{c__socket__packets_8c}\index{src/c\_socket\_packets.c@{src/c\_socket\_packets.c}}
+{\ttfamily \#include \char`\"{}c\+\_\+socket\+\_\+packets.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+Include dependency graph for c\+\_\+socket\+\_\+packets.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{c__socket__packets_8c_a0f72556d0016eefdbb6b48208bef7064}{packets\+\_\+read\+\_\+int}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read a 4-\/byte integer from the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket__packets_8c_abe277ecc1428b2042ab9ad8499a73c48}{packets\+\_\+read\+\_\+str}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, char $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read a 0-\/byte-\/terminated string from the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket__packets_8c_a2aef5c2360489aeab8396272d409ecd2}{packets\+\_\+read\+\_\+array}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read an integer array from the buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{c__socket__packets_8c_a72ec8a99ac85bb3c1569a12b2c446a10}{packets\+\_\+make}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int payload\+\_\+len, void $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Read a packet from the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{c__socket__packets_8c_a72ec8a99ac85bb3c1569a12b2c446a10}\label{c__socket__packets_8c_a72ec8a99ac85bb3c1569a12b2c446a10}} 
+\index{c\_socket\_packets.c@{c\_socket\_packets.c}!packets\_make@{packets\_make}}
+\index{packets\_make@{packets\_make}!c\_socket\_packets.c@{c\_socket\_packets.c}}
+\doxysubsubsection{\texorpdfstring{packets\_make()}{packets\_make()}}
+{\footnotesize\ttfamily int packets\+\_\+make (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int}]{payload\+\_\+len,  }\item[{void $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Read a packet from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8c_a2aef5c2360489aeab8396272d409ecd2}\label{c__socket__packets_8c_a2aef5c2360489aeab8396272d409ecd2}} 
+\index{c\_socket\_packets.c@{c\_socket\_packets.c}!packets\_read\_array@{packets\_read\_array}}
+\index{packets\_read\_array@{packets\_read\_array}!c\_socket\_packets.c@{c\_socket\_packets.c}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_array()}{packets\_read\_array()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+array (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read an integer array from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8c_a0f72556d0016eefdbb6b48208bef7064}\label{c__socket__packets_8c_a0f72556d0016eefdbb6b48208bef7064}} 
+\index{c\_socket\_packets.c@{c\_socket\_packets.c}!packets\_read\_int@{packets\_read\_int}}
+\index{packets\_read\_int@{packets\_read\_int}!c\_socket\_packets.c@{c\_socket\_packets.c}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_int()}{packets\_read\_int()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+int (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read a 4-\/byte integer from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8c_abe277ecc1428b2042ab9ad8499a73c48}\label{c__socket__packets_8c_abe277ecc1428b2042ab9ad8499a73c48}} 
+\index{c\_socket\_packets.c@{c\_socket\_packets.c}!packets\_read\_str@{packets\_read\_str}}
+\index{packets\_read\_str@{packets\_read\_str}!c\_socket\_packets.c@{c\_socket\_packets.c}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_str()}{packets\_read\_str()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+str (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{char $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read a 0-\/byte-\/terminated string from the buffer. 
+

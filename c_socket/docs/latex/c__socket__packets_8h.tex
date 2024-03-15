@@ -1,0 +1,168 @@
+\hypertarget{c__socket__packets_8h}{}\doxysection{src/c\+\_\+socket\+\_\+packets.h File Reference}
+\label{c__socket__packets_8h}\index{src/c\_socket\_packets.h@{src/c\_socket\_packets.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structHelloPacket}{Hello\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for checking connectivity. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structHelloReplyPacket}{Hello\+Reply\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for responding to a connectivity check. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structMapPacket}{Map\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for transmitting map data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structUnitInfoPacket}{Unit\+Info\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for transmitting unit data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structPlayerInfoPacket}{Player\+Info\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for transmitting player data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCityInfoPacket}{City\+Info\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for transmitting city data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structActionPacket}{Action\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for transmitting action data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structActionReplyPacket}{Action\+Reply\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet for replying to action data. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structTurnBeginPacket}{Turn\+Begin\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet to signal the beginning of the agent\textquotesingle{}s turn. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structTurnEndPacket}{Turn\+End\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet to signal the end of the agent\textquotesingle{}s turn. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structCompletedStateTransferPacket}{Completed\+State\+Transfer\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet to signal the completion of state transfer. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structResearchInfoPacket}{Research\+Info\+Packet}}
+\begin{DoxyCompactList}\small\item\em Packet to transmit research data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6}{Packet\+Enum}} \{ \newline
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a81fd637bf30ec1aeef591f5788112963}{Hello}} = 0, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a4218b9dbcfa3393cbb0d36037632d696}{Hello\+Reply}} = 1, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a09bc276a97b597eb46f5b9e81cb03d70}{Map}} = 2, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a2713c7c302607f6d9c099feee50b12d8}{Unit\+Info}} = 3, 
+\newline
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a22724fe17e82bc1aa700c3ce2d8bf4a5}{Civ\+Info}} = 4, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6aad29a24857d207c7063054c6472650c4}{City\+Info}} = 5, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6ad0d59d52c41a930b17a29a1c46604548}{Action\+Enum}} = 6, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a7830b4b0b6292e06e8ff574349937f3e}{Action\+Reply}} = 7, 
+\newline
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a593f00469c3545ae3fe2dfe0f897d4c4}{Turn\+Begin}} = 8, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a1176bda1e813d7d873848cc527c4087a}{Turn\+End}} = 9, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a743bdc93048b557546b5409aea2b0137}{Completed\+State\+Transfer}} = 10, 
+\mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a500c41b8c2e0bf5c0f5ff3d08616c836}{Research\+Info}} = 11
+ \}
+\begin{DoxyCompactList}\small\item\em Packet ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{c__socket__packets_8h_a0f72556d0016eefdbb6b48208bef7064}{packets\+\_\+read\+\_\+int}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read a 4-\/byte integer from the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket__packets_8h_abe277ecc1428b2042ab9ad8499a73c48}{packets\+\_\+read\+\_\+str}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, char $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read a 0-\/byte-\/terminated string from the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket__packets_8h_a2aef5c2360489aeab8396272d409ecd2}{packets\+\_\+read\+\_\+array}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int $\ast$out, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Read an integer array from the buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{c__socket__packets_8h_a72ec8a99ac85bb3c1569a12b2c446a10}{packets\+\_\+make}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int payload\+\_\+len, void $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Read a packet from the buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6}} 
+\index{c\_socket\_packets.h@{c\_socket\_packets.h}!PacketEnum@{PacketEnum}}
+\index{PacketEnum@{PacketEnum}!c\_socket\_packets.h@{c\_socket\_packets.h}}
+\doxysubsubsection{\texorpdfstring{PacketEnum}{PacketEnum}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6}{Packet\+Enum}}}
+
+
+
+Packet ID. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hello@{Hello}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!Hello@{Hello}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a81fd637bf30ec1aeef591f5788112963}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a81fd637bf30ec1aeef591f5788112963}} 
+Hello&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HelloReply@{HelloReply}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!HelloReply@{HelloReply}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a4218b9dbcfa3393cbb0d36037632d696}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a4218b9dbcfa3393cbb0d36037632d696}} 
+Hello\+Reply&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Map@{Map}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!Map@{Map}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a09bc276a97b597eb46f5b9e81cb03d70}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a09bc276a97b597eb46f5b9e81cb03d70}} 
+Map&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UnitInfo@{UnitInfo}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!UnitInfo@{UnitInfo}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a2713c7c302607f6d9c099feee50b12d8}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a2713c7c302607f6d9c099feee50b12d8}} 
+Unit\+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CivInfo@{CivInfo}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!CivInfo@{CivInfo}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a22724fe17e82bc1aa700c3ce2d8bf4a5}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a22724fe17e82bc1aa700c3ce2d8bf4a5}} 
+Civ\+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CityInfo@{CityInfo}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!CityInfo@{CityInfo}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6aad29a24857d207c7063054c6472650c4}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6aad29a24857d207c7063054c6472650c4}} 
+City\+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ActionEnum@{ActionEnum}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!ActionEnum@{ActionEnum}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6ad0d59d52c41a930b17a29a1c46604548}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6ad0d59d52c41a930b17a29a1c46604548}} 
+Action\+Enum&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ActionReply@{ActionReply}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!ActionReply@{ActionReply}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a7830b4b0b6292e06e8ff574349937f3e}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a7830b4b0b6292e06e8ff574349937f3e}} 
+Action\+Reply&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TurnBegin@{TurnBegin}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!TurnBegin@{TurnBegin}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a593f00469c3545ae3fe2dfe0f897d4c4}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a593f00469c3545ae3fe2dfe0f897d4c4}} 
+Turn\+Begin&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TurnEnd@{TurnEnd}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!TurnEnd@{TurnEnd}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a1176bda1e813d7d873848cc527c4087a}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a1176bda1e813d7d873848cc527c4087a}} 
+Turn\+End&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CompletedStateTransfer@{CompletedStateTransfer}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!CompletedStateTransfer@{CompletedStateTransfer}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a743bdc93048b557546b5409aea2b0137}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a743bdc93048b557546b5409aea2b0137}} 
+Completed\+State\+Transfer&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ResearchInfo@{ResearchInfo}!c\_socket\_packets.h@{c\_socket\_packets.h}}\index{c\_socket\_packets.h@{c\_socket\_packets.h}!ResearchInfo@{ResearchInfo}}}\mbox{\Hypertarget{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a500c41b8c2e0bf5c0f5ff3d08616c836}\label{c__socket__packets_8h_af84c654943ceebbca21c40ecbdfb84b6a500c41b8c2e0bf5c0f5ff3d08616c836}} 
+Research\+Info&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{c__socket__packets_8h_a72ec8a99ac85bb3c1569a12b2c446a10}\label{c__socket__packets_8h_a72ec8a99ac85bb3c1569a12b2c446a10}} 
+\index{c\_socket\_packets.h@{c\_socket\_packets.h}!packets\_make@{packets\_make}}
+\index{packets\_make@{packets\_make}!c\_socket\_packets.h@{c\_socket\_packets.h}}
+\doxysubsubsection{\texorpdfstring{packets\_make()}{packets\_make()}}
+{\footnotesize\ttfamily int packets\+\_\+make (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int}]{payload\+\_\+len,  }\item[{void $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Read a packet from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8h_a2aef5c2360489aeab8396272d409ecd2}\label{c__socket__packets_8h_a2aef5c2360489aeab8396272d409ecd2}} 
+\index{c\_socket\_packets.h@{c\_socket\_packets.h}!packets\_read\_array@{packets\_read\_array}}
+\index{packets\_read\_array@{packets\_read\_array}!c\_socket\_packets.h@{c\_socket\_packets.h}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_array()}{packets\_read\_array()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+array (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read an integer array from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8h_a0f72556d0016eefdbb6b48208bef7064}\label{c__socket__packets_8h_a0f72556d0016eefdbb6b48208bef7064}} 
+\index{c\_socket\_packets.h@{c\_socket\_packets.h}!packets\_read\_int@{packets\_read\_int}}
+\index{packets\_read\_int@{packets\_read\_int}!c\_socket\_packets.h@{c\_socket\_packets.h}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_int()}{packets\_read\_int()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+int (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read a 4-\/byte integer from the buffer. 
+
+\mbox{\Hypertarget{c__socket__packets_8h_abe277ecc1428b2042ab9ad8499a73c48}\label{c__socket__packets_8h_abe277ecc1428b2042ab9ad8499a73c48}} 
+\index{c\_socket\_packets.h@{c\_socket\_packets.h}!packets\_read\_str@{packets\_read\_str}}
+\index{packets\_read\_str@{packets\_read\_str}!c\_socket\_packets.h@{c\_socket\_packets.h}}
+\doxysubsubsection{\texorpdfstring{packets\_read\_str()}{packets\_read\_str()}}
+{\footnotesize\ttfamily void packets\+\_\+read\+\_\+str (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{char $\ast$}]{out,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Read a 0-\/byte-\/terminated string from the buffer. 
+

@@ -1,0 +1,23 @@
+digraph "src/c_socket_packets.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="src/c_socket_packets.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="src/c_socket.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$c__socket_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="src/c_socket.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$c__socket_8c.html",tooltip=" "];
+  Node2 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="src/demo.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$demo_8c.html",tooltip=" "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node5 [label="src/integration_test.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$integration__test_8c.html",tooltip=" "];
+  Node2 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="src/unit_test.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$unit__test_8c.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="src/c_socket_packets.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$c__socket__packets_8c.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+}

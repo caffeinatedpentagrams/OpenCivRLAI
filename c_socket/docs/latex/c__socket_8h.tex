@@ -1,0 +1,309 @@
+\hypertarget{c__socket_8h}{}\doxysection{src/c\+\_\+socket.h File Reference}
+\label{c__socket_8h}\index{src/c\_socket.h@{src/c\_socket.h}}
+{\ttfamily \#include \char`\"{}c\+\_\+socket\+\_\+packets.\+h\char`\"{}}\newline
+Include dependency graph for c\+\_\+socket.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{c__socket_8h_a335d3bfa152199ae8f21d1e43c869f72}{c\+\_\+socket\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize c socket. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a665268367619ac1156fb7613123ae813}{c\+\_\+socket\+\_\+bind\+\_\+and\+\_\+listen}} (int port)
+\begin{DoxyCompactList}\small\item\em Bind and listen for Python client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_ad039f526d23f7c27f03dc78f291530c8}{c\+\_\+socket\+\_\+accept}} ()
+\begin{DoxyCompactList}\small\item\em Accept the Python client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a6fffcc1bac09887d4b0e48f3990bf49d}{c\+\_\+socket\+\_\+read\+\_\+into\+\_\+buffer}} (int len)
+\begin{DoxyCompactList}\small\item\em Read bytes into the buffer. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{c__socket_8h_a7d47ba929bb446d307aedc6f1153e150}{c\+\_\+socket\+\_\+receive\+\_\+packet}} (void $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Read bytes into the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a7fcbc6cad2274c662f05017db3a25c22}{c\+\_\+socket\+\_\+append\+\_\+int}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int val, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Append a 4-\/byte integer to the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a4d7e6dd71d663450aeb99d3e8b5c8880}{c\+\_\+socket\+\_\+append\+\_\+str}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, char $\ast$str, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Append a string to the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_aba14dc692f6d500039f4f368c0b84bb3}{c\+\_\+socket\+\_\+append\+\_\+array}} (char $\ast$\mbox{\hyperlink{c__socket_8c_aa12b4323bd22e426cbe45a18be5871cf}{buffer}}, int $\ast$array, int len, int $\ast$idx)
+\begin{DoxyCompactList}\small\item\em Append an integer array to the buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a541ff322c2ae361478960caa29ab3041}{c\+\_\+socket\+\_\+send\+\_\+hello\+\_\+packet}} (struct \mbox{\hyperlink{structHelloPacket}{Hello\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Hello packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a7df5017ad6814bb09d7bfcaeab18a607}{c\+\_\+socket\+\_\+send\+\_\+hello\+\_\+reply\+\_\+packet}} (struct \mbox{\hyperlink{structHelloReplyPacket}{Hello\+Reply\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Hello\+Reply packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a8eed179c03dc9328fc2488268f4af860}{c\+\_\+socket\+\_\+send\+\_\+map\+\_\+packet}} (struct \mbox{\hyperlink{structMapPacket}{Map\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Map packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a9c9d6ed66beddab7d3e864d97857e1a6}{c\+\_\+socket\+\_\+send\+\_\+unit\+\_\+info\+\_\+packet}} (struct \mbox{\hyperlink{structUnitInfoPacket}{Unit\+Info\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Unit\+Info packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_abd0da751b6d5b6d6f50c2677a7bde253}{c\+\_\+socket\+\_\+send\+\_\+player\+\_\+info\+\_\+packet}} (struct \mbox{\hyperlink{structPlayerInfoPacket}{Player\+Info\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Player\+Info packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_adbcfaf3969370437cdc13d1dadf6a87d}{c\+\_\+socket\+\_\+send\+\_\+city\+\_\+info\+\_\+packet}} (struct \mbox{\hyperlink{structCityInfoPacket}{City\+Info\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a City\+Info packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a97f08639cf6d93fdb743e59064ca4f5b}{c\+\_\+socket\+\_\+send\+\_\+action\+\_\+packet}} (struct \mbox{\hyperlink{structActionPacket}{Action\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Action packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a9d80871dbcfc858c7ca4fad8ebd966a8}{c\+\_\+socket\+\_\+send\+\_\+action\+\_\+reply\+\_\+packet}} (struct \mbox{\hyperlink{structActionReplyPacket}{Action\+Reply\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Action\+Reply packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a3f74a231a7ff98eedc145b4ce7a6cccd}{c\+\_\+socket\+\_\+send\+\_\+turn\+\_\+begin\+\_\+packet}} (struct \mbox{\hyperlink{structTurnBeginPacket}{Turn\+Begin\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Turn\+Begin packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_acebbd02540b503c730c3eea616d68e98}{c\+\_\+socket\+\_\+send\+\_\+turn\+\_\+end\+\_\+packet}} (struct \mbox{\hyperlink{structTurnEndPacket}{Turn\+End\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Turn\+End packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a2b690da95deda92cdd587dc482ac424d}{c\+\_\+socket\+\_\+send\+\_\+completed\+\_\+state\+\_\+transfer\+\_\+packet}} (struct \mbox{\hyperlink{structCompletedStateTransferPacket}{Completed\+State\+Transfer\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Completed\+State\+Transfer packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_afdc373a16057f905dbe12895caca6df4}{c\+\_\+socket\+\_\+send\+\_\+research\+\_\+info\+\_\+packet}} (struct \mbox{\hyperlink{structResearchInfoPacket}{Research\+Info\+Packet}} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em Send a Research\+Info packet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{c__socket_8h_a7ffc02728727d398890698fb9711e943}{c\+\_\+socket\+\_\+close}} ()
+\begin{DoxyCompactList}\small\item\em Close the c socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{c__socket_8h_ad039f526d23f7c27f03dc78f291530c8}\label{c__socket_8h_ad039f526d23f7c27f03dc78f291530c8}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_accept@{c\_socket\_accept}}
+\index{c\_socket\_accept@{c\_socket\_accept}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_accept()}{c\_socket\_accept()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+accept (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Accept the Python client. 
+
+\mbox{\Hypertarget{c__socket_8h_aba14dc692f6d500039f4f368c0b84bb3}\label{c__socket_8h_aba14dc692f6d500039f4f368c0b84bb3}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_append\_array@{c\_socket\_append\_array}}
+\index{c\_socket\_append\_array@{c\_socket\_append\_array}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_append\_array()}{c\_socket\_append\_array()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+append\+\_\+array (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int $\ast$}]{array,  }\item[{int}]{len,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Append an integer array to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Buffer to append to \\
+\hline
+{\em val} & Array \\
+\hline
+{\em len} & Length of array \\
+\hline
+{\em idx} & Buffer offset \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a7fcbc6cad2274c662f05017db3a25c22}\label{c__socket_8h_a7fcbc6cad2274c662f05017db3a25c22}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_append\_int@{c\_socket\_append\_int}}
+\index{c\_socket\_append\_int@{c\_socket\_append\_int}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_append\_int()}{c\_socket\_append\_int()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+append\+\_\+int (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{int}]{val,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Append a 4-\/byte integer to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Buffer to append to \\
+\hline
+{\em val} & 4-\/byte integer value \\
+\hline
+{\em idx} & Buffer offset \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a4d7e6dd71d663450aeb99d3e8b5c8880}\label{c__socket_8h_a4d7e6dd71d663450aeb99d3e8b5c8880}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_append\_str@{c\_socket\_append\_str}}
+\index{c\_socket\_append\_str@{c\_socket\_append\_str}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_append\_str()}{c\_socket\_append\_str()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+append\+\_\+str (\begin{DoxyParamCaption}\item[{char $\ast$}]{buffer,  }\item[{char $\ast$}]{str,  }\item[{int $\ast$}]{idx }\end{DoxyParamCaption})}
+
+
+
+Append a string to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & Buffer to append to \\
+\hline
+{\em str} & String value \\
+\hline
+{\em idx} & Buffer offset \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a665268367619ac1156fb7613123ae813}\label{c__socket_8h_a665268367619ac1156fb7613123ae813}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_bind\_and\_listen@{c\_socket\_bind\_and\_listen}}
+\index{c\_socket\_bind\_and\_listen@{c\_socket\_bind\_and\_listen}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_bind\_and\_listen()}{c\_socket\_bind\_and\_listen()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+bind\+\_\+and\+\_\+listen (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})}
+
+
+
+Bind and listen for Python client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port to listen to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a7ffc02728727d398890698fb9711e943}\label{c__socket_8h_a7ffc02728727d398890698fb9711e943}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_close@{c\_socket\_close}}
+\index{c\_socket\_close@{c\_socket\_close}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_close()}{c\_socket\_close()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Close the c socket. 
+
+\mbox{\Hypertarget{c__socket_8h_a335d3bfa152199ae8f21d1e43c869f72}\label{c__socket_8h_a335d3bfa152199ae8f21d1e43c869f72}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_init@{c\_socket\_init}}
+\index{c\_socket\_init@{c\_socket\_init}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_init()}{c\_socket\_init()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initialize c socket. 
+
+\mbox{\Hypertarget{c__socket_8h_a6fffcc1bac09887d4b0e48f3990bf49d}\label{c__socket_8h_a6fffcc1bac09887d4b0e48f3990bf49d}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_read\_into\_buffer@{c\_socket\_read\_into\_buffer}}
+\index{c\_socket\_read\_into\_buffer@{c\_socket\_read\_into\_buffer}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_read\_into\_buffer()}{c\_socket\_read\_into\_buffer()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+read\+\_\+into\+\_\+buffer (\begin{DoxyParamCaption}\item[{int}]{len }\end{DoxyParamCaption})}
+
+
+
+Read bytes into the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em len} & Number of bytes to read \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a7d47ba929bb446d307aedc6f1153e150}\label{c__socket_8h_a7d47ba929bb446d307aedc6f1153e150}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_receive\_packet@{c\_socket\_receive\_packet}}
+\index{c\_socket\_receive\_packet@{c\_socket\_receive\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_receive\_packet()}{c\_socket\_receive\_packet()}}
+{\footnotesize\ttfamily int c\+\_\+socket\+\_\+receive\+\_\+packet (\begin{DoxyParamCaption}\item[{void $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Read bytes into the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em packet} & Buffer to read packet into \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{c__socket_8h_a97f08639cf6d93fdb743e59064ca4f5b}\label{c__socket_8h_a97f08639cf6d93fdb743e59064ca4f5b}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_action\_packet@{c\_socket\_send\_action\_packet}}
+\index{c\_socket\_send\_action\_packet@{c\_socket\_send\_action\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_action\_packet()}{c\_socket\_send\_action\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+action\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structActionPacket}{Action\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Action packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a9d80871dbcfc858c7ca4fad8ebd966a8}\label{c__socket_8h_a9d80871dbcfc858c7ca4fad8ebd966a8}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_action\_reply\_packet@{c\_socket\_send\_action\_reply\_packet}}
+\index{c\_socket\_send\_action\_reply\_packet@{c\_socket\_send\_action\_reply\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_action\_reply\_packet()}{c\_socket\_send\_action\_reply\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+action\+\_\+reply\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structActionReplyPacket}{Action\+Reply\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Action\+Reply packet. 
+
+\mbox{\Hypertarget{c__socket_8h_adbcfaf3969370437cdc13d1dadf6a87d}\label{c__socket_8h_adbcfaf3969370437cdc13d1dadf6a87d}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_city\_info\_packet@{c\_socket\_send\_city\_info\_packet}}
+\index{c\_socket\_send\_city\_info\_packet@{c\_socket\_send\_city\_info\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_city\_info\_packet()}{c\_socket\_send\_city\_info\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+city\+\_\+info\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structCityInfoPacket}{City\+Info\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a City\+Info packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a2b690da95deda92cdd587dc482ac424d}\label{c__socket_8h_a2b690da95deda92cdd587dc482ac424d}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_completed\_state\_transfer\_packet@{c\_socket\_send\_completed\_state\_transfer\_packet}}
+\index{c\_socket\_send\_completed\_state\_transfer\_packet@{c\_socket\_send\_completed\_state\_transfer\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_completed\_state\_transfer\_packet()}{c\_socket\_send\_completed\_state\_transfer\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+completed\+\_\+state\+\_\+transfer\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structCompletedStateTransferPacket}{Completed\+State\+Transfer\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Completed\+State\+Transfer packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a541ff322c2ae361478960caa29ab3041}\label{c__socket_8h_a541ff322c2ae361478960caa29ab3041}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_hello\_packet@{c\_socket\_send\_hello\_packet}}
+\index{c\_socket\_send\_hello\_packet@{c\_socket\_send\_hello\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_hello\_packet()}{c\_socket\_send\_hello\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+hello\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structHelloPacket}{Hello\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Hello packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a7df5017ad6814bb09d7bfcaeab18a607}\label{c__socket_8h_a7df5017ad6814bb09d7bfcaeab18a607}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_hello\_reply\_packet@{c\_socket\_send\_hello\_reply\_packet}}
+\index{c\_socket\_send\_hello\_reply\_packet@{c\_socket\_send\_hello\_reply\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_hello\_reply\_packet()}{c\_socket\_send\_hello\_reply\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+hello\+\_\+reply\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structHelloReplyPacket}{Hello\+Reply\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Hello\+Reply packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a8eed179c03dc9328fc2488268f4af860}\label{c__socket_8h_a8eed179c03dc9328fc2488268f4af860}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_map\_packet@{c\_socket\_send\_map\_packet}}
+\index{c\_socket\_send\_map\_packet@{c\_socket\_send\_map\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_map\_packet()}{c\_socket\_send\_map\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+map\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structMapPacket}{Map\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Map packet. 
+
+\mbox{\Hypertarget{c__socket_8h_abd0da751b6d5b6d6f50c2677a7bde253}\label{c__socket_8h_abd0da751b6d5b6d6f50c2677a7bde253}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_player\_info\_packet@{c\_socket\_send\_player\_info\_packet}}
+\index{c\_socket\_send\_player\_info\_packet@{c\_socket\_send\_player\_info\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_player\_info\_packet()}{c\_socket\_send\_player\_info\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+player\+\_\+info\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structPlayerInfoPacket}{Player\+Info\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Player\+Info packet. 
+
+\mbox{\Hypertarget{c__socket_8h_afdc373a16057f905dbe12895caca6df4}\label{c__socket_8h_afdc373a16057f905dbe12895caca6df4}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_research\_info\_packet@{c\_socket\_send\_research\_info\_packet}}
+\index{c\_socket\_send\_research\_info\_packet@{c\_socket\_send\_research\_info\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_research\_info\_packet()}{c\_socket\_send\_research\_info\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+research\+\_\+info\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structResearchInfoPacket}{Research\+Info\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Research\+Info packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a3f74a231a7ff98eedc145b4ce7a6cccd}\label{c__socket_8h_a3f74a231a7ff98eedc145b4ce7a6cccd}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_turn\_begin\_packet@{c\_socket\_send\_turn\_begin\_packet}}
+\index{c\_socket\_send\_turn\_begin\_packet@{c\_socket\_send\_turn\_begin\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_turn\_begin\_packet()}{c\_socket\_send\_turn\_begin\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+turn\+\_\+begin\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structTurnBeginPacket}{Turn\+Begin\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Turn\+Begin packet. 
+
+\mbox{\Hypertarget{c__socket_8h_acebbd02540b503c730c3eea616d68e98}\label{c__socket_8h_acebbd02540b503c730c3eea616d68e98}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_turn\_end\_packet@{c\_socket\_send\_turn\_end\_packet}}
+\index{c\_socket\_send\_turn\_end\_packet@{c\_socket\_send\_turn\_end\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_turn\_end\_packet()}{c\_socket\_send\_turn\_end\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+turn\+\_\+end\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structTurnEndPacket}{Turn\+End\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Turn\+End packet. 
+
+\mbox{\Hypertarget{c__socket_8h_a9c9d6ed66beddab7d3e864d97857e1a6}\label{c__socket_8h_a9c9d6ed66beddab7d3e864d97857e1a6}} 
+\index{c\_socket.h@{c\_socket.h}!c\_socket\_send\_unit\_info\_packet@{c\_socket\_send\_unit\_info\_packet}}
+\index{c\_socket\_send\_unit\_info\_packet@{c\_socket\_send\_unit\_info\_packet}!c\_socket.h@{c\_socket.h}}
+\doxysubsubsection{\texorpdfstring{c\_socket\_send\_unit\_info\_packet()}{c\_socket\_send\_unit\_info\_packet()}}
+{\footnotesize\ttfamily void c\+\_\+socket\+\_\+send\+\_\+unit\+\_\+info\+\_\+packet (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structUnitInfoPacket}{Unit\+Info\+Packet}} $\ast$}]{packet }\end{DoxyParamCaption})}
+
+
+
+Send a Unit\+Info packet. 
+
