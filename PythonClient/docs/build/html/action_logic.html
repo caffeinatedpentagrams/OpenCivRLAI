@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>action_logic module &#8212; OpenCiv-RLAI-py-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-action_logic">
+<span id="action-logic-module"></span><h1>action_logic module<a class="headerlink" href="#module-action_logic" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.Action">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">Action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.Action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Base class for all actions the RL agent can take</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.Action.execute">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.Action.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.Action.islegal">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.Action.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.BuildBuildingAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">BuildBuildingAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">city_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">building</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.BuildBuildingAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for building a building</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.BuildBuildingAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.BuildBuildingAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.BuildBuildingAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.BuildBuildingAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.ChangeTaxPolicyAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">ChangeTaxPolicyAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ChangeTaxPolicyAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for changing the tax policy</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.ChangeTaxPolicyAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ChangeTaxPolicyAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.ChangeTaxPolicyAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ChangeTaxPolicyAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.EndTurnAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">EndTurnAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.EndTurnAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for ending the RL agent’s turn</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.EndTurnAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.EndTurnAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.EndTurnAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.EndTurnAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.IrrigateAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">IrrigateAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.IrrigateAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for irrigating the tile</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.IrrigateAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.IrrigateAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.IrrigateAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.IrrigateAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.MineAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">MineAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.MineAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for mining the tile</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.MineAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.MineAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.MineAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.MineAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.ResearchAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">ResearchAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="state_rep.html#state_rep.Country" title="state_rep.Country"><span class="pre">Country</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">techname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ResearchAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for researching a technology</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.ResearchAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ResearchAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.ResearchAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.ResearchAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.RoadAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">RoadAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.RoadAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for building roads o the tile</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.RoadAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.RoadAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.RoadAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.RoadAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="action_logic.SettleAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">action_logic.</span></span><span class="sig-name descname"><span class="pre">SettleAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.SettleAction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#action_logic.Action" title="action_logic.Action"><code class="xref py py-class docutils literal notranslate"><span class="pre">Action</span></code></a></p>
+<p>Action for creating a settlement</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.SettleAction.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.SettleAction.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="action_logic.SettleAction.islegal">
+<span class="sig-name descname"><span class="pre">islegal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#action_logic.SettleAction.islegal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if this action is legal</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OpenCiv-RLAI-py-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Turing Tribe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/action_logic.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

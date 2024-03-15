@@ -12,19 +12,25 @@ Actions should output corresponding fields for their corresponding packet
 # Probably useless now, can have server tell us.
 
 class Action(ABC):
+    """Base class for all actions the RL agent can take"""
+
     def __init__(self, country):
         self.country = country
 
     @abstractmethod
     def execute(self):  # Treated as abstract method.
+        """Execute the action"""
         pass
 
     @abstractmethod
     def islegal(self):
+        """Returns True if this action is legal"""
         pass
 
 
 class ResearchAction(Action):
+    """Action for researching a technology"""
+
     def __init__(self, country: state_rep.Country, techname: str):
         super().__init__(country)
         self.techname = techname
@@ -42,6 +48,8 @@ class ResearchAction(Action):
 
 
 class BuildBuildingAction(Action):
+    """Action for building a building"""
+
     def __init__(self, country, city_index, building):
         super().__init__(country)
         self.city_index = city_index
@@ -65,6 +73,8 @@ class BuildBuildingAction(Action):
 
 
 class SettleAction(Action):
+    """Action for creating a settlement"""
+
     def __init__(self, country):
         super().__init__(country)
 
@@ -81,6 +91,8 @@ class SettleAction(Action):
 
 
 class IrrigateAction(Action):
+    """Action for irrigating the tile"""
+
     def __init__(self, country, unit_index):
         super().__init__(country)
         self.unit = self.country.get_unit_by_index(unit_index)
@@ -97,6 +109,8 @@ class IrrigateAction(Action):
 
 
 class MineAction(Action):
+    """Action for mining the tile"""
+
     def __init__(self, country, unit_index):
         super().__init__(country)
         self.unit = self.country.get_unit_by_index(unit_index)
@@ -113,6 +127,8 @@ class MineAction(Action):
 
 
 class RoadAction(Action):
+    """Action for building roads o the tile"""
+
     def __init__(self, country, unit_index):
         super().__init__(country)
         self.unit = self.country.get_unit_by_index(unit_index)
@@ -129,6 +145,8 @@ class RoadAction(Action):
 
 
 class ChangeTaxPolicyAction(Action):
+    """Action for changing the tax policy"""
+
     def __init__(self, country):
         super().__init__(country)
         pass
@@ -145,6 +163,8 @@ class ChangeTaxPolicyAction(Action):
 
 
 class EndTurnAction(Action):
+    """Action for ending the RL agent's turn"""
+
     def __init__(self, country):
         super().__init__(country)
         pass

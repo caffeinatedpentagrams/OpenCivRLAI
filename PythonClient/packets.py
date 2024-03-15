@@ -6,6 +6,8 @@ from enums import *
 import torch
 
 class Packet:
+    """Base class for all packet types"""
+
     def __init__(self, packid):
         self.packid = packid
         self.maxlens = {}
@@ -15,6 +17,7 @@ class Packet:
         self.types = {}
 
     def _add_field(self, field_name, maxlen, typestring):
+        """Define a field for the packet"""
         self.field_names.append(field_name)
         self.maxlens[field_name] = maxlen
         self.content[field_name] = ""
@@ -22,12 +25,14 @@ class Packet:
         # The maxlen for integers is given in bytes. e.g. uint32 would be 4 bytes!
 
     def initialize_fields(self, initializer_list):
+        """Initialize fields with an initializer list"""
         if len(initializer_list) != len(self.field_names):
             raise ValueError(f"Mismatch between fields and initializers for packet type {self.packid}")
         for i, c in enumerate(initializer_list):
             self.set_content(self.field_names[i], c)
 
     def set_content(self, field_name, content):
+        """Set the content of a specific field"""
         if field_name not in self.content:
             raise ValueError(f"{field_name} not found in packet type {self.packid}!")
         if self.types[field_name] == 'str':
@@ -40,6 +45,7 @@ class Packet:
         self.content[field_name] = content
 
     def encode(self):
+        """Encode the packet into a byte stream"""
         data = struct.pack('>H', self.packid)
         for field in self.field_names:
             arg = self.content[field]
@@ -60,6 +66,7 @@ class Packet:
 # TODO all coord fields should be one int for each coord!
 
 class HelloPacket(Packet):  # 0
+    """Hello packet"""
     def __init__(self):
         super().__init__(0)
         self._add_field("greeting", 10, 'str')

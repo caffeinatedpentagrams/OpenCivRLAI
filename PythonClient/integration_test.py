@@ -1,3 +1,7 @@
+"""
+Integration tests for connectivity and packet transmission between C server and Python client
+"""
+
 import socket
 from socket_listener import SocketClient
 from packets import *
