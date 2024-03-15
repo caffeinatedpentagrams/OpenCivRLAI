@@ -1,6 +1,7 @@
 #include "state_aggregator.h"
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 #include "terrain.h"
 #include "unittype.h"
 #include "unit.h"
@@ -15,6 +16,7 @@
 
 char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D]={0};
 struct UnitInfoPacket units[MAX_UNITS_ADIT];
+struct PlayerInfoPacket player_state;
 //struct unit_basic units[MAX_UNITS_ADIT];
 
 struct map_index* tile_to_vec(struct tile* tile) {
@@ -80,6 +82,29 @@ void update_units(struct packet_unit_info* punit) {
 
 }
 
+void remove_unit(struct packet_unit_remove* ptr) {
+  uint16_t id = ptr->unit_id;
+  for (int i=0;i<MAX_UNITS_ADIT;i++) {
+    if (units[i].unit_id==id) {
+      units[i].unit_id = 0;
+      break;
+    }
+  }
+}
+
+void update_player(struct packet_player_info* ptr) {
+  player_state.playerno = ptr->playerno;
+  strcpy(player_state.name,ptr->name);
+  strcpy(player_state.username,ptr->username);
+  player_state.score = ptr->score;
+  player_state.turns_alive = ptr->turns_alive;
+  player_state.is_alive = ptr->is_alive;
+  player_state.gold = ptr->gold;
+  player_state.percent_tax = ptr->tax;
+  player_state.science = ptr->science;
+  player_state.luxury = ptr->luxury;
+}
+
 void *communicator(void *vargp) {
   while (true) {
     // Send over state to python RL client
@@ -89,6 +114,7 @@ void *communicator(void *vargp) {
     for (int i=0;i<MAX_UNITS_ADIT;i++){
       c_socket_send_unit_info_packet(&units[i]);
     }
+    c_socket_send_player_info_packet(&player_state);
     struct CompletedStateTransferPacket done_packet = {
       .done = "done"
     };
@@ -118,6 +144,7 @@ void *communicator(void *vargp) {
       
     } while (type==ActionEnum);
     key_end_turn();
+    sleep(1);
     //free(packet);
   }
 }

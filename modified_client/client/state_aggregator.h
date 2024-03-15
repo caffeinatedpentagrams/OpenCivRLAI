@@ -29,42 +29,12 @@ struct map_index {
   struct unit_list* units;
 };
 
-/*struct UnitInfoPacket {
-  int unit_id;
-  char owner[100];
-  char nationality[100];
-  int coordx;
-  int coordy;
-  int upkeep;
-  };*/
-
-struct unit_basic {
-  int id;
-  int type;
-  int x;
-  int y;
-  //  int build_cost;
-  //int pop_cost; //# workers in unit
-  //int att_str;
-  //int def_str;
-  //int move_rate;
-  //int unknown_move_cost;
-  //int vision_radius;
-  //int hp;
-  //int firepower;
-  //int city_size;
-  //int city_slots;
-  //int pos; //index from (x,y)
-  //int homecity;
-  //int moves_left;
-  //int upkeep[O_LAST];
-  //bool has_orders; // Use this field to only order units without current orders
-};
 
 #define D sizeof(int)
 
 extern struct UnitInfoPacket units[MAX_UNITS_ADIT];
 extern char map_state_internal[MAXIMUM_ADIT][MAXIMUM_ADIT][D];
+extern struct PlayerInfoPacket player_state;
 
 struct map_index* tile_to_vec(struct tile* tile);
 
@@ -73,6 +43,10 @@ void update_map(int x, int y, int map_index);
 void single_unit_update(struct UnitInfoPacket* old, struct packet_unit_info* new); 
 
 void update_units(struct packet_unit_info* punit);
+
+void remove_unit(struct packet_unit_remove* ptr);
+
+void update_player(struct packet_player_info* ptr);
 
 void *communicator(void *vargp);
 

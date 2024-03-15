@@ -28,7 +28,7 @@ extern "C" {
 /* Don't allow other modules to access directly to the fields. */
 #define vernacular _private_vernacular_
 #define rulename   _private_rulename_
-#define translated _private_translated_
+  //#define translated _private_translated_
 
 /* Ruleset strings (such as names) are kept in their original vernacular
  * as well as being translated to the current locale. */
