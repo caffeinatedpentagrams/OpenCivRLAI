@@ -1,6 +1,7 @@
 # https://upload.wikimedia.org/wikipedia/commons/4/4c/Freeciv-2.1.8_technology_tree.png
 
 class Technology:
+    """Base class for technologies"""
     def __init__(self, name, requirements, cost):
         self.name = name
         self.requirements = requirements
@@ -13,6 +14,7 @@ class Technology:
 
 
 class TechnologyTree:
+    """Technology tree"""
     def __init__(self):  # TODO Correct costs!
         alphabet = Technology('alphabet', [], 0)
         ceremonial_burial = Technology('ceremonial_burial', [], 0)
@@ -91,6 +93,11 @@ class TechnologyTree:
         self.currently_researching = None
 
     def get_researchable(self):
+        """
+        Get a list of researchable technologies
+
+        :return: A list of researchable technologies
+        """
         researchable = []
         for tech in self.techs.values():
             if all(map(lambda req: req.researched, tech.requirements)):
@@ -98,6 +105,11 @@ class TechnologyTree:
         return researchable
 
     def research(self, tech):  # TODO check, also duplicated logic.
+        """
+        Research a technology
+
+        :param tech: The technology
+        """
         if 'str' in str(type(tech)):
             if tech not in self.techs:
                 raise ValueError(f'{tech} does not exist')
@@ -112,6 +124,11 @@ class TechnologyTree:
         self.techs[tech].researched = True
 
     def add_research_progress(self, progress):  # TODO Possibly extraneous, probably just get this from packets
+        """
+        Progress an ongoing research
+
+        :param progress: Progress
+        """
         self.techs[self.currently_researching] += progress
         if self.techs[self.currently_researching].progress >= self.techs[self.currently_researching].cost:
             accum_progress = (self.techs[self.currently_researching].progress -

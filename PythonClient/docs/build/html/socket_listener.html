@@ -35,20 +35,34 @@
 <dt class="sig sig-object py" id="socket_listener.SocketClient">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">socket_listener.</span></span><span class="sig-name descname"><span class="pre">SocketClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">server_ip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_port</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_listener.SocketClient" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>TCP socket used to communicate with the C server</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="socket_listener.SocketClient.close">
 <span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket_listener.SocketClient.close" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Close the socket</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="socket_listener.SocketClient.receive_packet">
 <span class="sig-name descname"><span class="pre">receive_packet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#socket_listener.SocketClient.receive_packet" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Listen for a packet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The packet</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="socket_listener.SocketClient.send_packet">
 <span class="sig-name descname"><span class="pre">send_packet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#socket_listener.SocketClient.send_packet" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode and send a packet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>packet</strong> – The packet</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

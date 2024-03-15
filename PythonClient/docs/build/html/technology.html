@@ -35,21 +35,35 @@
 <dt class="sig sig-object py" id="technology.Technology">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">technology.</span></span><span class="sig-name descname"><span class="pre">Technology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">requirements</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#technology.Technology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for technologies</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="technology.TechnologyTree">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">technology.</span></span><span class="sig-name descname"><span class="pre">TechnologyTree</span></span><a class="headerlink" href="#technology.TechnologyTree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Technology tree</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="technology.TechnologyTree.add_research_progress">
 <span class="sig-name descname"><span class="pre">add_research_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">progress</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#technology.TechnologyTree.add_research_progress" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Progress an ongoing research</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>progress</strong> – Progress</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="technology.TechnologyTree.get_researchable">
 <span class="sig-name descname"><span class="pre">get_researchable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#technology.TechnologyTree.get_researchable" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Get a list of researchable technologies</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of researchable technologies</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="technology.TechnologyTree.is_busy">
@@ -59,7 +73,13 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="technology.TechnologyTree.research">
 <span class="sig-name descname"><span class="pre">research</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tech</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#technology.TechnologyTree.research" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Research a technology</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tech</strong> – The technology</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

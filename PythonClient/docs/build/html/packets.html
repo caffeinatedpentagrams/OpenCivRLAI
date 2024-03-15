@@ -35,62 +35,73 @@
 <dt class="sig sig-object py" id="packets.ActionPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">ActionPacket</span></span><a class="headerlink" href="#packets.ActionPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting action data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.ActionReplyPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">ActionReplyPacket</span></span><a class="headerlink" href="#packets.ActionReplyPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for replying to action data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.CityInfoPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">CityInfoPacket</span></span><a class="headerlink" href="#packets.CityInfoPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting city data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.CompletedStateTransferPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">CompletedStateTransferPacket</span></span><a class="headerlink" href="#packets.CompletedStateTransferPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet to signal the completion of state transfer</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.HelloPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">HelloPacket</span></span><a class="headerlink" href="#packets.HelloPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for checking connectivity</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.HelloReplyPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">HelloReplyPacket</span></span><a class="headerlink" href="#packets.HelloReplyPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for responding to a connectivity check</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.MapPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">MapPacket</span></span><a class="headerlink" href="#packets.MapPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting map data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.Packet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">Packet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#packets.Packet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all packet types</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.Packet.encode">
 <span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#packets.Packet.encode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Encode the packet into a byte stream</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.Packet.initialize_fields">
 <span class="sig-name descname"><span class="pre">initialize_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initializer_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#packets.Packet.initialize_fields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initialize fields with an initializer list</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.Packet.set_content">
 <span class="sig-name descname"><span class="pre">set_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#packets.Packet.set_content" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Set the content of a specific field</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -98,30 +109,45 @@
 <dt class="sig sig-object py" id="packets.PacketFactory">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">PacketFactory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytestream</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#packets.PacketFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Factory class for generating possibly different types of packets from a byte stream</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.PacketFactory.get_array">
 <span class="sig-name descname"><span class="pre">get_array</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#packets.PacketFactory.get_array" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Read an integer array from the byte stream</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.PacketFactory.get_int">
 <span class="sig-name descname"><span class="pre">get_int</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#packets.PacketFactory.get_int" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Read a 4-byte integer from the byte stream</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.PacketFactory.get_str">
 <span class="sig-name descname"><span class="pre">get_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#packets.PacketFactory.get_str" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Read a 0-byte-terminated string from the byte stream</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.PacketFactory.make_action_packet">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">make_action_packet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="enums.html#enums.ActionEnum" title="enums.ActionEnum"><span class="pre">ActionEnum</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">actor_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#packets.ActionPacket" title="packets.ActionPacket"><span class="pre">ActionPacket</span></a></span></span><a class="headerlink" href="#packets.PacketFactory.make_action_packet" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generate an action packet given the contents</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>action_id</strong> – Action identifier</p></li>
+<li><p><strong>actor_id</strong> – Actor identifier</p></li>
+<li><p><strong>target_id</strong> – Target identifier</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="packets.PacketFactory.make_packet">
 <span class="sig-name descname"><span class="pre">make_packet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#packets.PacketFactory.make_packet" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Parse the byte stream into the packet</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -129,36 +155,42 @@
 <dt class="sig sig-object py" id="packets.PlayerInfoPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">PlayerInfoPacket</span></span><a class="headerlink" href="#packets.PlayerInfoPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting player data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.ResearchInfoPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">ResearchInfoPacket</span></span><a class="headerlink" href="#packets.ResearchInfoPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting research data</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.TurnBeginPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">TurnBeginPacket</span></span><a class="headerlink" href="#packets.TurnBeginPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet to signal the beginning of the agent’s turn</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.TurnEndPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">TurnEndPacket</span></span><a class="headerlink" href="#packets.TurnEndPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet to signal the end of the agent’s turn</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="packets.UnitInfoPacket">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">UnitInfoPacket</span></span><a class="headerlink" href="#packets.UnitInfoPacket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#packets.Packet" title="packets.Packet"><code class="xref py py-class docutils literal notranslate"><span class="pre">Packet</span></code></a></p>
+<p>Packet for transmitting unit data</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="packets.test">
 <span class="sig-prename descclassname"><span class="pre">packets.</span></span><span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bytestream</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#packets.test" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Test the parsing result given a byte stream</p>
+</dd></dl>
 
 </section>
 
