@@ -4,8 +4,80 @@ Unit tests for Python client
 
 import unittest
 from packets import *
+from technology import *
 
-class testPacketFactory(unittest.TestCase):
+class TestTechnology(unittest.TestCase):
+    def testInitiallyResearchable(self):
+        tree = TechnologyTree()
+        researchable = tree.get_researchable()
+        self.assertListEqual(researchable, [
+            tree.techs['alphabet'],
+            tree.techs['ceremonial_burial'],
+            tree.techs['pottery'],
+            tree.techs['masonry'],
+            tree.techs['horseback_riding'],
+            tree.techs['bronze_working'],
+            tree.techs['warrior_code'],
+        ])
+
+    def testResearchByTechnologyObject(self):
+        tree = TechnologyTree()
+        tree.research(tree.get_researchable()[0])
+        researchable = tree.get_researchable()
+        self.assertListEqual(researchable, [
+            tree.techs['ceremonial_burial'],
+            tree.techs['pottery'],
+            tree.techs['masonry'],
+            tree.techs['horseback_riding'],
+            tree.techs['bronze_working'],
+            tree.techs['warrior_code'],
+            tree.techs['writing'],
+            tree.techs['code_of_laws'],
+            tree.techs['map_making'],
+        ])
+
+    def testResearchByName(self):
+        tree = TechnologyTree()
+        tree.research('alphabet')
+        tree.research('pottery')
+        tree.research('map_making')
+        researchable = tree.get_researchable()
+        self.assertListEqual(researchable, [
+            tree.techs['ceremonial_burial'],
+            tree.techs['masonry'],
+            tree.techs['horseback_riding'],
+            tree.techs['bronze_working'],
+            tree.techs['warrior_code'],
+            tree.techs['writing'],
+            tree.techs['code_of_laws'],
+            tree.techs['seafaring'],
+        ])
+
+    def testRequirementsNotMet(self):
+        tree = TechnologyTree()
+        tree.research('alphabet')
+        tree.research('pottery')
+        tree.research('map_making')
+        with self.assertRaises(ValueError):
+            tree.research('construction')
+
+    def testAlreadyResearched(self):
+        tree = TechnologyTree()
+        tree.research('alphabet')
+        tree.research('pottery')
+        tree.research('map_making')
+        with self.assertRaises(ValueError):
+            tree.research('alphabet')
+
+    def testDoesNotExist(self):
+        tree = TechnologyTree()
+        tree.research('alphabet')
+        tree.research('pottery')
+        tree.research('map_making')
+        with self.assertRaises(ValueError):
+            tree.research('rocket_science')
+
+class TestPacketFactory(unittest.TestCase):
     def testHello(self):
         bytestream = b'\x00\x00hello\x00'
         packet = PacketFactory(bytestream).make_packet()

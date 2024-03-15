@@ -100,7 +100,7 @@ class TechnologyTree:
         """
         researchable = []
         for tech in self.techs.values():
-            if all(map(lambda req: req.researched, tech.requirements)):
+            if all(map(lambda req: req.researched, tech.requirements)) and not tech.researched:
                 researchable.append(tech)
         return researchable
 
@@ -115,13 +115,13 @@ class TechnologyTree:
                 raise ValueError(f'{tech} does not exist')
             tech = self.techs[tech]
 
-        if self.techs[tech].researched:
+        if tech.researched:
             raise ValueError(f'{tech.name} already researched')
 
         if tech not in self.get_researchable():
             raise ValueError(f'requirements not met for {tech.name}')
 
-        self.techs[tech].researched = True
+        tech.researched = True
 
     def add_research_progress(self, progress):  # TODO Possibly extraneous, probably just get this from packets
         """
@@ -139,40 +139,3 @@ class TechnologyTree:
 
     def is_busy(self):
         return self.currently_researching is not None
-
-
-# TODO make proper unit test
-if __name__ == '__test__':
-    tree = TechnologyTree()
-    print(*tree.get_researchable(), sep=', ', end='\n\n')
-
-    # research by technology object
-    tree.research(tree.get_researchable()[0])
-    print(*tree.get_researchable(), sep=', ', end='\n\n')
-
-    # research by name
-    # should unlock seafaring
-    tree.research('pottery')
-    tree.research('map_making')
-    print(*tree.get_researchable(), sep=', ', end='\n\n')
-
-    # invalid research: requirements not met
-    try:
-        tree.research('construction')
-    except ValueError as e:
-        print(e)
-    print()
-
-    # invalid research: already researched
-    try:
-        tree.research('alphabet')
-    except ValueError as e:
-        print(e)
-    print()
-
-    # invalid research: does not exist
-    try:
-        tree.research('rocket_science')
-    except ValueError as e:
-        print(e)
-    print()
