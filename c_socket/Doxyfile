@@ -1,0 +1,7 @@
+# Project settings
+PROJECT_NAME           = "OpenCiv-RLAI-c-socket"
+OUTPUT_DIRECTORY       = ./docs
+EXTRACT_ALL            = "YES"
+
+# Input files
+INPUT                  = ./src
