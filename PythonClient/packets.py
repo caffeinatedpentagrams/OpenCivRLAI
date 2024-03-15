@@ -6,6 +6,8 @@ from enums import *
 import torch
 
 class Packet:
+    """Base class for all packet types"""
+
     def __init__(self, packid):
         self.packid = packid
         self.maxlens = {}
@@ -15,6 +17,7 @@ class Packet:
         self.types = {}
 
     def _add_field(self, field_name, maxlen, typestring):
+        """Define a field for the packet"""
         self.field_names.append(field_name)
         self.maxlens[field_name] = maxlen
         self.content[field_name] = ""
@@ -22,12 +25,14 @@ class Packet:
         # The maxlen for integers is given in bytes. e.g. uint32 would be 4 bytes!
 
     def initialize_fields(self, initializer_list):
+        """Initialize fields with an initializer list"""
         if len(initializer_list) != len(self.field_names):
             raise ValueError(f"Mismatch between fields and initializers for packet type {self.packid}")
         for i, c in enumerate(initializer_list):
             self.set_content(self.field_names[i], c)
 
     def set_content(self, field_name, content):
+        """Set the content of a specific field"""
         if field_name not in self.content:
             raise ValueError(f"{field_name} not found in packet type {self.packid}!")
         if self.types[field_name] == 'str':
@@ -40,6 +45,7 @@ class Packet:
         self.content[field_name] = content
 
     def encode(self):
+        """Encode the packet into a byte stream"""
         data = struct.pack('>H', self.packid)
         for field in self.field_names:
             arg = self.content[field]
@@ -60,21 +66,25 @@ class Packet:
 # TODO all coord fields should be one int for each coord!
 
 class HelloPacket(Packet):  # 0
+    """Packet for checking connectivity"""
     def __init__(self):
         super().__init__(0)
         self._add_field("greeting", 10, 'str')
 
 class HelloReplyPacket(Packet):  # 1 TODO Adit
+    """Packet for responding to a connectivity check"""
     def __init__(self):
         super().__init__(1)
         self._add_field("greeting", 10, 'str')
 
 class MapPacket(Packet):  # 2 TODO Adit
+    """Packet for transmitting map data"""
     def __init__(self):
         super().__init__(2)
         self._add_field('map', 4096*4, 'array')  # TODO check len
 
 class UnitInfoPacket(Packet):  # 3 TODO Adit
+    """Packet for transmitting unit data"""
     def __init__(self):
         super().__init__(3)
         self._add_field('unit_id', 100, 'int')
@@ -85,6 +95,7 @@ class UnitInfoPacket(Packet):  # 3 TODO Adit
         self._add_field('upkeep', 1, 'int')  # comes as uint8_t acc to packets.def
 
 class PlayerInfoPacket(Packet):  # 4 TODO Adit
+    """Packet for transmitting player data"""
     def __init__(self):
         super().__init__(4)
         self._add_field('playerno', 4, 'int')
@@ -99,6 +110,7 @@ class PlayerInfoPacket(Packet):  # 4 TODO Adit
         self._add_field('luxury', 4, 'int')
 
 class CityInfoPacket(Packet):  # 5 TODO Adit
+    """Packet for transmitting city data"""
     def __init__(self):
         super().__init__(5)
         self._add_field('id', 8, 'int') # TODO double check type packets.def id; key
@@ -114,6 +126,7 @@ class CityInfoPacket(Packet):  # 5 TODO Adit
         self._add_field('improvements', 5000, 'str') # We will force this to contain a list of the buildings
 
 class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which can be a tile, a unit, or a city)
+    """Packet for transmitting action data"""
     def __init__(self):
         super().__init__(6)
         self._add_field('action', 100, 'str')
@@ -123,26 +136,31 @@ class ActionPacket(Packet):  # 6 TODO ACTION_ID, actor_id, and target_id (which 
         # TODO maybe add more?
 
 class ActionReplyPacket(Packet):  # 7 TODO Adit
+    """Packet for replying to action data"""
     def __init__(self):
         super().__init__(7)
         self._add_field('action', 100, 'str')
 
 class TurnBeginPacket(Packet):  # 8 TODO Adit
+    """Packet to signal the beginning of the agent's turn"""
     def __init__(self):
         super().__init__(8)
         self._add_field('turn_begin', 1000, 'int')
 
 class TurnEndPacket(Packet):  # 9 TODO can be baked into ActionPacket
+    """Packet to signal the end of the agent's turn"""
     def __init__(self):
         super().__init__(9)
         self._add_field('turn_end', 100, 'str')
 
 class CompletedStateTransferPacket(Packet):  # 10 TODO Adit
+    """Packet to signal the completion of state transfer"""
     def __init__(self):
         super().__init__(10)
         self._add_field('done', 100, 'str')
 
 class ResearchInfoPacket(Packet):  # 11 TODO Adit
+    """Packet for transmitting research data"""
     def __init__(self):
         super().__init__(11)
         self._add_field('id', 4, 'int')  # TODO check type
@@ -153,6 +171,7 @@ class ResearchInfoPacket(Packet):  # 11 TODO Adit
         # TODO check line 1025 in packets.def; unsure if further fields needed
 
 class PacketFactory:  # TODO add logic for 11
+    """Factory class for generating possibly different types of packets from a byte stream"""
     # the payload should be passed in
     # i.e. the 2-byte packet length field should be removed
     def __init__(self, bytestream):
@@ -161,23 +180,27 @@ class PacketFactory:  # TODO add logic for 11
         self.idx = 2
 
     def get_str(self):
+        """Read a 0-byte-terminated string from the byte stream"""
         cut_idx = self.bytestream.find(b'\0', self.idx)
         value = self.bytestream[self.idx : cut_idx].decode()
         self.idx = cut_idx + 1
         return value
 
     def get_int(self):
+        """Read a 4-byte integer from the byte stream"""
         value = int.from_bytes(self.bytestream[self.idx : self.idx + 4], byteorder='big')
         self.idx += 4
         return value
 
     def get_array(self):
+        """Read an integer array from the byte stream"""
         length = self.get_int()
         value = np.frombuffer(self.bytestream[self.idx : self.idx + 4 * length], dtype='>u4')
         self.idx += 4 * length
         return value
 
     def make_packet(self):
+        """Parse the byte stream into the packet"""
         if self.packet_type == PacketEnum.Hello.value: packet = HelloPacket()
         elif self.packet_type == PacketEnum.HelloReply.value: packet = HelloReplyPacket()
         elif self.packet_type == PacketEnum.Map.value: packet = MapPacket()
@@ -203,6 +226,13 @@ class PacketFactory:  # TODO add logic for 11
 
     @staticmethod
     def make_action_packet(action_id: ActionEnum, actor_id: int, target_id: int) -> ActionPacket:
+        """
+        Generate an action packet given the contents
+
+        :param action_id: Action identifier
+        :param actor_id: Actor identifier
+        :param target_id: Target identifier
+        """
         packet = ActionPacket()
         packet.set_content('ACTION_ID', action_id)
         packet.set_content('actor_id', actor_id)
@@ -212,6 +242,7 @@ class PacketFactory:  # TODO add logic for 11
 
 
 def test(bytestream):
+    """Test the parsing result given a byte stream"""
     packet = PacketFactory(bytestream).make_packet()
     for field in packet.field_names:
         print(f'{field}: {packet.content[field]}')

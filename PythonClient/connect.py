@@ -1,3 +1,7 @@
+"""
+Not used
+"""
+
 # Implements the following from clinet.h
 '''int connect_to_server(const char *username, const char *hostname, int port,
                       char *errbuf, int errbufsize);

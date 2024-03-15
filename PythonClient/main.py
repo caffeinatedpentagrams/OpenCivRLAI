@@ -1,3 +1,7 @@
+"""
+Entry point for RL agent
+"""
+
 import socket
 from socket_listener import SocketClient
 from packets import *

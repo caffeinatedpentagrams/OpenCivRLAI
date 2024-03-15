@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>agent module &#8212; OpenCiv-RLAI-py-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-agent">
+<span id="agent-module"></span><h1>agent module<a class="headerlink" href="#module-agent" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.ActionSpace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">ActionSpace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.ActionSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation of the space of all actions to take</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.ActionSpace.make_packet">
+<span class="sig-name descname"><span class="pre">make_packet</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.ActionSpace.make_packet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a packet</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.ActionSpace.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.ActionSpace.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample a random action with uniform probability</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.DQN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">DQN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_observations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_actions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.DQN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Deep Q-Network AI implementation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.DQN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.DQN.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="agent.DQN.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#agent.DQN.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.Environment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">Environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">socket_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model=&lt;agent.Model</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_limit=10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Encapsulation of game environment</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.end_turn">
+<span class="sig-name descname"><span class="pre">end_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.end_turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>End the current turn</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.listen_for_updates">
+<span class="sig-name descname"><span class="pre">listen_for_updates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.listen_for_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Listen for a single update from the server</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.listen_for_updates_until_turn">
+<span class="sig-name descname"><span class="pre">listen_for_updates_until_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.listen_for_updates_until_turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Listen for game updates from the server until agent turn begins</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.perform">
+<span class="sig-name descname"><span class="pre">perform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.perform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute an action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the environment</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the game environment for a turn and generate actions</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Environment.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.Environment.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute all queued actions</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><a class="headerlink" href="#agent.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface for RL model</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Model.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.Model.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the next action</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.Model.illegal_action_penalty">
+<span class="sig-name descname"><span class="pre">illegal_action_penalty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#agent.Model.illegal_action_penalty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Penalize the model for making an illegal action</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.ReplayMemory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">ReplayMemory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">capacity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.ReplayMemory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Record of all state transitions for game playback</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.ReplayMemory.push">
+<span class="sig-name descname"><span class="pre">push</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.ReplayMemory.push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a transition</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.ReplayMemory.sample">
+<span class="sig-name descname"><span class="pre">sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.ReplayMemory.sample" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.State">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">State</span></span><a class="headerlink" href="#agent.State" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Encapsulation of all the state information the RL agent uses</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.State.is_legal">
+<span class="sig-name descname"><span class="pre">is_legal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.State.is_legal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="agent.State.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packet</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.State.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the state with the packet received from c server</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="agent.Transition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">agent.</span></span><span class="sig-name descname"><span class="pre">Transition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">next_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reward</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#agent.Transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="agent.Transition.action">
+<span class="sig-name descname"><span class="pre">action</span></span><a class="headerlink" href="#agent.Transition.action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="agent.Transition.next_state">
+<span class="sig-name descname"><span class="pre">next_state</span></span><a class="headerlink" href="#agent.Transition.next_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="agent.Transition.reward">
+<span class="sig-name descname"><span class="pre">reward</span></span><a class="headerlink" href="#agent.Transition.reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="agent.Transition.state">
+<span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#agent.Transition.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OpenCiv-RLAI-py-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Turing Tribe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/agent.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

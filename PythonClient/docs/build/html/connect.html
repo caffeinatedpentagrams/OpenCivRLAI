@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>connect module &#8212; OpenCiv-RLAI-py-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-connect">
+<span id="connect-module"></span><h1>connect module<a class="headerlink" href="#module-connect" title="Permalink to this heading">¶</a></h1>
+<p>Not used</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.connect_to_server">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">connect_to_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errbuf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.connect_to_server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.disconnect_from_server">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">disconnect_from_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leaving_sound</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.disconnect_from_server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.get_server_address">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">get_server_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errbuf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.get_server_address" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.input_from_server">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">input_from_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.input_from_server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.input_from_server_till_request_got_processed">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">input_from_server_till_request_got_processed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_request_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.input_from_server_till_request_got_processed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.make_connection">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">make_connection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">socketnum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.make_connection" title="Permalink to this definition">¶</a></dt>
+<dd><p>PACKET_SERVER_JOIN_REQ = 4; cs, dsend, no-delta, no-handle
+STRING username[48];
+STRING capability[512];
+STRING version_label[48];
+UINT32 major_version, minor_version, patch_version;
+end</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.start_autoconnecting_to_server">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">start_autoconnecting_to_server</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#connect.start_autoconnecting_to_server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.try_to_autoconnect">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">try_to_autoconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#connect.try_to_autoconnect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="connect.try_to_connect">
+<span class="sig-prename descclassname"><span class="pre">connect.</span></span><span class="sig-name descname"><span class="pre">try_to_connect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errbuf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#connect.try_to_connect" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OpenCiv-RLAI-py-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Turing Tribe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/connect.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

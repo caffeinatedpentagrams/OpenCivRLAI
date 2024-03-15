@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PythonClient &#8212; OpenCiv-RLAI-py-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pythonclient">
+<h1>PythonClient<a class="headerlink" href="#pythonclient" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="action_logic.html">action_logic module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.Action"><code class="docutils literal notranslate"><span class="pre">Action</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.Action.execute"><code class="docutils literal notranslate"><span class="pre">Action.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.Action.islegal"><code class="docutils literal notranslate"><span class="pre">Action.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.BuildBuildingAction"><code class="docutils literal notranslate"><span class="pre">BuildBuildingAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.BuildBuildingAction.execute"><code class="docutils literal notranslate"><span class="pre">BuildBuildingAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.BuildBuildingAction.islegal"><code class="docutils literal notranslate"><span class="pre">BuildBuildingAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.ChangeTaxPolicyAction"><code class="docutils literal notranslate"><span class="pre">ChangeTaxPolicyAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.ChangeTaxPolicyAction.execute"><code class="docutils literal notranslate"><span class="pre">ChangeTaxPolicyAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.ChangeTaxPolicyAction.islegal"><code class="docutils literal notranslate"><span class="pre">ChangeTaxPolicyAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.EndTurnAction"><code class="docutils literal notranslate"><span class="pre">EndTurnAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.EndTurnAction.execute"><code class="docutils literal notranslate"><span class="pre">EndTurnAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.EndTurnAction.islegal"><code class="docutils literal notranslate"><span class="pre">EndTurnAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.IrrigateAction"><code class="docutils literal notranslate"><span class="pre">IrrigateAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.IrrigateAction.execute"><code class="docutils literal notranslate"><span class="pre">IrrigateAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.IrrigateAction.islegal"><code class="docutils literal notranslate"><span class="pre">IrrigateAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.MineAction"><code class="docutils literal notranslate"><span class="pre">MineAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.MineAction.execute"><code class="docutils literal notranslate"><span class="pre">MineAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.MineAction.islegal"><code class="docutils literal notranslate"><span class="pre">MineAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.ResearchAction"><code class="docutils literal notranslate"><span class="pre">ResearchAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.ResearchAction.execute"><code class="docutils literal notranslate"><span class="pre">ResearchAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.ResearchAction.islegal"><code class="docutils literal notranslate"><span class="pre">ResearchAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.RoadAction"><code class="docutils literal notranslate"><span class="pre">RoadAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.RoadAction.execute"><code class="docutils literal notranslate"><span class="pre">RoadAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.RoadAction.islegal"><code class="docutils literal notranslate"><span class="pre">RoadAction.islegal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="action_logic.html#action_logic.SettleAction"><code class="docutils literal notranslate"><span class="pre">SettleAction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.SettleAction.execute"><code class="docutils literal notranslate"><span class="pre">SettleAction.execute()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="action_logic.html#action_logic.SettleAction.islegal"><code class="docutils literal notranslate"><span class="pre">SettleAction.islegal()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agent.html">agent module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.ActionSpace"><code class="docutils literal notranslate"><span class="pre">ActionSpace</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.ActionSpace.make_packet"><code class="docutils literal notranslate"><span class="pre">ActionSpace.make_packet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.ActionSpace.sample"><code class="docutils literal notranslate"><span class="pre">ActionSpace.sample()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.DQN"><code class="docutils literal notranslate"><span class="pre">DQN</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.DQN.forward"><code class="docutils literal notranslate"><span class="pre">DQN.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.DQN.training"><code class="docutils literal notranslate"><span class="pre">DQN.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.end_turn"><code class="docutils literal notranslate"><span class="pre">Environment.end_turn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.listen_for_updates"><code class="docutils literal notranslate"><span class="pre">Environment.listen_for_updates()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.listen_for_updates_until_turn"><code class="docutils literal notranslate"><span class="pre">Environment.listen_for_updates_until_turn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.perform"><code class="docutils literal notranslate"><span class="pre">Environment.perform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.reset"><code class="docutils literal notranslate"><span class="pre">Environment.reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.run"><code class="docutils literal notranslate"><span class="pre">Environment.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Environment.step"><code class="docutils literal notranslate"><span class="pre">Environment.step()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.Model"><code class="docutils literal notranslate"><span class="pre">Model</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Model.forward"><code class="docutils literal notranslate"><span class="pre">Model.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Model.illegal_action_penalty"><code class="docutils literal notranslate"><span class="pre">Model.illegal_action_penalty()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.ReplayMemory"><code class="docutils literal notranslate"><span class="pre">ReplayMemory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.ReplayMemory.push"><code class="docutils literal notranslate"><span class="pre">ReplayMemory.push()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.ReplayMemory.sample"><code class="docutils literal notranslate"><span class="pre">ReplayMemory.sample()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.State"><code class="docutils literal notranslate"><span class="pre">State</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.State.is_legal"><code class="docutils literal notranslate"><span class="pre">State.is_legal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.State.update"><code class="docutils literal notranslate"><span class="pre">State.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="agent.html#agent.Transition"><code class="docutils literal notranslate"><span class="pre">Transition</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Transition.action"><code class="docutils literal notranslate"><span class="pre">Transition.action</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Transition.next_state"><code class="docutils literal notranslate"><span class="pre">Transition.next_state</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Transition.reward"><code class="docutils literal notranslate"><span class="pre">Transition.reward</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="agent.html#agent.Transition.state"><code class="docutils literal notranslate"><span class="pre">Transition.state</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connect.html">connect module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.connect_to_server"><code class="docutils literal notranslate"><span class="pre">connect_to_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.disconnect_from_server"><code class="docutils literal notranslate"><span class="pre">disconnect_from_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.get_server_address"><code class="docutils literal notranslate"><span class="pre">get_server_address()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.input_from_server"><code class="docutils literal notranslate"><span class="pre">input_from_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.input_from_server_till_request_got_processed"><code class="docutils literal notranslate"><span class="pre">input_from_server_till_request_got_processed()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.make_connection"><code class="docutils literal notranslate"><span class="pre">make_connection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.start_autoconnecting_to_server"><code class="docutils literal notranslate"><span class="pre">start_autoconnecting_to_server()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.try_to_autoconnect"><code class="docutils literal notranslate"><span class="pre">try_to_autoconnect()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="connect.html#connect.try_to_connect"><code class="docutils literal notranslate"><span class="pre">try_to_connect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dummy_test.html">dummy_test module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="enums.html">enums module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="enums.html#enums.ActionEnum"><code class="docutils literal notranslate"><span class="pre">ActionEnum</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.BuildBuildingAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.BuildBuildingAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.ChangeTaxPolicyAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.ChangeTaxPolicyAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.EndTurnAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.EndTurnAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.IrrigateAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.IrrigateAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.MineAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.MineAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.ResearchAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.ResearchAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.RoadAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.RoadAction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.ActionEnum.SettleAction"><code class="docutils literal notranslate"><span class="pre">ActionEnum.SettleAction</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html#enums.Direction"><code class="docutils literal notranslate"><span class="pre">Direction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Direction.EAST"><code class="docutils literal notranslate"><span class="pre">Direction.EAST</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Direction.NORTH"><code class="docutils literal notranslate"><span class="pre">Direction.NORTH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Direction.SOUTH"><code class="docutils literal notranslate"><span class="pre">Direction.SOUTH</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Direction.WEST"><code class="docutils literal notranslate"><span class="pre">Direction.WEST</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html#enums.PacketEnum"><code class="docutils literal notranslate"><span class="pre">PacketEnum</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.Action"><code class="docutils literal notranslate"><span class="pre">PacketEnum.Action</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.ActionReply"><code class="docutils literal notranslate"><span class="pre">PacketEnum.ActionReply</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.CityInfo"><code class="docutils literal notranslate"><span class="pre">PacketEnum.CityInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.CivInfo"><code class="docutils literal notranslate"><span class="pre">PacketEnum.CivInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.CompletedStateTransfer"><code class="docutils literal notranslate"><span class="pre">PacketEnum.CompletedStateTransfer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.Hello"><code class="docutils literal notranslate"><span class="pre">PacketEnum.Hello</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.HelloReply"><code class="docutils literal notranslate"><span class="pre">PacketEnum.HelloReply</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.Map"><code class="docutils literal notranslate"><span class="pre">PacketEnum.Map</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.ResearchInfo"><code class="docutils literal notranslate"><span class="pre">PacketEnum.ResearchInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.TurnBegin"><code class="docutils literal notranslate"><span class="pre">PacketEnum.TurnBegin</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.TurnEnd"><code class="docutils literal notranslate"><span class="pre">PacketEnum.TurnEnd</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.PacketEnum.UnitInfo"><code class="docutils literal notranslate"><span class="pre">PacketEnum.UnitInfo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="enums.html#enums.Tax"><code class="docutils literal notranslate"><span class="pre">Tax</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Tax.GOLD"><code class="docutils literal notranslate"><span class="pre">Tax.GOLD</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Tax.LUXURY"><code class="docutils literal notranslate"><span class="pre">Tax.LUXURY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="enums.html#enums.Tax.SCIENCE"><code class="docutils literal notranslate"><span class="pre">Tax.SCIENCE</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="freeciv_agent.html">freeciv_agent module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.freeciv_agent"><code class="docutils literal notranslate"><span class="pre">freeciv_agent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.freeciv_agent.action"><code class="docutils literal notranslate"><span class="pre">freeciv_agent.action()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.freeciv_agent.forward"><code class="docutils literal notranslate"><span class="pre">freeciv_agent.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.freeciv_agent.training"><code class="docutils literal notranslate"><span class="pre">freeciv_agent.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="freeciv_agent.html#freeciv_agent.reward"><code class="docutils literal notranslate"><span class="pre">reward()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration_test.html">integration_test module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packets.html">packets module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.ActionPacket"><code class="docutils literal notranslate"><span class="pre">ActionPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.ActionReplyPacket"><code class="docutils literal notranslate"><span class="pre">ActionReplyPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.CityInfoPacket"><code class="docutils literal notranslate"><span class="pre">CityInfoPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.CompletedStateTransferPacket"><code class="docutils literal notranslate"><span class="pre">CompletedStateTransferPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.HelloPacket"><code class="docutils literal notranslate"><span class="pre">HelloPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.HelloReplyPacket"><code class="docutils literal notranslate"><span class="pre">HelloReplyPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.MapPacket"><code class="docutils literal notranslate"><span class="pre">MapPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.Packet"><code class="docutils literal notranslate"><span class="pre">Packet</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.Packet.encode"><code class="docutils literal notranslate"><span class="pre">Packet.encode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.Packet.initialize_fields"><code class="docutils literal notranslate"><span class="pre">Packet.initialize_fields()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.Packet.set_content"><code class="docutils literal notranslate"><span class="pre">Packet.set_content()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.PacketFactory"><code class="docutils literal notranslate"><span class="pre">PacketFactory</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.PacketFactory.get_array"><code class="docutils literal notranslate"><span class="pre">PacketFactory.get_array()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.PacketFactory.get_int"><code class="docutils literal notranslate"><span class="pre">PacketFactory.get_int()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.PacketFactory.get_str"><code class="docutils literal notranslate"><span class="pre">PacketFactory.get_str()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.PacketFactory.make_action_packet"><code class="docutils literal notranslate"><span class="pre">PacketFactory.make_action_packet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html#packets.PacketFactory.make_packet"><code class="docutils literal notranslate"><span class="pre">PacketFactory.make_packet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.PlayerInfoPacket"><code class="docutils literal notranslate"><span class="pre">PlayerInfoPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.ResearchInfoPacket"><code class="docutils literal notranslate"><span class="pre">ResearchInfoPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.TurnBeginPacket"><code class="docutils literal notranslate"><span class="pre">TurnBeginPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.TurnEndPacket"><code class="docutils literal notranslate"><span class="pre">TurnEndPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.UnitInfoPacket"><code class="docutils literal notranslate"><span class="pre">UnitInfoPacket</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="packets.html#packets.test"><code class="docutils literal notranslate"><span class="pre">test()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pretender.html">pretender module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="socket_listener.html">socket_listener module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="socket_listener.html#socket_listener.SocketClient"><code class="docutils literal notranslate"><span class="pre">SocketClient</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="socket_listener.html#socket_listener.SocketClient.close"><code class="docutils literal notranslate"><span class="pre">SocketClient.close()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="socket_listener.html#socket_listener.SocketClient.receive_packet"><code class="docutils literal notranslate"><span class="pre">SocketClient.receive_packet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="socket_listener.html#socket_listener.SocketClient.send_packet"><code class="docutils literal notranslate"><span class="pre">SocketClient.send_packet()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="state_rep.html">state_rep module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.City"><code class="docutils literal notranslate"><span class="pre">City</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.City.build_building"><code class="docutils literal notranslate"><span class="pre">City.build_building()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.City.build_unit"><code class="docutils literal notranslate"><span class="pre">City.build_unit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.City.grow"><code class="docutils literal notranslate"><span class="pre">City.grow()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.Country"><code class="docutils literal notranslate"><span class="pre">Country</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Country.change_taxrate"><code class="docutils literal notranslate"><span class="pre">Country.change_taxrate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Country.get_city_by_index"><code class="docutils literal notranslate"><span class="pre">Country.get_city_by_index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Country.get_unit_by_index"><code class="docutils literal notranslate"><span class="pre">Country.get_unit_by_index()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Country.research_technology"><code class="docutils literal notranslate"><span class="pre">Country.research_technology()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Country.update_from_packet"><code class="docutils literal notranslate"><span class="pre">Country.update_from_packet()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.Explorer"><code class="docutils literal notranslate"><span class="pre">Explorer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Explorer.queue_multiple_one_tile_moves"><code class="docutils literal notranslate"><span class="pre">Explorer.queue_multiple_one_tile_moves()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.MovingUnit"><code class="docutils literal notranslate"><span class="pre">MovingUnit</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.MovingUnit.move"><code class="docutils literal notranslate"><span class="pre">MovingUnit.move()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.PositionalEmbedding"><code class="docutils literal notranslate"><span class="pre">PositionalEmbedding</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.PositionalEmbedding.forward"><code class="docutils literal notranslate"><span class="pre">PositionalEmbedding.forward()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.PositionalEmbedding.training"><code class="docutils literal notranslate"><span class="pre">PositionalEmbedding.training</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.Settler"><code class="docutils literal notranslate"><span class="pre">Settler</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Settler.settle"><code class="docutils literal notranslate"><span class="pre">Settler.settle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.Unit"><code class="docutils literal notranslate"><span class="pre">Unit</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Unit.act"><code class="docutils literal notranslate"><span class="pre">Unit.act()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Unit.get_ontile_entity_id"><code class="docutils literal notranslate"><span class="pre">Unit.get_ontile_entity_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Unit.on_begin_turn"><code class="docutils literal notranslate"><span class="pre">Unit.on_begin_turn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Unit.on_end_turn"><code class="docutils literal notranslate"><span class="pre">Unit.on_end_turn()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.Worker"><code class="docutils literal notranslate"><span class="pre">Worker</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Worker.build_road"><code class="docutils literal notranslate"><span class="pre">Worker.build_road()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Worker.irrigate"><code class="docutils literal notranslate"><span class="pre">Worker.irrigate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="state_rep.html#state_rep.Worker.mine"><code class="docutils literal notranslate"><span class="pre">Worker.mine()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.get_state_rep_simple"><code class="docutils literal notranslate"><span class="pre">get_state_rep_simple()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="state_rep.html#state_rep.get_state_rep_sinusoidal"><code class="docutils literal notranslate"><span class="pre">get_state_rep_sinusoidal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="technology.html">technology module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="technology.html#technology.Technology"><code class="docutils literal notranslate"><span class="pre">Technology</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="technology.html#technology.TechnologyTree"><code class="docutils literal notranslate"><span class="pre">TechnologyTree</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#technology.TechnologyTree.add_research_progress"><code class="docutils literal notranslate"><span class="pre">TechnologyTree.add_research_progress()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#technology.TechnologyTree.get_researchable"><code class="docutils literal notranslate"><span class="pre">TechnologyTree.get_researchable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#technology.TechnologyTree.is_busy"><code class="docutils literal notranslate"><span class="pre">TechnologyTree.is_busy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="technology.html#technology.TechnologyTree.research"><code class="docutils literal notranslate"><span class="pre">TechnologyTree.research()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unit_test.html">unit_test module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unit_test.html#unit_test.test"><code class="docutils literal notranslate"><span class="pre">test()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OpenCiv-RLAI-py-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Turing Tribe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/modules.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

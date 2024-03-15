@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>state_rep module &#8212; OpenCiv-RLAI-py-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-state_rep">
+<span id="state-rep-module"></span><h1>state_rep module<a class="headerlink" href="#module-state_rep" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.City">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">City</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.City" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#state_rep.Unit" title="state_rep.Unit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.City.build_building">
+<span class="sig-name descname"><span class="pre">build_building</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">building</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.City.build_building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a building</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>building</strong> – Building to be built</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.City.build_unit">
+<span class="sig-name descname"><span class="pre">build_unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.City.build_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a unit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.City.grow">
+<span class="sig-name descname"><span class="pre">grow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.City.grow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grow the population</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.Country">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">Country</span></span><a class="headerlink" href="#state_rep.Country" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Country.change_taxrate">
+<span class="sig-name descname"><span class="pre">change_taxrate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Country.change_taxrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the tax rate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Country.get_city_by_index">
+<span class="sig-name descname"><span class="pre">get_city_by_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Country.get_city_by_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Country.get_unit_by_index">
+<span class="sig-name descname"><span class="pre">get_unit_by_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Country.get_unit_by_index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Country.research_technology">
+<span class="sig-name descname"><span class="pre">research_technology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">techname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Country.research_technology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Research a technology</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>techname</strong> – The technology</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Country.update_from_packet">
+<span class="sig-name descname"><span class="pre">update_from_packet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">civ_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Country.update_from_packet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the state with a packet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>civ_info</strong> – The packet</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.Explorer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">Explorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Explorer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#state_rep.MovingUnit" title="state_rep.MovingUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">MovingUnit</span></code></a></p>
+<p>An explorer unit</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Explorer.queue_multiple_one_tile_moves">
+<span class="sig-name descname"><span class="pre">queue_multiple_one_tile_moves</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Explorer.queue_multiple_one_tile_moves" title="Permalink to this definition">¶</a></dt>
+<dd><p>Queue up multiple moves</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.MovingUnit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">MovingUnit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.MovingUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#state_rep.Unit" title="state_rep.Unit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code></a></p>
+<p>A movable unit</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.MovingUnit.move">
+<span class="sig-name descname"><span class="pre">move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.MovingUnit.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move the unit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>args</strong> – Arguments</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.PositionalEmbedding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">PositionalEmbedding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_seq_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_model_dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.PositionalEmbedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<p>Trigonometric embedding of location on map</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.PositionalEmbedding.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.PositionalEmbedding.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="state_rep.PositionalEmbedding.training">
+<span class="sig-name descname"><span class="pre">training</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#state_rep.PositionalEmbedding.training" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.Settler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">Settler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Settler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#state_rep.MovingUnit" title="state_rep.MovingUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">MovingUnit</span></code></a></p>
+<p>A settler unit</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Settler.settle">
+<span class="sig-name descname"><span class="pre">settle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Settler.settle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.Unit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">Unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Representation of a unit</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Unit.act">
+<span class="sig-name descname"><span class="pre">act</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Unit.act" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute an action</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>action_name</strong> – The action to be executed</p>
+</dd>
+<dt class="field-even">Parma args<span class="colon">:</span></dt>
+<dd class="field-even"><p>Argument to be passed to the action</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Unit.get_ontile_entity_id">
+<span class="sig-name descname"><span class="pre">get_ontile_entity_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Unit.get_ontile_entity_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the entity identifier on the tile</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Unit.on_begin_turn">
+<span class="sig-name descname"><span class="pre">on_begin_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Unit.on_begin_turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook for the beginning of the RL agent’s turn</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Unit.on_end_turn">
+<span class="sig-name descname"><span class="pre">on_end_turn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Unit.on_end_turn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook for the end of the RL agent’s turn</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="state_rep.Worker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">Worker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xcoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ycoord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upkeep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Worker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#state_rep.MovingUnit" title="state_rep.MovingUnit"><code class="xref py py-class docutils literal notranslate"><span class="pre">MovingUnit</span></code></a></p>
+<p>A worker unit</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Worker.build_road">
+<span class="sig-name descname"><span class="pre">build_road</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">terrain_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Worker.build_road" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build roads on the tile</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Worker.irrigate">
+<span class="sig-name descname"><span class="pre">irrigate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Worker.irrigate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Irrigate the tile</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="state_rep.Worker.mine">
+<span class="sig-name descname"><span class="pre">mine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.Worker.mine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mine the tile</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="state_rep.get_state_rep_simple">
+<span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">get_state_rep_simple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapsize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.get_state_rep_simple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="state_rep.get_state_rep_sinusoidal">
+<span class="sig-prename descclassname"><span class="pre">state_rep.</span></span><span class="sig-name descname"><span class="pre">get_state_rep_sinusoidal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mapsize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#state_rep.get_state_rep_sinusoidal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OpenCiv-RLAI-py-client</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Turing Tribe.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/state_rep.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

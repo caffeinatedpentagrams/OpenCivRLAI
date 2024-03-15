@@ -14,6 +14,8 @@ buildable_units = {'settler': (), 'worker': ()}  # TODO upkeep ?
 
 
 class Unit:
+    """Representation of a unit"""
+
     def __init__(self, xcoord, ycoord):
         self.xpos = xcoord
         self.ypos = ycoord
@@ -23,9 +25,21 @@ class Unit:
         self.actions = {}
 
     def _add_action(self, action_enum: ActionEnum, funcptr):
+        """
+        Add an action to this unit
+        
+        :param action_enum: Action type enumeration
+        :param funcptr: Defined behavior of this action
+        """
         self.actions[action_enum] = funcptr
 
     def act(self, action_name, args):
+        """
+        Execute an action
+
+        :param action_name: The action to be executed
+        :parma args: Argument to be passed to the action
+        """
         if not self.exists:
             raise ValueError("Actor does not exist!")
         if action_name in self.actions:
@@ -35,23 +49,43 @@ class Unit:
             raise ValueError("Invalid action!")
 
     def on_begin_turn(self):
+        """
+        Hook for the beginning of the RL agent's turn
+        """
+
         if self.exists and not self.isBusy:  # TODO Find out how we know e.g. when a worker is done working
             self.current_action = None  # TODO i.e. from packet only, how can we know if we are no longer busy?
 
     def on_end_turn(self):
+        """
+        Hook for the end of the RL agent's turn
+        """
         pass  # TODO
 
     def get_ontile_entity_id(self):
+        """
+        Get the entity identifier on the tile
+        """
         pass  # TODO
 
 
 class MovingUnit(Unit):
+    """
+    A movable unit
+    """
+
     def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord)
         self.entity_id = entity_id
         self.actions = {'move': self.move}
 
     def move(self, args):  # direction should be passed as instance of the Direction enum!
+        """
+        Move the unit
+
+        :param args: Arguments
+        """
+
         direction = args[0]
         if direction == Direction.NORTH or direction == direction.SOUTH:
             self.ypos += direction.value
@@ -60,6 +94,8 @@ class MovingUnit(Unit):
 
 
 class Worker(MovingUnit):  # If override superclass, should always call superclass method!
+    """A worker unit"""
+
     def __init__(self, xcoord, ycoord, entity_id, upkeep=0):
         super().__init__(xcoord, ycoord, entity_id)
         self._add_action(ActionEnum.IrrigateAction, self.irrigate)
@@ -69,6 +105,8 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         self.production = 0  # TODO find val
 
     def irrigate(self):  # TODO find duration
+        """Irrigate the tile"""
+
         if self.food > 0:
             # Each irrigation step consumes:1 and adds:2 (produce)
             self.food -= 1
@@ -77,6 +115,7 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
             pass
 
     def mine(self):  # TODO find duration
+        """Mine the tile"""
         if self.production > 0:
             self.production -= 1
             self.production += 2
@@ -87,6 +126,7 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
         return init_duration
 
     def build_road(self, terrain_type):  # TODO find duration
+        """Build roads on the tile"""
         road_cost = 1  # TODO find cost
         if self.production >= road_cost:
             self.production -= road_cost
@@ -104,6 +144,7 @@ class Worker(MovingUnit):  # If override superclass, should always call supercla
 
 
 class Settler(MovingUnit):
+    """A settler unit"""
     def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord, entity_id)
         self._add_action(ActionEnum.SettleAction, 0)
@@ -113,10 +154,17 @@ class Settler(MovingUnit):
 
 
 class Explorer(MovingUnit):  # TODO Probably don't even need to overload
+    """An explorer unit"""
     def __init__(self, xcoord, ycoord, entity_id):
         super().__init__(xcoord, ycoord, entity_id)
 
     def queue_multiple_one_tile_moves(self, args):  # pass list or tuple (xtarget, ytarget)
+        """
+        Queue up multiple moves
+
+        :param args: Arguments
+        """
+
         xc, yc = args
         pass  # TODO probably allow 2-tiles movement, double check wiki.
 
@@ -138,6 +186,11 @@ class City(Unit):
         # TODO add city attributes
 
     def build_building(self, building):  # TODO check
+        """
+        Build a building
+
+        :param building: Building to be built
+        """
         building_cost = 100  # Production cost to construct a building
         if self.production >= building_cost:
             self.production -= building_cost
@@ -147,6 +200,8 @@ class City(Unit):
             print("Not enough production points ")
 
     def grow(self):
+        """Grow the population"""
+
         # Population increase
         self.population += 1
         if self.population > self.max_population:
@@ -154,6 +209,11 @@ class City(Unit):
         # TODO something with workers?
 
     def build_unit(self, args):
+        """
+        Build a unit
+
+        :param args: Arguments
+        """
         pass  # TODO
 
 class Country:
@@ -181,9 +241,19 @@ class Country:
 
     def update_from_packet(self,
                            civ_info):  # Updates and returns the science! TODO THE BELOW METHODS SHOULD REFERENCE PACKETS
+        """
+        Update the state with a packet
+
+        :param civ_info: The packet
+        """
         pass
 
     def research_technology(self, techname):
+        """
+        Research a technology
+
+        :param techname: The technology
+        """
         if techname not in self.tech_tree.get_researchable():
             return False  # TODO Invalid Action
         elif self.tech_tree.currently_researching is not None:
@@ -193,6 +263,11 @@ class Country:
             return True
 
     def change_taxrate(self, args):  # pass tuple (i, type)
+        """
+        Change the tax rate
+
+        :param args: Arguments
+        """
         i, type = args
         self.taxpoints[i] = type  # type is a Tax enum
         self.gold_tax = 0
@@ -221,6 +296,9 @@ class Country:
 
 
 class PositionalEmbedding(nn.Module):
+    """
+    Trigonometric embedding of location on map
+    """
     def __init__(self,max_seq_len,embed_model_dim):
         super(PositionalEmbedding, self).__init__()
         self.embed_dim = embed_model_dim

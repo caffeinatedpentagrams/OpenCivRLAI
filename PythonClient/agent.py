@@ -13,21 +13,24 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 
-# TODO
 class ActionSpace:
+    """Representation of the space of all actions to take"""
     def __init__(self, n):
         self.n = n
 
     # Randomly samples an action from the action space with uniform probability
     def sample(self):
+        """Sample a random action with uniform probability"""
         return random.randint(0,self.n-1)
 
 
     def make_packet(self):
+        """Make a packet"""
         return Packet()
 
-# TODO
 class State:
+    """Encapsulation of all the state information the RL agent uses"""
+
     def __init__(self):
         self._map = np.zeros((64,64))
         self._old_units = {}
@@ -36,6 +39,8 @@ class State:
         self._is_alive = True
     
     def update(self, packet):
+        """Update the state with the packet received from c server"""
+
         if packet.packid==2:
             # case map packet
             self._map = np.array(packet.content['map'])
@@ -56,6 +61,7 @@ Transition = namedtuple('Transition',
                         ('state', 'action', 'next_state', 'reward'))
 
 class ReplayMemory(object):
+    """Record of all state transitions for game playback"""
 
     def __init__(self, capacity):
         self.memory = deque([], maxlen=capacity)
@@ -72,17 +78,22 @@ class ReplayMemory(object):
 
 # TODO
 class Model:
+    """Interface for RL model"""
+
     def __init__(self):
         pass
     
     def forward(self, map_state, unit_state, action_mask):
+        """Generate the next action"""
         return Action()
 
     def illegal_action_penalty(self):
+        """Penalize the model for making an illegal action"""
         # reward -= penalty
         pass
 
 class DQN(nn.Module):
+    """Deep Q-Network AI implementation"""
 
     def __init__(self, n_observations, n_actions):
         super(DQN, self).__init__()
@@ -99,6 +110,8 @@ class DQN(nn.Module):
         return self.layer3(x)
 
 class Environment:
+    """Encapsulation of game environment"""
+
     def __init__(self, socket_client, model=Model(), action_limit = 10):
         self.model = model
         self.action_limit = action_limit
@@ -107,11 +120,13 @@ class Environment:
         self.action_space = ActionSpace(5)
 
     def reset(self):
+        """Reset the environment"""
         self.state = State()
         self.listen_for_updates()
         return self.state
     
     def step(self, actions):
+        """Execute all queued actions"""
         for action, unit_id in actions:
             #print(f"types of action and unit_id: {type(action)} {type(unit_id)}")
             packet = ActionPacket()
@@ -125,6 +140,7 @@ class Environment:
         return self.state
 
     def run(self):
+        """Run the game environment for a turn and generate actions"""
         num_actions = 0
         turn_ended = False
         while num_actions < self.action_limit:
@@ -147,6 +163,7 @@ class Environment:
 
     # listen for packets from server and update state until turn begins
     def listen_for_updates_until_turn(self):
+        """Listen for game updates from the server until agent turn begins"""
         while True:
             packet = self.client.receive_packet()
             self.state.update(packet)
@@ -155,6 +172,7 @@ class Environment:
 
     # listen for packets from server and update state until state transfer completed
     def listen_for_updates(self):
+        """Listen for a single update from the server"""
         self.state._old_units = copy.deepcopy(self.state._units)
         self.state._units = {}
         while True:
@@ -164,7 +182,9 @@ class Environment:
                 break
 
     def perform(self, action):
-        self.client.send_packet(action.make_packet_from_bytestream())
+        """Execute an action"""
+        self.client.send_packet(action.make_packet())
 
     def end_turn(self):
+        """End the current turn"""
         self.client.send_packet(TurnEndPacket())

@@ -4,6 +4,8 @@ import struct
 import packets
 
 class SocketClient:
+    """TCP socket used to communicate with the C server"""
+
     def __init__(self, server_ip, server_port):
         self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.client_socket.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 65536)
@@ -21,9 +23,15 @@ class SocketClient:
             print("Failed to connect, closed")
 
     def close(self):
+        """Close the socket"""
         self.client_socket.close()
 
     def receive_packet(self):
+        """
+        Listen for a packet
+
+        :return: The packet
+        """
         data = self.client_socket.recv(2)
         packet_len = int.from_bytes(data, byteorder='big')
 
@@ -33,4 +41,9 @@ class SocketClient:
         return packets.PacketFactory(data).make_packet()
 
     def send_packet(self, packet):
+        """
+        Encode and send a packet
+        
+        :param packet: The packet
+        """
         self.client_socket.send(packet.encode())
