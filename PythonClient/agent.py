@@ -3,6 +3,7 @@ from packets import Packet, TurnEndPacket, PacketEnum, ActionPacket
 import socket
 import numpy as np
 import random
+import copy
 
 from collections import namedtuple, deque
 
@@ -29,7 +30,10 @@ class ActionSpace:
 class State:
     def __init__(self):
         self._map = np.zeros((64,64))
+        self._old_units = {}
         self._units = {}
+        self._reward = {'gold':(0,0),'score':(0,0)}
+        self._is_alive = True
     
     def update(self, packet):
         if packet.packid==2:
@@ -37,8 +41,13 @@ class State:
             self._map = np.array(packet.content['map'])
         elif packet.packid==3:
             id = packet.content['unit_id']
+            #self._units = {}
             if id!=0:
                 self._units[id] = np.array([packet.content['coordx'],packet.content['coordy'],packet.content['upkeep']])
+        elif packet.packid==4:
+            self._is_alive = packet.content['is_alive']
+            self._reward['gold'] = (packet.content['gold'],packet.content['gold']-self._reward['gold'][0])
+            self._reward['score'] = (packet.content['score'],packet.content['score']-self._reward['score'][0])
 
     def is_legal(self, action):
         return True
@@ -73,6 +82,22 @@ class Model:
         # reward -= penalty
         pass
 
+class DQN(nn.Module):
+
+    def __init__(self, n_observations, n_actions):
+        super(DQN, self).__init__()
+        self.conv1 = nn.Conv2d()
+        self.layer1 = nn.Linear(n_observations, 128)
+        self.layer2 = nn.Linear(128, 128)
+        self.layer3 = nn.Linear(128, n_actions)
+
+    # Called with either one element to determine next action, or a batch
+    # during optimization. Returns tensor([[left0exp,right0exp]...]).
+    def forward(self, x):
+        x = F.relu(self.layer1(x))
+        x = F.relu(self.layer2(x))
+        return self.layer3(x)
+
 class Environment:
     def __init__(self, socket_client, model=Model(), action_limit = 10):
         self.model = model
@@ -88,7 +113,7 @@ class Environment:
     
     def step(self, actions):
         for action, unit_id in actions:
-            print(f"types of action and unit_id: {type(action)} {type(unit_id)}")
+            #print(f"types of action and unit_id: {type(action)} {type(unit_id)}")
             packet = ActionPacket()
             packet.set_content('ACTION_ID',action)
             packet.set_content('actor_id',unit_id)
@@ -130,6 +155,8 @@ class Environment:
 
     # listen for packets from server and update state until state transfer completed
     def listen_for_updates(self):
+        self.state._old_units = copy.deepcopy(self.state._units)
+        self.state._units = {}
         while True:
             packet = self.client.receive_packet()
             self.state.update(packet)
@@ -137,7 +164,7 @@ class Environment:
                 break
 
     def perform(self, action):
-        self.client.send_packet(action.make_packet())
+        self.client.send_packet(action.make_packet_from_bytestream())
 
     def end_turn(self):
         self.client.send_packet(TurnEndPacket())

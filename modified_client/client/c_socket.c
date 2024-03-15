@@ -11,7 +11,6 @@ int client_socket;
 char buffer[65536];
 
 void c_socket_init() {
-  printf("Inside c_socket_init\n");
   c_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (c_socket == -1) {
     perror("socket creation failed");
@@ -20,7 +19,6 @@ void c_socket_init() {
 }
 
 void c_socket_bind_and_listen(int port) {
-  printf("Inside c_socket_bind_and_list\n");
   struct sockaddr_in addr;
   addr.sin_family = AF_INET;
   addr.sin_addr.s_addr = INADDR_ANY;
@@ -143,11 +141,22 @@ void c_socket_send_unit_info_packet(struct UnitInfoPacket* packet) {
   send(client_socket, send_buffer, len, 0);
 }
 
-void c_socket_send_civ_info_packet(struct CivInfoPacket* packet) {
+void c_socket_send_player_info_packet(struct PlayerInfoPacket* packet) {
   char send_buffer[65536];
   send_buffer[2] = (CivInfo >> 8) & 0xff;
   send_buffer[3] = (CivInfo >> 0) & 0xff;
   int len = 4;
+
+  c_socket_append_int(send_buffer, packet->playerno, &len);
+  c_socket_append_str(send_buffer, packet->name, &len);
+  c_socket_append_str(send_buffer, packet->username, &len);
+  c_socket_append_int(send_buffer, packet->score, &len);
+  c_socket_append_int(send_buffer, packet->turns_alive, &len);
+  c_socket_append_int(send_buffer, packet->is_alive, &len);
+  c_socket_append_int(send_buffer, packet->gold, &len);
+  c_socket_append_int(send_buffer, packet->percent_tax, &len);
+  c_socket_append_int(send_buffer, packet->science, &len);
+  c_socket_append_int(send_buffer, packet->luxury, &len);
 
   send_buffer[0] = (len >> 8) & 0xff;
   send_buffer[1] = (len >> 0) & 0xff;

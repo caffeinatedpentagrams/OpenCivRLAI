@@ -99,7 +99,7 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
    memcpy(&ppl_angry[0], &packet[32], sizeof(uint8_t)*6);
    printf("Recieved a city info packet... FEELING_LAST: %d\n", FEELING_LAST);
 
-   printf("Recieved a city info packet!!!\nid: %u\ntile: %d\nowner: %d\nsize: %u\nradius: %u\nstyle: %u\ncapital: %u\n",id,tile,owner,size,city_radius_sq,style,capital);
+   //printf("Recieved a city info packet!!!\nid: %u\ntile: %d\nowner: %d\nsize: %u\nradius: %u\nstyle: %u\ncapital: %u\n",id,tile,owner,size,city_radius_sq,style,capital);
 
  }
  else if (type==PACKET_UNIT_INFO){
@@ -107,33 +107,21 @@ void intercept_packet(enum packet_type type, void* packet, char* visited,int* co
    struct packet_unit_info unit;
    memcpy(&unit,packet,sizeof(struct packet_unit_info));
    update_units(&unit);
-   /*struct unit unit;
-   memcpy(&unit, packet, sizeof(unit));
-   struct unit_type* type;
-   type = &unit; // First elem of struct is an int
-   printf("\n\nUnit ID: %d\nUnit type: %d\nBuild cost: %d\nPop Cost: %d\nAttack Strength: %d\nDefense strength: %d\nMove Rate: %d\nunknown move cost: %d\nVision radius: %d\nTransport capacity: %d\nHP (unit type): %d\nHP (unit): %d\nFirepower: %d\nCity size: %d\nCity Slots: %d",unit.id,type->item_number,type->build_cost,type->pop_cost,type->attack_strength,type->defense_strength,type->move_rate,type->unknown_move_cost,type->vision_radius_sq,type->transport_capacity,type->hp,unit.hp,type->firepower,type->city_size,type->city_slots);
-   printf("\nO_LAST: %d\n",O_LAST);
-   printf("\nUnit ID: %d\nHome city: %d\n",unit.id,unit.homecity);
-   struct tile tile;*/
-   //memcpy(&tile,unit.tile,sizeof(struct tile));
-   //printf("\nTile extracted: %d\n",&tile.index);
-   //printf("\nIndex of tile: %d\n",&tile.index);
    int x = index_to_map_pos_x(unit.tile);
    int y = index_to_map_pos_y(unit.tile);
    printf("Current location of unit %u: (%d,%d)\n",(uint16_t)unit.id,x,y);
-   
-   /*if (unitA!=NULL) {
-     struct tile tile;
-     memcpy(&tile,unitA->tile,sizeof(struct tile));
-     //tile.index+=1;
-     x = index_to_map_pos_x(tile_index(&tile));
-     y = index_to_map_pos_y(tile_index(&tile));
-     //printf("Changing location of unit... new location: (%d,%d)\n\n\nHUGE NEWS!!!!\n\n",x,y);
-     //request_do_action(ACTION_FOUND_CITY,unitA->id,tile.index,0,"AditLand");
-     
-     }*/
-   
   }
+ else if (type==PACKET_PLAYER_INFO) { // 51
+   struct packet_player_info info;
+   memcpy(&info,packet,sizeof(struct packet_player_info));
+   update_player(&info);
+ }
+ else if (type==PACKET_UNIT_REMOVE) {
+   struct packet_unit_remove info;
+   memcpy(&info,packet,sizeof(struct packet_unit_remove));
+   printf("Remove unit %u (must've lost em)\n",info.unit_id);
+   remove_unit(&info);
+ }
 }
 
 

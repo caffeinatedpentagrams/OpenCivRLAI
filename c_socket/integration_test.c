@@ -37,8 +37,18 @@ int main() {
   printf("upkeep: %d\n", ((struct UnitInfoPacket*) packet)->upkeep);
   printf("\n");
 
-  // receive civ info
+  // receive player info
   type = c_socket_receive_packet(packet);
+  printf("playerno: %d\n", ((struct PlayerInfoPacket*) packet)->playerno);
+  printf("name: %s\n", ((struct PlayerInfoPacket*) packet)->name);
+  printf("username: %s\n", ((struct PlayerInfoPacket*) packet)->username);
+  printf("score: %d\n", ((struct PlayerInfoPacket*) packet)->score);
+  printf("turns_alive: %d\n", ((struct PlayerInfoPacket*) packet)->turns_alive);
+  printf("is_alive: %d\n", ((struct PlayerInfoPacket*) packet)->is_alive);
+  printf("gold: %d\n", ((struct PlayerInfoPacket*) packet)->gold);
+  printf("percent_tax: %d\n", ((struct PlayerInfoPacket*) packet)->percent_tax);
+  printf("science: %d\n", ((struct PlayerInfoPacket*) packet)->science);
+  printf("luxury: %d\n", ((struct PlayerInfoPacket*) packet)->luxury);
   printf("\n");
 
   // receive city info
@@ -125,8 +135,19 @@ int main() {
   c_socket_send_unit_info_packet(&unit_info);
 
   // send civ info
-  struct CivInfoPacket civ_info = {};
-  c_socket_send_civ_info_packet(&civ_info);
+  struct PlayerInfoPacket player_info = {
+    .playerno = 3,
+    .name = "playername",
+    .username = "username",
+    .score = 4,
+    .turns_alive = 5,
+    .is_alive = 1,
+    .gold = 6,
+    .percent_tax = 7,
+    .science = 8,
+    .luxury = 9
+  };
+  c_socket_send_player_info_packet(&player_info);
 
   // send city info
   struct CityInfoPacket city_info = {

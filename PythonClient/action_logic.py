@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import state_rep
 import packets
+from enums import ActionEnum
 
 '''
 Actions correspond to an action string ( TODO to be defined ) in the action dispatching logic
@@ -33,9 +34,8 @@ class ResearchAction(Action):
             return None
         else:
             self.country.tech_tree.currently_researching = self.country.tech_tree.techs[self.techname]
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            return packets.PacketFactory.make_action_packet(ActionEnum.ResearchAction, 0, 0)
+            # TODO check target and actor ids for this
 
     def islegal(self):
         return (not self.country.tech_tree.is_busy()) and self.techname in self.country.tech_tree.get_researchable()
@@ -51,9 +51,9 @@ class BuildBuildingAction(Action):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            entity_id = self.country.get_city_by_index(self.city_index).entity_id
+            return packets.PacketFactory.make_action_packet(ActionEnum.BuildBuildingAction, entity_id, entity_id)
+            # TODO Probably need more detail for the build building action; e.g. target id might be a building? not sure.
 
     def islegal(self):
         if not self.country.city_list[self.city_index].exists:
@@ -67,7 +67,6 @@ class BuildBuildingAction(Action):
 class SettleAction(Action):
     def __init__(self, country):
         super().__init__(country)
-        pass
 
     def execute(self):
         if not self.islegal():
@@ -82,54 +81,51 @@ class SettleAction(Action):
 
 
 class IrrigateAction(Action):
-    def __init__(self, country):
+    def __init__(self, country, unit_index):
         super().__init__(country)
-        pass
+        self.unit = self.country.get_unit_by_index(unit_index)
 
     def execute(self):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            return packets.PacketFactory.make_action_packet(ActionEnum.IrrigateAction, self.unit.entity_id,
+                                                            self.unit.get_ontile_entity_id())
 
     def islegal(self):
-        pass  # check that there isn't an improvement already on the tile, and that the tile is irrigable
+        pass  # TODO check that there isn't an improvement already on the tile, and that the tile is irrigable
 
 
 class MineAction(Action):
-    def __init__(self, country):
+    def __init__(self, country, unit_index):
         super().__init__(country)
-        pass
+        self.unit = self.country.get_unit_by_index(unit_index)
 
     def execute(self):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            return packets.PacketFactory.make_action_packet(ActionEnum.MineAction, self.unit.entity_id,
+                                                            self.unit.get_ontile_entity_id())
 
     def islegal(self):
-        pass  # check that there isn't an improvement already on the tile, and that the tile is mineable
+        pass  # TODO  check that there isn't an improvement already on the tile, and that the tile is mineable
 
 
 class RoadAction(Action):
-    def __init__(self, country):
+    def __init__(self, country, unit_index):
         super().__init__(country)
-        pass
+        self.unit = self.country.get_unit_by_index(unit_index)
 
     def execute(self):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            return packets.PacketFactory.make_action_packet(ActionEnum.MineAction, self.unit.entity_id,
+                                                            self.unit.get_ontile_entity_id())
 
     def islegal(self):
-        pass  # check that there isn't a road on the tile already
+        pass  # TODO check that there isn't a road on the tile already
 
 
 class ChangeTaxPolicyAction(Action):
@@ -141,9 +137,8 @@ class ChangeTaxPolicyAction(Action):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
-            return packet
+            return packets.PacketFactory.make_action_packet(ActionEnum.ChangeTaxPolicyAction, 0, 0)
+            # TODO Actor id and target id for country-level actions??
 
     def islegal(self):
         return True  # always legal TODO check!
@@ -158,8 +153,8 @@ class EndTurnAction(Action):
         if not self.islegal():
             return None
         else:
-            packet = packets.ActionPacket()
-            # TODO set contents ACTION_ID, actor_id, and target_id
+            packet = packets.TurnEndPacket()  # TODO use factory
+            packet.set_content('turn_end', 'done')
             return packet
 
     def islegal(self):

@@ -41,8 +41,8 @@ int main() {
   c_socket_send_unit_info_packet(&unit_info);
 
   // send civ info
-  struct CivInfoPacket civ_info = {};
-  c_socket_send_civ_info_packet(&civ_info);
+  // struct CivInfoPacket civ_info = {};
+  // c_socket_send_civ_info_packet(&civ_info);
 
   // send city info
   struct CityInfoPacket city_info = {
