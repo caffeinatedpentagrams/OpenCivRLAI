@@ -1,5 +1,12 @@
 # OpenCivRLAI
 
+## Build the docker image
+```sh
+$ git clone https://github.com/caffeinatedpentagrams/OpenCivRLAI.git
+$ cd OpenCivRLAI
+$ docker build -t freeciv-gui-mp .
+```
+
 ## RL agent Python virtual environment setup
 ```sh
 $ cd PythonClient
