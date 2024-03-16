@@ -22,3 +22,5 @@ $ cd PythonClient
 $ python main.py
 ```
 
+## Obtain freeciv-server v3.0.10
+Make sure you have a working executable of `freeciv-server`. One that runs on mac is provided in the repo, and for windows users there are easy ready to download links. See the wiki page for detailed instructions on running the complete set of code/processes.
