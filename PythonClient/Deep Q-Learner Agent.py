@@ -40,8 +40,9 @@ class CustomReward:
         return reward
 
 class DQNAgent:
-    def __init__(self, state_shape, num_actions, gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, 
-                 learning_rate=0.00025, batch_size=32, replay_buffer_size=10000):
+    def __init__(self, state_shape, num_actions, gamma=0.9, epsilon=1.0, epsilon_min=0.2, epsilon_decay=0.99, 
+                 learning_rate=0.001, batch_size=32, replay_buffer_size=1000):
+ #Tried different customizations based on the environment   
         self.state_shape = state_shape
         self.num_actions = num_actions
         self.gamma = gamma
